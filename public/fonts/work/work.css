@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "Work Sans";
+  src: url(./WorkSans-Medium.ttf);
+  font-weight: 500;
+  font-style: normal;
+  font-variant: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Work Sans";
+  src: url(./WorkSans-Regular.ttf);
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Work Sans";
+  src: url(./WorkSans-SemiBold.ttf);
+  font-weight: 600;
+  font-style: normal;
+  font-variant: normal;
+  font-display: block;
+}

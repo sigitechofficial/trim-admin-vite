@@ -1,0 +1,80 @@
+::-webkit-scrollbar {
+  width: 5px;
+
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f4f5fa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 32px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+.swiper-button-prev {
+  font-size: 24px !important;
+  font-weight: 900 !important;
+  color: black;
+  background: white;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+
+.swiper-button-next {
+  color: black;
+  background: white;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.swiper-button-prev:after {
+  content: '\2190' !important;
+  color: black;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+}
+
+.swiper-button-next:after {
+  content: '\2192' !important;
+  color: black;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+}
+
+.react-tel-input {
+  width: auto !important;
+}
+
+.p-accordion-content {
+  padding: 4px !important;
+  background-color: #12466F;
+}
+
+.p-accordion-header {
+  /* border-top-left-radius: 5px;
+    border-top-right-radius: 5px; */
+  border-radius: 5px;
+
+}
+
+.p-toggleable-content {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-top: -3px;
+}
+
+.manageTable ::-webkit-scrollbar {
+  display: none !important;
+  width: 5px;
+}
