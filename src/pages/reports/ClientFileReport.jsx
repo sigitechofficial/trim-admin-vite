@@ -19,7 +19,7 @@ export default function ClientFileReport() {
     { field: "noShowBookingCount", header: "No Show" },
     { field: "reScheduleCount", header: "Re-Schedule" },
   ]
-
+ 
   const datas = [];
   data?.data?.report?.map((values, index) => {
     return datas.push({

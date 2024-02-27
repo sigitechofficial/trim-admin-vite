@@ -8,7 +8,8 @@ import { TbAdjustmentsHorizontal } from "react-icons/tb";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { InputText } from 'primereact/inputtext';
-
+import Select from "react-select";
+import selectStyles from "../utilities/SelectStyle";
 
 export default function MyDataTable(props) {
   const [globalFilter, setGlobalFilter] = useState('');
@@ -50,7 +51,19 @@ export default function MyDataTable(props) {
 
         </div>
 
-        <div className={`flex gap-x-5 ${props?.hide ? 'hidden':'block'}`}>
+        <div className={`flex gap-x-5 ${props?.hide ? 'hidden' : 'block'}`}>
+
+          <div className={`${props?.options ? 'block':'hidden'}`}>
+            <Select
+              options={props?.options}
+              defaultValue={props?.selectedOption}
+              onChange={(val) => {
+                // getSalonReport(salonID, val?.value)
+                props?.setSelectedOption(val)
+              }}
+              styles={selectStyles} />
+          </div>
+
           <button
             className="flex items-center gap-x-2 p-3 bg-themeGray rounded-lg hover:bg-gray-200 duration-200"
             onClick={props.onClick}

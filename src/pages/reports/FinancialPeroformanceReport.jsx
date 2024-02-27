@@ -1,41 +1,52 @@
 // @ts-nocheck
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import MyDataTable from "../../components/MyDataTable";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa6";
+import GetAPI from "../../utilities/GetAPI";
+
 
 export default function FinancialPeroformanceReport() {
-  const columns = [
-    {
-      name: "Sr",
-      selector: (row) => row.serialNo,
-    },
-    {
-      name: "All salons",
-      selector: (row) => row.allSalons,
-    },
-    {
-      name: "Monthly Revenue",
-      selector: (row) => row.monthlyRevenue,
-    },
-    {
-      name: "No. of employees",
-      selector: (row) => row.employees,
-    },
-    {
-      name: "Total Bookings",
-      selector: (row) => row.bookings,
-    },
-    {
-      name: "Salon rating",
-      selector: (row) => row.rating,
-    },
-    {
-      name: "Avg Customer Spent",
-      selector: (row) => row.avgCustomerSpent,
-    },
+  const [selectedOption, setSelectedOption] = useState({ value: 'complete', label: 'Complete' });
+  console.log("🚀 ~ FinancialPeroformanceReport ~ selectedOption:", selectedOption)
+  // const [para, setPara] = useState('complete')
+  
+  const {data} = GetAPI(`admin/reports/financial-performance/${selectedOption?.value}`)
+
+  console.log("🚀 ~ FinancialPeroformanceReport ~ data:", data)
+
+  const options = [
+    { value: 'complete', label: 'Complete' },
+    { value: 'cancel', label: 'Cancel' },
+    { value: 'no-show', label: 'No Show' },
   ];
+
+  const columns = [
+    { field: "sn", header: "Sn" },
+    { field: "salonName", header: "Salon Name" },
+    { field: "revenue", header: "Revenue" },
+    { field: "averageBookingTotal", header: "Avg. Total Bookings" },
+    { field: "totalAppointments", header: "Total Appointments" },
+    { field: "totalEmployees", header: "Total Employees" },
+    { field: "salonAverageRating", header: "Salon Avg. Rating" },
+    { field: "ratingCount", header: "Rating Count" },
+  ]
+
+  const datas = []
+  data?.data?.report?.map((values,i) => {
+    return datas.push({
+      sn:i+1,
+      salonName: values?.salonName,
+      revenue:  values?.revenue,
+      averageBookingTotal:  values?.averageBookingTotal,
+      totalAppointments: values?.totalAppointments ,
+      totalEmployees: values?.totalEmployees ,
+      salonAverageRating: values?.salonAverageRating ,
+      ratingCount: values?.ratingCount
+    })
+  })
+ 
   return (
     <Layout
       content={
@@ -56,7 +67,8 @@ export default function FinancialPeroformanceReport() {
               Financial Peroformance Report
             </h2>
           </div>
-          <MyDataTable columns={columns} />
+      
+          <MyDataTable columns={columns} data={datas} options={options} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
         </div>
       }
     />
