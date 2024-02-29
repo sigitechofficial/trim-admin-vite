@@ -45,6 +45,7 @@ export default function Login() {
 
       if (res?.data?.status === "1") {
         setLoader(false);
+        localStorage.setItem('loginStatus', true)
         localStorage.setItem("accessToken", res?.data?.data?.accessToken);
         localStorage.setItem("userId", res?.data?.data?.userId);
         localStorage.setItem("userEmail", res?.data?.data?.email);

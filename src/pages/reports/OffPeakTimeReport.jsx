@@ -19,6 +19,7 @@ import Select from "react-select";
 import selectStyles from "../../utilities/SelectStyle";
 import { BASE_URL } from "../../utilities/URL";
 import { error_toaster, success_toaster } from "../../utilities/Toaster";
+import Loader from "../../components/Loader";
 
 export default function OffPeakTimeReport() {
   const [modal, setModal] = useState(false)
@@ -138,7 +139,9 @@ export default function OffPeakTimeReport() {
     });
   })
 
-  return (
+  return SalonData?.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">

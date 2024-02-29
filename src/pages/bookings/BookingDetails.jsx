@@ -9,10 +9,11 @@ import { FaArrowLeft } from "react-icons/fa";
 import SalonProfileCard from "../../components/SalonProfileCard";
 import GetAPI from "../../utilities/GetAPI";
 import { BASE_URL } from "../../utilities/URL";
+import Loader from "../../components/Loader";
 
 export default function BookingDetails() {
   const { data } = GetAPI(`admin/appointment-detail/${JSON.parse(localStorage.getItem('bookingDetailsID'))}`)
-  console.log("🚀 ~ BookingDetails ~ data:", data?.data?.appointments)
+  console.log("🚀 ~ BookingDetails ~ data:",data?.data?.appointments?.user)
 
   // const calculateTotals = (val) => {
   //   let tipTotal = 0
@@ -29,7 +30,9 @@ export default function BookingDetails() {
   //   }
   // }
 
-  return (
+  return data?.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">
@@ -48,8 +51,27 @@ export default function BookingDetails() {
           </div>
           <div className="bg-white p-5 rounded-lg space-y-6">
             <div className="grid xl:grid-cols-2 gap-5">
-              <ProfileCard shadow="shadow-none" bgColor="bg-themeGray" profileCardData={data?.data?.appointments?.user} />
-              <SalonProfileCard shadow={false} bgColor="bg-themeGray" salonProfileCardData={data?.data?.appointments?.salonDetail} />
+              <ProfileCard shadow="shadow-none" bgColor="bg-themeGray" 
+              employeeName={`${data?.data?.appointments?.user?.firstName} ${data?.data?.appointments?.user?.lastName}`}
+              coverImage={data?.data?.appointments?.user?.image}
+              employeeID={data?.data?.appointments?.user?.id}
+              employeeEmail={data?.data?.appointments?.user?.email}
+              employeePhoneNumber={`${data?.data?.appointments?.user?.countryCode} ${data?.data?.appointments?.user?.phoneNum}`}
+              // profileCardData={data?.data?.appointments?.user}
+               /> 
+
+              <SalonProfileCard shadow={false}
+               bgColor="bg-themeGray"
+                coverImage={data?.data?.appointments?.salonDetail?.coverImage}
+                bgColor="bg-themeGray"
+                salonName={data?.data?.appointments?.salonDetail?.salonName}
+                salonAverageRating={data?.data?.appointments?.salonDetail?.salonAverageRating}
+                ratingCount={data?.data?.appointments?.salonDetail?.ratingCount}
+                salonAddress={`${data?.data?.appointments?.salonDetail?.addressDB?.streetAddress},${data?.data?.appointments?.salonDetail?.addressDB?.district},${data?.data?.appointments?.salonDetail?.addressDB?.city},${data?.data?.appointments?.salonDetail?.addressDB?.country}`}
+                socialLinks={data?.data?.socialLinks}
+
+                // salonProfileCardData={data?.data?.appointments?.salonDetail}
+              />
             </div>
 
             <div className="bg-themeGray rounded-2xl p-4 lg:p-6 space-y-8">

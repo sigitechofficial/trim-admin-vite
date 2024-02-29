@@ -5,6 +5,7 @@ import MyDataTable from "../../components/MyDataTable";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa6";
 import GetAPI from "../../utilities/GetAPI";
+import Loader from "../../components/Loader";
 
 export default function ClientFileReport() {
   const { data } = GetAPI('admin/reports/client-file')
@@ -33,7 +34,9 @@ export default function ClientFileReport() {
     });
   });
 
-  return (
+  return data?.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">

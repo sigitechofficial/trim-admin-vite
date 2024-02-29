@@ -5,7 +5,8 @@ import MyDataTable from "../../components/MyDataTable";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import GetAPI from "../../utilities/GetAPI";
-
+import Loader from "../../components/Loader";
+ 
 export default function CancelledBookings() {
   const navigate = useNavigate()
   const { data } = GetAPI('admin/appointments')
@@ -68,7 +69,9 @@ export default function CancelledBookings() {
     });
   });
 
-  return (
+  return data?.length === 0 ? (
+    <Loader />
+  ) :(
     <Layout
       content={
         <div className="space-y-5">

@@ -16,12 +16,12 @@ import { useNavigate } from "react-router-dom";
 // } from "@chakra-ui/react";
 // import selectStyles from "../../utilities/SelectStyle";
 // import Select from "react-select";
-
+ 
 export default function Coupons() {
   const navigate = useNavigate();
 
   const { data, reFetch } = GetAPI('admin/coupons')
-  console.log("🚀 ~ Coupons ~ data:", data)
+  // console.log("🚀 ~ Coupons ~ data:", data)
   // const [modal, setModal] = useState(false);
   // //   const [modalType, setModalType] = useState(null);
 

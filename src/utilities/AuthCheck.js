@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { info_toaster } from "../utilities/Toaster";
+import { useNavigate, useLocation } from "react-router-dom";
+import { info_toaster } from "./Toaster";
 
 export const setLoginStatus = (data) => {
     try {
@@ -10,10 +10,11 @@ export const setLoginStatus = (data) => {
 
 export const AuthCheck = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     useEffect(() => {
         if (
-            !localStorage.getItem("loginStatus") ||
-            !localStorage.getItem("accessToken")
+            (!localStorage.getItem("loginStatus") ||
+                !localStorage.getItem("accessToken"))
         ) {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("loginStatus");

@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import MyDataTable from "../../components/MyDataTable";
 import { FaAngleRight, FaArrowLeft } from "react-icons/fa";
 import GetAPI from "../../utilities/GetAPI";
+import Loader from "../../components/Loader";
 
 export default function AppointmentReport() {
  
@@ -37,7 +38,9 @@ export default function AppointmentReport() {
     });
   });
 
-  return (
+  return data?.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">

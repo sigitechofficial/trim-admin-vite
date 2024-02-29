@@ -11,11 +11,13 @@ import { LuPackageCheck, LuPackageX } from "react-icons/lu";
 import { FiBox } from "react-icons/fi";
 import GetAPI from "../../utilities/GetAPI";
 import Charts from "./Charts";
+import Loader from "../../components/Loader";
 
 export default function Home() {
   const { data } = GetAPI('admin/dashboard')
-  console.log("🚀 ~ Home ~ data:", data)
-  return (
+  return data?.length === 0 ? (
+    <Loader />
+  ) :(
     <Layout
       content={
         <div className="bg-homeGradient w-full h-44 relative before:absolute before:bg-texture before:w-full before:h-44 before:bg-contain">

@@ -5,16 +5,17 @@ import MyDataTable from "../../components/MyDataTable";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa6";
 import GetAPI from "../../utilities/GetAPI";
+import Loader from "../../components/Loader";
 
 
 export default function FinancialPeroformanceReport() {
   const [selectedOption, setSelectedOption] = useState({ value: 'complete', label: 'Complete' });
-  console.log("🚀 ~ FinancialPeroformanceReport ~ selectedOption:", selectedOption)
+  // console.log("🚀 ~ FinancialPeroformanceReport ~ selectedOption:", selectedOption)
   // const [para, setPara] = useState('complete')
   
   const {data} = GetAPI(`admin/reports/financial-performance/${selectedOption?.value}`)
 
-  console.log("🚀 ~ FinancialPeroformanceReport ~ data:", data)
+  // console.log("🚀 ~ FinancialPeroformanceReport ~ data:", data)
 
   const options = [
     { value: 'complete', label: 'Complete' },
@@ -47,7 +48,9 @@ export default function FinancialPeroformanceReport() {
     })
   })
  
-  return (
+  return data?.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">

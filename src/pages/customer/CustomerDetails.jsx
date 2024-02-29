@@ -4,7 +4,7 @@ import Layout from "../../components/Layout";
 import Loader from "../../components/Loader";
 import ProfileCard from "../../components/ProfileCard";
 import MyDataTable from "../../components/MyDataTable";
-import { useLocation } from "react-router-dom";
+
 import GetAPI from "../../utilities/GetAPI";
 import formatDateFromDB, {
   formatTimeFromDB,
@@ -17,15 +17,14 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalOverlay,
+  ModalOverlay, 
 } from "@chakra-ui/react";
 import { MdOutlineEmail } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
 
 export default function CustomerDetails() {
-  const location = useLocation();
   const { data } = GetAPI(
-    `admin/customer-detail/${location?.state?.customerId}`
+    `admin/customer-detail/${localStorage.getItem('customerID')}`
   );
   const [modal, setModal] = useState(false);
   const [bookingData, setBookingData] = useState("");

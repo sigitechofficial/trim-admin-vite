@@ -7,22 +7,23 @@ import { LuMapPin } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../utilities/URL";
 export default function SalonProfileCard(props) {
+  console.log(`${BASE_URL}${props?.salonProfileCardData?.coverImage}`);
   return (
     <div
       className={`${ 
         props.bgColor
       } p-4 lg:p-6 rounded-xl grid grid-cols-2 gap-x-10 ${
         props.shadow === true ? "shadow-lg" : "shadow-none"
-      }`}
+      }`} 
     > 
       <div className="h-64">
-        <img src={`${BASE_URL}${props?.salonProfileCardData?.coverImage}`} alt="barbershop" className="object-fill h-full w-full rounded-md" />
+        <img src={`${BASE_URL}${props?.coverImage}`} alt="barbershop" className="object-fill h-full w-full rounded-md" />
       </div>
  
       <div className="space-y-3">
         <div className="space-y-2">
           <h2 className="text-2xl font-medium font-workSans">
-            {props?.salonProfileCardData?.salonName}
+            {props?.salonName}
           </h2>
           <div className="flex gap-x-1 items-center">
             {/* <HiOutlineStar className={`${}`} /> */}
@@ -31,7 +32,7 @@ export default function SalonProfileCard(props) {
             <HiOutlineStar />
             <HiOutlineStar />
             <span className="text-themeLightGray font-workSans font-medium">
-              ({props?.salonProfileCardData?.ratingCount} Reviews) 
+              ({props?.ratingCount} Reviews) 
             </span>
           </div>
         </div>
@@ -47,7 +48,7 @@ export default function SalonProfileCard(props) {
           </li> */}
           <li className="flex items-center gap-x-2 text-themeLightGray font-medium font-workSans">
             <LuMapPin size={20} color="#12466F" />
-            <span>{props?.salonProfileCardData?.addressDB?.postalCode} {props?.salonProfileCardData?.addressDB?.streetAddress} {props?.salonProfileCardData?.addressDB?.city} {props?.salonProfileCardData?.addressDB?.country}</span>
+            <span>{props?.salonAddress}</span>
           </li>
         </ul>
 

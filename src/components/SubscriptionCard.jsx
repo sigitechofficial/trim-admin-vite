@@ -44,13 +44,14 @@ export default function SubscriptionCard(props) {
             Include Feature in Standard
           </h2>
           <ul className="mt-5 space-y-2">
-            <li className="flex items-center gap-x-4">
+            {props?.includedFeatures?.map((values, i) => <li key={i} className="flex items-center gap-x-4">
               <IoMdCheckboxOutline size={26} color="#12466F" />
               <span className="text-2xl font-workSans font-medium">
-                Online Bookings
+                {/* Online Bookings */}
+                {values?.feature}
               </span>
-            </li>
-            <li className="flex items-center gap-x-4">
+            </li>)}
+            {/* <li className="flex items-center gap-x-4">
               <IoMdCheckboxOutline size={26} color="#12466F" />
               <span className="text-2xl font-workSans font-medium">
                 Online Payments
@@ -79,7 +80,7 @@ export default function SubscriptionCard(props) {
               <span className="text-2xl font-workSans font-medium">
                 {props.valid}
               </span>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

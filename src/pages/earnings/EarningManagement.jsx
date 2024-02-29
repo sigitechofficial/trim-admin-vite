@@ -3,6 +3,7 @@ import React from "react";
 import Layout from "../../components/Layout";
 import MyDataTable from "../../components/MyDataTable";
 import GetAPI from "../../utilities/GetAPI";
+import Loader from "../../components/Loader";
 
 export default function EarningManagement() {
   const { data, reFetch } = GetAPI('admin/salon-earnings')
@@ -41,7 +42,9 @@ export default function EarningManagement() {
   })
 
 
-  return (
+  return data?.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">

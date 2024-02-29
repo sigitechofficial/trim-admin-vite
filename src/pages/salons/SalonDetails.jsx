@@ -19,7 +19,7 @@ export default function SalonDetails() {
   const handleTime = (day) => {
     const temp = data?.data?.detail?.times?.find(obj => obj?.day.toLowerCase() === day.toLowerCase())
     if (temp) {
-      return `${temp?.openingTime} ${temp?.closingTime}`
+      return `${temp?.openingTime} - ${temp?.closingTime}`
     }
     else {
       return 'Closed'
@@ -43,7 +43,7 @@ export default function SalonDetails() {
             <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
               Barbershop Details
             </h2>
-          </div>
+          </div> 
 
           <div>
             <SalonProfileCard

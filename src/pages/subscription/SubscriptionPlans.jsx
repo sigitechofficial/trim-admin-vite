@@ -3,9 +3,17 @@ import React from "react";
 import Layout from "../../components/Layout";
 import { FaArrowLeft } from "react-icons/fa";
 import SubscriptionCard from "../../components/SubscriptionCard";
+import { useLocation } from 'react-router-dom'
+import Loader from "../../components/Loader";
+
 
 export default function SubscriptionPlans() {
-  return (
+  const data = useLocation().state.data
+  // console.log("🚀 ~ SubscriptionPlans ~ data:", data)
+  
+  return data?.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">
@@ -29,6 +37,7 @@ export default function SubscriptionPlans() {
               title="Trim Standard"
               staff="0-5 Staff"
               valid="Valid for One Month"
+              includedFeatures={data}
             />
           </div>
         </div>

@@ -13,8 +13,8 @@ import formatDateFromDB from "../../utilities/DateTime";
 import Loader from "../../components/Loader";
 
 export default function Customers() {
-  const { data, reFetch } = GetAPI("admin/customer");
   const navigate = useNavigate();
+  const { data, reFetch } = GetAPI("admin/customer");
 
   const handleStatus = async (customerId) => {
     let res = await PutAPI(`admin/customer-change-status/${customerId}`);
@@ -22,13 +22,19 @@ export default function Customers() {
       success_toaster(res?.data?.message);
       reFetch();
     } else {
-      error_toaster(res?.data?.message); 
+      error_toaster(res?.data?.message);
     }
   };
 
   const columns = [
-    { field: "sn", header: "Sn" },
-    { field: "id", header: "Id" },
+    {
+      field: "sn",
+      header: "Sn"
+    },
+    {
+      field: "id",
+      header: "Id"
+    },
     {
       field: "name",
       header: "Name",
@@ -82,7 +88,6 @@ export default function Customers() {
           )}
         </div>
       ),
-
       changeStatus: (
         <label>
           <Switch
@@ -103,11 +108,10 @@ export default function Customers() {
         <div className="flex gap-x-2">
           <button
             className="border border-yellow-400 rounded-md p-2 text-yellow-400"
-            onClick={() =>
-              navigate("/customer-details", {
-                state: { customerId: values?.id },
-              })
-            }
+            onClick={() => {
+              navigate("/customer-details")
+              localStorage.setItem('customerID', values?.id)
+            }}
           >
             <FaEye size={24} />
           </button>

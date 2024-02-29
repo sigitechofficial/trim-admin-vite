@@ -32,47 +32,48 @@ import SubscriptionReport from './pages/reports/SubscriptionReport';
 import FinancialPeroformanceReport from './pages/reports/FinancialPeroformanceReport';
 import AppointmentReport from './pages/reports/AppointmentReport';
 import AllBookings from './pages/bookings/AllBookings';
+import ProtectedRoute from './utilities/ProtectedRoute';
 
 function App() {
   return (
     <>
       <ToastContainer />
-      <ChakraProvider>
+      <ChakraProvider> 
         <Router>
           <Routes>
             <Route exact path="/sign-in" element={<Login />} />
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/admin-earnings" element={<AdminEarnings />} />
-            <Route exact path="/all-bookings" element={<AllBookings />} />
-            <Route exact path="/noshow-bookings" element={<UpcomingBookings />} />
-            <Route exact path="/completed-bookings" element={<CompletedBookings />} />
-            <Route exact path="/cancelled-bookings" element={<CancelledBookings />} />
-            <Route exact path="/booking-details" element={<BookingDetails />} />
-            <Route exact path="/barbershops" element={<Salons />} />
-            <Route exact path="/barbershop-details" element={<SalonDetails />} />
-            <Route exact path="/barbershop-details/saloon-employee-details" element={<SalonEmployeeDetails />} />
-            <Route exact path="/customers" element={<Customers />} />
-            <Route exact path="/customer-details" element={<CustomerDetails />} />
-            <Route exact path="/services" element={<Services />} />
-            <Route exact path="/employees" element={<EmployeeManagement />} />
-            <Route exact path="/earnings" element={<EarningManagement />} />
-            <Route exact path="/roles" element={<RoleManagement />} />
-            <Route exact path="/coupons" element={<Coupons />} />
-            <Route exact path="/coupon-details" element={<CouponDetails />} />
-            <Route exact path="/subscription" element={<Subscription />} />
-            <Route exact path="/subscription-plans" element={<SubscriptionPlans />} />
-            <Route exact path="/notifications" element={<Notifications />} />
-            <Route exact path="/send-notifications" element={<SendNotifications />} />
-            <Route exact path="/customer-support" element={<HelpAndSupport />} />
-            <Route exact path="/reports" element={<Reports />} />
-            <Route exact path="/reports/off-peak-time-report" element={<OffPeakTimeReport />} />
-            <Route exact path="/reports/client-file-report" element={<ClientFileReport />} />
-            <Route exact path="/reports/subscription-report" element={<SubscriptionReport />} />
-            <Route exact path="/reports/financial-performance-report" element={<FinancialPeroformanceReport />} />
-            <Route exact path="/reports/appointment-conversion-report" element={<AppointmentReport />} />
+            <Route exact path="/" element={<ProtectedRoute Component={Home} />} />
+            <Route exact path="/admin-earnings" element={<ProtectedRoute Component={AdminEarnings} />} />
+            <Route exact path="/all-bookings" element={<ProtectedRoute Component={AllBookings} />} />
+            <Route exact path="/noshow-bookings" element={<ProtectedRoute Component={UpcomingBookings} />} />
+            <Route exact path="/completed-bookings" element={<ProtectedRoute Component={CompletedBookings} />} />
+            <Route exact path="/cancelled-bookings" element={<ProtectedRoute Component={CancelledBookings} />} />
+            <Route exact path="/booking-details" element={<ProtectedRoute Component={BookingDetails} />} />
+            <Route exact path="/barbershops" element={<ProtectedRoute Component={Salons} />} />
+            <Route exact path="/barbershop-details" element={<ProtectedRoute Component={SalonDetails} />} />
+            <Route exact path="/barbershop-details/saloon-employee-details" element={<ProtectedRoute Component={SalonEmployeeDetails} />} />
+            <Route exact path="/customers" element={<ProtectedRoute Component={Customers} />} />
+            <Route exact path="/customer-details" element={<ProtectedRoute Component={CustomerDetails} />} />
+            <Route exact path="/services" element={<ProtectedRoute Component={Services} />} />
+            <Route exact path="/employees" element={<ProtectedRoute Component={EmployeeManagement} />} />
+            <Route exact path="/earnings" element={<ProtectedRoute Component={EarningManagement} />} />
+            <Route exact path="/roles" element={<ProtectedRoute Component={RoleManagement} />} />
+            <Route exact path="/coupons" element={<ProtectedRoute Component={Coupons} />} />
+            <Route exact path="/coupon-details" element={<ProtectedRoute Component={CouponDetails} />} />
+            <Route exact path="/subscription" element={<ProtectedRoute Component={Subscription} />} />
+            <Route exact path="/subscription-plans" element={<ProtectedRoute Component={SubscriptionPlans} />} />
+            <Route exact path="/notifications" element={<ProtectedRoute Component={Notifications} />} />
+            <Route exact path="/send-notifications" element={<ProtectedRoute Component={SendNotifications} />} />
+            <Route exact path="/customer-support" element={<ProtectedRoute Component={HelpAndSupport} />} />
+            <Route exact path="/reports" element={<ProtectedRoute Component={Reports} />} />
+            <Route exact path="/reports/off-peak-time-report" element={<ProtectedRoute Component={OffPeakTimeReport} />} />
+            <Route exact path="/reports/client-file-report" element={<ProtectedRoute Component={ClientFileReport} />} />
+            <Route exact path="/reports/subscription-report" element={<ProtectedRoute Component={SubscriptionReport} />} />
+            <Route exact path="/reports/financial-performance-report" element={<ProtectedRoute Component={FinancialPeroformanceReport} />} />
+            <Route exact path="/reports/appointment-conversion-report" element={<ProtectedRoute Component={AppointmentReport} />} />
           </Routes>
         </Router>
-      </ChakraProvider>
+      </ChakraProvider >
     </>
   );
 }

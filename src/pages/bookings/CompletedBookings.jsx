@@ -5,6 +5,8 @@ import MyDataTable from "../../components/MyDataTable";
 import GetAPI from "../../utilities/GetAPI";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader";
+
 
 export default function CompletedBookings() {
   const navigate = useNavigate()
@@ -68,7 +70,9 @@ export default function CompletedBookings() {
     });
   });
 
-  return (
+  return data?.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">

@@ -183,7 +183,7 @@ export default function Services() {
 
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-10 pt-5">
             {data?.data?.map((services, index) => (
-              <div className="bg-white p-5 rounded-lg shadow-textShadow flex flex-col gap-y-4 justify-center items-center relative">
+              <div  key={index} className="bg-white p-5 rounded-lg shadow-textShadow flex flex-col gap-y-4 justify-center items-center relative">
                 <img
                   src={`${BASE_URL}${services?.image}`}
                   alt="services"

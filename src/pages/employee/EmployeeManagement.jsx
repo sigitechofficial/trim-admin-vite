@@ -5,70 +5,68 @@ import MyDataTable from "../../components/MyDataTable";
 import {
   Modal,
   ModalOverlay,
-  ModalContent, 
+  ModalContent,
   ModalBody,
   ModalCloseButton,
   ModalFooter,
 } from "@chakra-ui/react";
 import PhoneInput from "react-phone-input-2";
+import { FaEye } from "react-icons/fa";
 import "react-phone-input-2/lib/style.css";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import selectStyles from "../../utilities/SelectStyle";
+import GetAPI from "../../utilities/GetAPI";
 
 export default function EmployeeManagement() {
-  const [modal, setModal] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
+  const { data } = GetAPI('admin/salon-employees/all')
+  console.log("🚀 ~ EmployeeManagement ~ data:", data?.data?.employees)
+
+
+  const employeeCount = data?.data?.employees.length
+  // const [modal, setModal] = useState(false);
+  // const [visible, setVisible] = useState(false);
   //   const [modalType, setModalType] = useState(null);
 
-  const openModal = (type) => {
-    // setModalType(type);
-    setModal(true); 
-  };
+  // const openModal = (type) => {
+  //   // setModalType(type);
+  //   setModal(true); 
+  // };
 
-  const closeModal = () => {
-    setModal(false);
-  };
+  // const closeModal = () => {
+  //   setModal(false);
+  // };
 
   const columns = [
-    {
-      name: "Sr",
-      selector: (row) => row.serialNo,
-    },
-    {
-      name: "First Name",
-      selector: (row) => row.fname,
-    },
-    {
-      name: "Last Name",
-      selector: (row) => row.lname,
-    },
-    {
-      name: "Email",
-      selector: (row) => row.email,
-    },
-    {
-      name: "Phone",
-      selector: (row) => row.phone,
-    },
-    {
-      name: "Role",
-      selector: (row) => row.role,
-    },
-    {
-      name: "Current Status",
-      selector: (row) => row.status,
-    },
-    {
-      name: "Change Status",
-      selector: (row) => row.changeStatus,
-    },
-    {
-      name: "Action",
-      selector: (row) => row.action,
-      minWidth: "160px",
-    },
-  ];
+    { field: "sn", header: "Sn" },
+    { field: "salonName", header: "Salon Name" },
+    { field: "name", header: "Name" },
+    { field: "position", header: "Position" },
+    { field: "employeeAverageRating", header: "Avg. Rating" },
+    { field: "action", header: "Action" }
+  ]
+
+  const datas = []
+  data?.data?.employees?.map((values, i) => {
+    return datas.push({
+      sn: i + 1,
+      salonName: values?.salonDetail?.salonName,
+      name: `${values?.user?.firstName} ${values?.user?.lastName}`,
+      position: values?.position,
+      employeeAverageRating: values?.employeeAverageRating,
+      action: <button
+        className="border border-yellow-400 rounded-md p-2 text-yellow-400"
+        onClick={() => {
+          navigate("/barbershop-details/saloon-employee-details")
+          localStorage.setItem('barberShopEmployeeID', values?.user?.id)
+        }}
+      >
+        <FaEye size={24} />
+      </button>
+    })
+  })
 
   return (
     <Layout
@@ -76,9 +74,9 @@ export default function EmployeeManagement() {
         <div className="space-y-5">
           <div className="w-full flex justify-between items-center">
             <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
-              All Employees <span className="text-labelColor">(260)</span>
+              All Employees <span className="text-labelColor">({employeeCount})</span>
             </h2>
-            <button
+            {/* <button
               className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-transparent
            hover:text-theme duration-200"
               onClick={() => {
@@ -86,11 +84,12 @@ export default function EmployeeManagement() {
               }}
             >
               + Add New Employee
-            </button>
+            </button> */}
           </div>
 
-          <MyDataTable columns={columns} />
+          <MyDataTable columns={columns} data={datas} />
 
+          {/* 
           <Modal onClose={closeModal} isOpen={modal} isCentered size={"2xl"}>
             <ModalOverlay />
             <ModalContent>
@@ -217,7 +216,7 @@ export default function EmployeeManagement() {
                 </div>
               </ModalFooter>
             </ModalContent>
-          </Modal>
+          </Modal> */}
         </div>
       }
     />

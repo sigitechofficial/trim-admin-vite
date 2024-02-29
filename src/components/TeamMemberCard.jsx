@@ -20,7 +20,7 @@ export default function TeamMemberCard(props) {
         <div className="mt-6 grid grid-cols-3 lg:grid-cols-4  xl:grid-cols-6 2xl:grid-cols-8">
           {props?.employees?.map((employee, i) => <div key={i} onClick={() => handleBarberShopDetail(employee)} className="relative">
             <img
-              src={`${BASE_URL}${employee?.user?.image}`}
+              src={employee?.user?.image ? `${BASE_URL}${employee?.user?.image}`:'/images/defaultProfileImg.webp'} 
               alt="team member"
               className="w-28 h-28 mx-auto object-fill object-center rounded-full"
             />

@@ -10,10 +10,10 @@ import { useNavigate } from "react-router-dom";
 import Switch from "react-switch";
 import { PutAPI } from "../../utilities/PutAPI";
 import { error_toaster, success_toaster } from "../../utilities/Toaster";
-
+ 
 export default function Salons() {
   const { data, reFetch } = GetAPI("admin/salon-view");
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const handleStatus = async (userId) => {
     let res = await PutAPI(`admin/salon-change-status/${userId}`);

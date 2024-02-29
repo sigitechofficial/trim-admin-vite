@@ -5,6 +5,8 @@ import GetAPI from '../../utilities/GetAPI'
 import formatDateFromDB from '../../utilities/DateTime'
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader";
+
 
 export default function AllBookings() {
     const navigate = useNavigate()
@@ -69,7 +71,9 @@ export default function AllBookings() {
         });
     });
 
-    return (
+    return data?.length === 0 ? (
+        <Loader />
+      ) :(
         <Layout
             content={
                 <div className="space-y-5">

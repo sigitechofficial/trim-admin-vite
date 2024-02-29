@@ -5,10 +5,11 @@ import GetAPI from "../../utilities/GetAPI";
 import { PutAPI } from "../../utilities/PutAPI";
 import PhoneInput from "react-phone-input-2";
 import { Input } from "@chakra-ui/react";
+import Loader from "../../components/Loader";
 
 export default function HelpAndSupport() {
   const { data, reFetch } = GetAPI('admin/help-support')
-  console.log("🚀 ~ HelpAndSupport ~ data:", data?.data)
+  // console.log("🚀 ~ HelpAndSupport ~ data:", data?.data)
 
   const [inputDisability, setInputDisability] = useState({
     email: true,
@@ -56,7 +57,9 @@ export default function HelpAndSupport() {
     })
   }, [data])
 
-  return (
+  return data?.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">
