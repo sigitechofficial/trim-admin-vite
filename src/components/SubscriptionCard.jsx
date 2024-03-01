@@ -59,7 +59,7 @@ export default function SubscriptionCard(props) {
             <ul className="mt-5 space-y-2">
               {props?.includedFeatures?.map((values, i) => <li key={i} className="flex items-center gap-x-4">
                 <span><IoMdCheckboxOutline size={26} color="#12466F" /></span>
-                <span className="text-2xl font-workSans font-medium">
+                <span className="text-xl font-workSans font-medium">
                   {values?.name}
                 </span>
               </li>)}
