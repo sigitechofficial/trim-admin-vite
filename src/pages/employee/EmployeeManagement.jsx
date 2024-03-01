@@ -18,6 +18,7 @@ import Select from "react-select";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import selectStyles from "../../utilities/SelectStyle";
 import GetAPI from "../../utilities/GetAPI";
+import Loader from "../../components/Loader";
 
 export default function EmployeeManagement() {
   const navigate = useNavigate();
@@ -68,7 +69,7 @@ export default function EmployeeManagement() {
     })
   })
 
-  return (
+  return data.length === 0 ? <Loader /> :(
     <Layout
       content={
         <div className="space-y-5">

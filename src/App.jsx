@@ -60,7 +60,7 @@ function App() {
             <Route exact path="/roles" element={<ProtectedRoute Component={RoleManagement} />} />
             <Route exact path="/coupons" element={<ProtectedRoute Component={Coupons} />} />
             <Route exact path="/coupon-details" element={<ProtectedRoute Component={CouponDetails} />} />
-            {/* <Route exact path="/subscription" element={<ProtectedRoute Component={Subscription} />} /> */}
+            <Route exact path="/subscription" element={<ProtectedRoute Component={Subscription} />} />
             <Route exact path="/subscription-plans" element={<ProtectedRoute Component={SubscriptionPlans} />} />
             <Route exact path="/notifications" element={<ProtectedRoute Component={Notifications} />} />
             <Route exact path="/send-notifications" element={<ProtectedRoute Component={SendNotifications} />} />

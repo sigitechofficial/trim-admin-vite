@@ -19,18 +19,18 @@ export default function SubscriptionCard(props) {
     setModal(true);
   };
 
-  const closeModal = () => { 
+  const closeModal = () => {
     setModal(false);
   };
 
   return (
     <>
-      <div className="bg-white shadow-md rounded-lg">
+      <div className="bg-white shadow-md rounded-lg" key={props?.i}>
         <div
           className={`${props.bgColor} flex rounded-lg flex-col justify-center items-center py-5 space-y-2 relative`}
         >
-          <h2 className="text-3xl font-chivo font-medium">{props.title}</h2>
-          <p className="text-2xl font-chivo font-medium">{props.staff}</p>
+          <h2 className="text-3xl font-chivo font-medium">{props?.title}</h2>
+          <p className="text-2xl font-chivo font-medium">{props?.desc}</p>
           <FaEdit
             size={26}
             color="#12466F"
@@ -39,49 +39,33 @@ export default function SubscriptionCard(props) {
           />
         </div>
 
-        <div className="py-10 flex flex-col justify-center items-center  px-10">
-          <h2 className="text-2xl font-chivo font-medium">
-            Include Feature in Standard
-          </h2>
-          <ul className="mt-5 space-y-2">
-            {props?.includedFeatures?.map((values, i) => <li key={i} className="flex items-center gap-x-4">
-              <IoMdCheckboxOutline size={26} color="#12466F" />
-              <span className="text-2xl font-workSans font-medium">
-                {/* Online Bookings */}
-                {values?.name}
-              </span>
-            </li>)}
-            {/* <li className="flex items-center gap-x-4">
-              <IoMdCheckboxOutline size={26} color="#12466F" />
-              <span className="text-2xl font-workSans font-medium">
-                Online Payments
-              </span>
-            </li>
-            <li className="flex items-center gap-x-4">
-              <IoMdCheckboxOutline size={26} color="#12466F" />
-              <span className="text-2xl font-workSans font-medium">
-                Limited Message
-              </span>
-            </li>
-            <li className="flex items-center gap-x-4">
-              <IoMdCheckboxOutline size={26} color="#12466F" />
-              <span className="text-2xl font-workSans font-medium">
-                Earning Management
-              </span>
-            </li>
-            <li className="flex items-center gap-x-4">
-              <IoMdCheckboxOutline size={26} color="#12466F" />
-              <span className="text-2xl font-workSans font-medium">
-                Staff Management
-              </span>
-            </li>
-            <li className="flex items-center gap-x-4">
-              <IoMdCheckboxOutline size={26} color="#12466F" />
-              <span className="text-2xl font-workSans font-medium">
-                {props.valid}
-              </span>
-            </li> */}
-          </ul>
+
+        <div className="py-5 px-10 space-y-8">
+          <div className="flex justify-between items-center [&>div]:space-y-1  [&>div]:text-xl">
+            <div>
+              <p className="font-bold">Duration</p>
+              <p className="text-red-800 font-semibold">{props?.duration}</p>
+            </div>
+            <div className="">
+              <p className="font-bold">Price</p>
+              <p className="text-red-800 font-semibold text-lg">${props?.price}</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center">
+            <h2 className="text-2xl font-chivo font-medium">
+              Include Feature in Standard
+            </h2>
+            <ul className="mt-5 space-y-2">
+              {props?.includedFeatures?.map((values, i) => <li key={i} className="flex items-center gap-x-4">
+                <span><IoMdCheckboxOutline size={26} color="#12466F" /></span>
+                <span className="text-2xl font-workSans font-medium">
+                  {values?.name}
+                </span>
+              </li>)}
+
+            </ul>
+          </div>
         </div>
       </div>
 

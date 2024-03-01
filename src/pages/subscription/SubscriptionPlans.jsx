@@ -12,7 +12,7 @@ export default function SubscriptionPlans() {
   // const data = useLocation().state.data
   // console.log("🚀 ~ SubscriptionPlans ~ data:", data)
   const { data } = GetAPI('admin/AllSubscriptions')
-  console.log("🚀 ~ SubscriptionPlans ~ data:", data?.data?.listOfPlans)
+  // console.log("🚀 ~ SubscriptionPlans ~ data:", data?.data?.listOfPlans)
 
   return data?.length === 0 ? (
     <Loader />
@@ -48,9 +48,12 @@ export default function SubscriptionPlans() {
 
           <div className="grid grid-col-1 xl:grid-cols-2 2xl:grid-cols-3 gap-y-10 gap-x-20">
             {data?.data?.listOfPlans.length > 0 ? data?.data?.listOfPlans?.map((values, i) => <SubscriptionCard
-              bgColor="bg-themePink"
+              key={i}
+              bgColor={values?.name.includes("Gold") ? "bg-[#FADD81]" : values?.name.includes("Premium") ? 'bg-[#EEC1FD]' : 'bg-[#ADEEF5]'}
               title={values?.name}
-              staff="0-5 Staff"
+              duration={values?.duration}
+              price={values?.price}
+              desc={values?.description}
               valid="Valid for One Month"
               includedFeatures={values?.features}
             />) : <p className="font-bold text-2xl">No Subscription Yet</p>
