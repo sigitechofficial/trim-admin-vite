@@ -36,7 +36,7 @@ export default function Login() {
     initialValues,
     validationSchema: loginSchema,
     onSubmit: async (values, action) => {
-      setLoader(true);
+      // setLoader(true);
       let res = await loginAPI("admin/auth/login", {
         email: values.email,
         password: values.password,
