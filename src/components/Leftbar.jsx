@@ -119,9 +119,16 @@ export default function Leftbar() {
           active={location === "/coupon-details"}
         />
 
-        <ListHead
+        {/* <ListHead
           title="Subscription"
           to="/subscription"
+          Icon={MdOutlineSubscriptions}
+          active={location === "/subscription-plans"}
+        /> */}
+
+        <ListHead
+          title="All Subscription"
+          to="/subscription-plans"
           Icon={MdOutlineSubscriptions}
           active={location === "/subscription-plans"}
         />

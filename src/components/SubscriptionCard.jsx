@@ -19,7 +19,7 @@ export default function SubscriptionCard(props) {
     setModal(true);
   };
 
-  const closeModal = () => {
+  const closeModal = () => { 
     setModal(false);
   };
 
@@ -48,7 +48,7 @@ export default function SubscriptionCard(props) {
               <IoMdCheckboxOutline size={26} color="#12466F" />
               <span className="text-2xl font-workSans font-medium">
                 {/* Online Bookings */}
-                {values?.feature}
+                {values?.name}
               </span>
             </li>)}
             {/* <li className="flex items-center gap-x-4">

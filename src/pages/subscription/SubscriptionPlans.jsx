@@ -5,40 +5,56 @@ import { FaArrowLeft } from "react-icons/fa";
 import SubscriptionCard from "../../components/SubscriptionCard";
 import { useLocation } from 'react-router-dom'
 import Loader from "../../components/Loader";
+import GetAPI from "../../utilities/GetAPI";
 
 
 export default function SubscriptionPlans() {
-  const data = useLocation().state.data
+  // const data = useLocation().state.data
   // console.log("🚀 ~ SubscriptionPlans ~ data:", data)
-  
+  const { data } = GetAPI('admin/AllSubscriptions')
+  console.log("🚀 ~ SubscriptionPlans ~ data:", data?.data?.listOfPlans)
+
   return data?.length === 0 ? (
     <Loader />
   ) : (
     <Layout
       content={
         <div className="space-y-5">
-          <div className="flex items-center gap-x-2">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-x-2">
+              <button
+                className="flex justify-center items-center w-6 h-6 text-black rounded-full hover:bg-black hover:text-white duration-200"
+                onClick={() => {
+                  window.history.back();
+                }}
+              >
+                <FaArrowLeft />
+              </button>
+              <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
+                Subscription’s plan
+              </h2>
+            </div>
+
             <button
-              className="flex justify-center items-center w-6 h-6 text-black rounded-full hover:bg-black hover:text-white duration-200"
-              onClick={() => {
-                window.history.back();
-              }}
+              className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-transparent
+           hover:text-theme duration-200"
+            // onClick={() => {
+            //   openModal("Add Employe");
+            // }}
             >
-              <FaArrowLeft />
+              + Add New Subscription
             </button>
-            <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
-              Subscription’s plan
-            </h2>
           </div>
 
           <div className="grid grid-col-1 xl:grid-cols-2 2xl:grid-cols-3 gap-y-10 gap-x-20">
-            <SubscriptionCard
+            {data?.data?.listOfPlans.length > 0 ? data?.data?.listOfPlans?.map((values, i) => <SubscriptionCard
               bgColor="bg-themePink"
-              title="Trim Standard"
+              title={values?.name}
               staff="0-5 Staff"
               valid="Valid for One Month"
-              includedFeatures={data}
-            />
+              includedFeatures={values?.features}
+            />) : <p className="font-bold text-2xl">No Subscription Yet</p>
+            }
           </div>
         </div>
       }

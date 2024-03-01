@@ -121,7 +121,7 @@ export default function BookingDetails() {
                     <h4 className="text-xl font-workSans font-medium">Service</h4>
                     <div className="border border-inputBorder rounded-lg flex justify-between p-4">
                       <div className="font-workSans font-medium">
-                        {job?.service?.serviceName}
+                        {job?.service?.serviceName} 
                         <span className="text-themeLightGray"> ({job?.duration} minutes)</span>
                       </div>
                       <div className="font-workSans font-medium">{job?.total} $</div>

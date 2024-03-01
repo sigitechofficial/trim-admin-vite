@@ -188,12 +188,12 @@ export default function Login() {
           </div>
 
           <div className="flex justify-end gap-x-2">
-            <button
+            {/* <button
               className="bg-transparent text-theme font-semibold px-6 py-2 rounded-md border border-theme hover:text-white hover:bg-theme duration-200"
               onClick={handleCancel}
             >
               Cancel
-            </button>
+            </button> */}
             <button
               className="bg-theme text-white font-semibold px-6 py-2 rounded-md border border-theme hover:text-theme hover:bg-transparent duration-200"
               type="submit"
