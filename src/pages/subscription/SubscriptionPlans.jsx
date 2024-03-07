@@ -9,10 +9,7 @@ import GetAPI from "../../utilities/GetAPI";
 
 
 export default function SubscriptionPlans() {
-  // const data = useLocation().state.data
-  // console.log("🚀 ~ SubscriptionPlans ~ data:", data)
-  const { data } = GetAPI('admin/AllSubscriptions')
-  // console.log("🚀 ~ SubscriptionPlans ~ data:", data?.data?.listOfPlans)
+  const { data, reFetch } = GetAPI('admin/AllSubscriptions')
 
   return data?.length === 0 ? (
     <Loader />
@@ -35,20 +32,22 @@ export default function SubscriptionPlans() {
               </h2>
             </div>
 
-            <button
+            {/* <button
               className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-transparent
            hover:text-theme duration-200"
-            // onClick={() => {
-            //   openModal("Add Employe");
-            // }}
+            onClick={() => {
+              openModal("Add Employe");
+            }}
             >
               + Add New Subscription
-            </button>
+            </button> */}
           </div>
 
           <div className="grid grid-col-1 xl:grid-cols-2 2xl:grid-cols-3 gap-y-10 gap-x-20">
             {data?.data?.listOfPlans.length > 0 ? data?.data?.listOfPlans?.map((values, i) => <SubscriptionCard
               key={i}
+              Id={values?.id}
+              reFetch={reFetch}
               bgColor={values?.name.includes("Gold") ? "bg-[#FADD81]" : values?.name.includes("Premium") ? 'bg-[#EEC1FD]' : 'bg-[#ADEEF5]'}
               title={values?.name}
               duration={values?.duration}

@@ -29,7 +29,7 @@ export default function Subscription() {
   data?.data?.map((values, i) => {
     return datas.push({
       sn: i + 1,
-      name: values?.name,
+      name: values?.name, 
       price: values?.price,
       teamSize: values?.teamSize,
       duration: values?.duration,

@@ -3,7 +3,6 @@ import { Bar } from 'react-chartjs-2'
 import Chart from 'chart.js/auto';
  
 export default function BarChart({ dashboardBarChartData }) {
-    console.log("🚀 ~ BarChart ~ dashboardBarChartData:", dashboardBarChartData)
     const UpdatedData = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         ,

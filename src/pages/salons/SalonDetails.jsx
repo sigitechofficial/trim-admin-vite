@@ -5,7 +5,6 @@ import { FaArrowLeft } from "react-icons/fa";
 import SalonProfileCard from "../../components/SalonProfileCard";
 import { HiOutlineStar } from "react-icons/hi2";
 import TeamMemberCard from "../../components/TeamMemberCard";
-import { useLocation } from "react-router-dom";
 import GetAPI from "../../utilities/GetAPI";
 import Loader from "../../components/Loader";
 import { BASE_URL } from "../../utilities/URL";
@@ -14,7 +13,6 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 export default function SalonDetails() {
   const [tab, setTab] = useState("about");
   const { data } = GetAPI(`admin/salon-detail/${JSON.parse(localStorage.getItem('salonID'))}`);
-  console.table("🚀 ~ file: SalonDetails.jsx:17 ~ SalonDetails ~ data:", data?.data?.detail);
 
   const handleTime = (day) => {
     const temp = data?.data?.detail?.times?.find(obj => obj?.day.toLowerCase() === day.toLowerCase())
@@ -25,6 +23,7 @@ export default function SalonDetails() {
       return 'Closed'
     }
   }
+
   return data.length === 0 ? (
     <Loader />
   ) : (
@@ -43,7 +42,7 @@ export default function SalonDetails() {
             <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
               Barbershop Details
             </h2>
-          </div> 
+          </div>
 
           <div>
             <SalonProfileCard
@@ -129,7 +128,7 @@ export default function SalonDetails() {
               ) : tab === "gallery" ? (
                 <div className="grid grid-cols-6 gap-x-4">
                   {data?.data?.detail?.salonImages?.map((obj, i) => {
-                    return <div className="w-full">
+                    return <div key={i} className="w-full">
                       <img
                         src={`${BASE_URL}${obj?.imageUrl}`}
                         alt=""
@@ -312,7 +311,7 @@ export default function SalonDetails() {
                 </div>
               ) : tab === "team members" ? (
 
-                <TeamMemberCard employees={data?.data?.detail?.employees}  />
+                <TeamMemberCard employees={data?.data?.detail?.employees} />
 
               ) : null}
             </div>

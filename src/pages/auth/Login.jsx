@@ -36,7 +36,6 @@ export default function Login() {
     initialValues,
     validationSchema: loginSchema,
     onSubmit: async (values, action) => {
-      // setLoader(true);
       let res = await loginAPI("admin/auth/login", {
         email: values.email,
         password: values.password,
@@ -57,7 +56,6 @@ export default function Login() {
         );
         localStorage.setItem("rememberMe", rememberMe);
         setLoginStatus(true);
-
         if (rememberMe) {
           localStorage.setItem("rememberedEmail", values.email);
           localStorage.setItem("rememberedPassword", values.password);
@@ -66,7 +64,6 @@ export default function Login() {
           localStorage.removeItem("rememberedPassword");
           localStorage.removeItem("rememberMe");
         }
-
         navigate("/");
         success_toaster("Login Successfully");
       } else {

@@ -4,11 +4,29 @@ import { FaArrowLeft } from "react-icons/fa";
 import Layout from "../../components/Layout";
 import Select from "react-select";
 import selectStyles from "../../utilities/SelectStyle";
+import { PostAPI } from "../../utilities/PostAPI";
+import { MiniLoader } from "../../components/Loader";
+import { useNavigate } from "react-router-dom";
+import { error_toaster, info_toaster, success_toaster } from "../../utilities/Toaster";
 
 export default function SendNotifications() {
+  const navigate = useNavigate()
+  const [data, setData] = useState({
+    title: "",
+    body: ""
+  })
+  const [loading, setLoading] = useState(false)
   const [image, setImage] = useState({
     logo: "",
   });
+  const [selectedOption, setSelectedOption] = useState({ value: 'all', label: 'All' });
+
+  const options = [
+    { value: 'all', label: 'All' },
+    { value: 'customers', label: 'Customers' },
+    { value: 'salons', label: 'Salons' },
+    { value: 'employees', label: 'Employees' },
+  ]
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -18,7 +36,40 @@ export default function SendNotifications() {
     }
   };
 
-  return (
+  const handleReset = () => {
+    setImage({
+      logo: ''
+    })
+  }
+
+  const handleSendNotifications = async (e) => {
+    e.preventDefault()
+    if (selectedOption?.value === '') {
+      info_toaster('Please select Send To')
+    } else if (data?.title === '') {
+      info_toaster('Title cannot be empty')
+    }
+    else if (data?.body === '') {
+      info_toaster('Message cannot be empty')
+    }
+    else {
+      const res = await PostAPI('/admin/throw-notification', {
+        "sendTo": selectedOption?.value,
+        "title": data?.title,
+        "body": data?.body
+      })
+      if (res?.data?.status === "1") {
+        setLoading(false)
+        navigate("/notifications");
+        success_toaster(res?.data?.message);
+      } else {
+        setLoading(false)
+        error_toaster(res?.data?.message);
+      }
+    }
+  }
+
+  return loading ? <MiniLoader /> : (
     <Layout
       content={
         <div className="space-y-5">
@@ -46,7 +97,7 @@ export default function SendNotifications() {
                   >
                     Send To
                   </label>
-                  <Select styles={selectStyles} />
+                  <Select defaultValue={selectedOption} options={options} styles={selectStyles} value={selectedOption} onChange={setSelectedOption} placeholder="Select Send To" />
                 </div>
 
                 <div className="space-y-2">
@@ -59,6 +110,8 @@ export default function SendNotifications() {
                   <input
                     type="text"
                     id="title"
+                    value={data?.title}
+                    onChange={(e) => setData({ ...data, title: e.target.value })}
                     placeholder="Subject"
                     className="w-full h-[42px] rounded-md px-3 outline-none border font-workSans font-medium 
                             text-labelColor"
@@ -75,6 +128,8 @@ export default function SendNotifications() {
                   <input
                     type="text"
                     id="write"
+                    value={data?.body}
+                    onChange={(e) => setData({ ...data, body: e.target.value })}
                     placeholder="Write here.."
                     className="w-full h-[42px] rounded-md px-3 outline-none border font-workSans font-medium 
                             text-labelColor"
@@ -114,11 +169,13 @@ export default function SendNotifications() {
                   hidden
                   onChange={handleImageChange}
                 />
+
               </div>
             </div>
 
             <div className="flex justify-end gap-x-3">
               <button
+                onClick={handleReset}
                 className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
                          hover:text-white duration-200"
               >
@@ -127,6 +184,7 @@ export default function SendNotifications() {
               <button
                 className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
                          hover:text-white duration-200"
+                onClick={handleSendNotifications}
               >
                 Send Notifications
               </button>
