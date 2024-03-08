@@ -10,11 +10,9 @@ import { Column } from "primereact/column";
 // import { InputText } from 'primereact/inputtext';
 import Select from "react-select";
 import selectStyles from "../utilities/SelectStyle";
-import { border } from "@chakra-ui/react";
 
 export default function MyDataTable(props) {
   const [globalFilter, setGlobalFilter] = useState('');
-
 
   const onGlobalFilterChange = (event) => {
     setGlobalFilter(event?.target?.value);

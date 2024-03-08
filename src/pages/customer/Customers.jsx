@@ -11,7 +11,6 @@ import { error_toaster, success_toaster } from "../../utilities/Toaster";
 import { PutAPI } from "../../utilities/PutAPI";
 import formatDateFromDB from "../../utilities/DateTime";
 import Loader from "../../components/Loader";
-import { FilterMatchMode } from "primereact/api";
 
 export default function Customers() {
   const navigate = useNavigate();
@@ -127,7 +126,6 @@ export default function Customers() {
       ),
     });
   });
-
 
   return data?.length === 0 ? (
     <Loader />
