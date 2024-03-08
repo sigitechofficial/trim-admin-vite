@@ -13,7 +13,6 @@ import Loader from "../../components/Loader";
 
 export default function BookingDetails() {
   const { data } = GetAPI(`admin/appointment-detail/${JSON.parse(localStorage.getItem('bookingDetailsID'))}`)
-  console.log("🚀 ~ BookingDetails ~ data:", data?.data?.appointments?.user)
 
   // const calculateTotals = (val) => {
   //   let tipTotal = 0

@@ -15,7 +15,6 @@ import Loader from "../../components/Loader";
 
 export default function Home() {
   const { data } = GetAPI('admin/dashboard')
-  // console.log("🚀 ~ Home ~ data:", data)
   
   return data?.length === 0 ? (
     <Loader />

@@ -1,5 +1,5 @@
 // @ts-nocheck 
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import MyDataTable from "../../components/MyDataTable";
 import GetAPI from "../../utilities/GetAPI";
@@ -11,6 +11,7 @@ import { error_toaster, success_toaster } from "../../utilities/Toaster";
 import { PutAPI } from "../../utilities/PutAPI";
 import formatDateFromDB from "../../utilities/DateTime";
 import Loader from "../../components/Loader";
+import { FilterMatchMode } from "primereact/api";
 
 export default function Customers() {
   const navigate = useNavigate();
@@ -29,19 +30,23 @@ export default function Customers() {
   const columns = [
     {
       field: "sn",
-      header: "Sn"
+      header: "Sn",
+      // filter: true
     },
     {
       field: "id",
-      header: "Id"
+      header: "Id",
+      // filter: true
     },
     {
       field: "name",
       header: "Name",
+      // filter: true
     },
     {
       field: "contact",
       header: "Contact",
+      // filter: true
     },
     {
       field: "email",
@@ -122,6 +127,7 @@ export default function Customers() {
       ),
     });
   });
+
 
   return data?.length === 0 ? (
     <Loader />

@@ -21,7 +21,6 @@ export default function Coupons() {
   const navigate = useNavigate();
 
   const { data, reFetch } = GetAPI('admin/coupons')
-  // console.log("🚀 ~ Coupons ~ data:", data)
   // const [modal, setModal] = useState(false);
   // //   const [modalType, setModalType] = useState(null);
 

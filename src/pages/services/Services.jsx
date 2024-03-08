@@ -148,7 +148,6 @@ export default function Services() {
   const deleteService = async () => {
     setLoader(true);
     let res = await DeleteAPI(`admin/service-type/delete/${serviceId}`);
-    console.log("🚀 ~ file: Services.jsx:152 ~ deleteService ~ res:", res);
     if (res?.data?.status === "1") {
       reFetch();
       setModal(false);

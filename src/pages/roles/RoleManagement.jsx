@@ -128,6 +128,193 @@ export default function RoleManagement() {
                           <Checkbox border={"#00000099"} />
                         </td>
                       </tr>
+
+                      <tr className="">
+                        <td className="text-labelColor font-workSans font-medium">
+                          Admin Earnings
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                      </tr>
+
+                      <tr className="">
+                        <td className="text-labelColor font-workSans font-medium">
+                          Customer Management
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                      </tr>
+
+
+                      <tr className="">
+                        <td className="text-labelColor font-workSans font-medium">
+                          Bookings
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                      </tr>
+
+
+                      <tr className="">
+                        <td className="text-labelColor font-workSans font-medium">
+                          BaberShops
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                      </tr>
+
+
+                      <tr className="">
+                        <td className="text-labelColor font-workSans font-medium">
+                          Earning Management
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                      </tr>
+
+
+                      <tr className="">
+                        <td className="text-labelColor font-workSans font-medium">
+                          Coupons
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                      </tr>
+
+
+                      <tr className="">
+                        <td className="text-labelColor font-workSans font-medium">
+                          All Subscription
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                      </tr>
+
+
+                      <tr className="">
+                        <td className="text-labelColor font-workSans font-medium">
+                          Push Notifications
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                      </tr>
+
+                      <tr className="">
+                        <td className="text-labelColor font-workSans font-medium">
+                          Report
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                      </tr>
+
+                      <tr className="">
+                        <td className="text-labelColor font-workSans font-medium">
+                          Help & Support
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                        <td className="text-center pt-4">
+                          <Checkbox border={"#00000099"} />
+                        </td>
+                      </tr>
+
                     </tbody>
                   </table>
                 </div>

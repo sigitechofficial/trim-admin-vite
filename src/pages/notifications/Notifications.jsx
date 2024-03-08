@@ -16,13 +16,13 @@ export default function Notifications() {
   const navigate = useNavigate()
   const [modal, setModal] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [loading2, setLoading2] = useState(false)
   const { data, reFetch } = GetAPI('/admin/notifications')
 
   const handleDelete = async (e) => {
     e.preventDefault()
     setLoading(true)
     const res = await PutAPI(`admin/delete-notification/${JSON.parse(localStorage.getItem('deleteNotificationID'))}`)
-    // console.log("🚀 ~ handleDelete ~ res:", res)
     if (res?.data?.status === "1") {
       setLoading(false)
       reFetch()
@@ -37,14 +37,14 @@ export default function Notifications() {
   }
 
   const handleResendNotification = async (id) => {
-    setLoading(true)
+    setLoading2(true)
     const res = await PostAPI(`admin/re-send-notification/${id}`)
     if (res?.data?.status === "1") {
-      setLoading(false)
+      setLoading2(false)
       reFetch()
       success_toaster(res?.data?.message);
     } else {
-      setLoading(false)
+      setLoading2(false)
       error_toaster(res?.data?.message);
     }
   }
@@ -109,15 +109,17 @@ export default function Notifications() {
               Send New Notification
             </button>
           </div>
-          {loading ? <MiniLoader /> : <MyDataTable columns={columns} data={datas} />}
+
+          {loading2 ? <MiniLoader /> : <MyDataTable columns={columns} data={datas} />}
 
           <Modal onClose={closeModal} isOpen={modal} isCentered size={"lg"}>
             <ModalOverlay />
             <form onSubmit={handleDelete} className="relative">
-              <ModalContent>
+              <ModalContent className="py-5">
                 <ModalCloseButton />
-                {loading ? <MiniLoader /> : <ModalBody>
-                  <p className="text-center text-lg py-5">Are you sure you want to delete ?</p>
+                {loading ? <MiniLoader /> : <ModalBody className="space-y-2">
+                  <p className="text-center text-lg font-bold pt-5">Delete the Notification</p>
+                  <p className="text-center text-lg">Are you sure you want to delete Notification ?</p>
                 </ModalBody>}
                 <ModalFooter>
                   <button

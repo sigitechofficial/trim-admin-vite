@@ -9,7 +9,6 @@ import Loader from "../../components/Loader";
 
 export default function ClientFileReport() {
   const { data } = GetAPI('admin/reports/client-file')
-  console.log("🚀 ~ ClientFileReport ~ data:", data?.data?.report)
 
   const columns = [
     { field: "sn", header: "Sn" },

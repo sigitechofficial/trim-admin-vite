@@ -23,7 +23,6 @@ import Loader from "../../components/Loader";
 export default function EmployeeManagement() {
   const navigate = useNavigate();
   const { data } = GetAPI('admin/salon-employees/all')
-  console.log("🚀 ~ EmployeeManagement ~ data:", data?.data?.employees)
 
 
   const employeeCount = data?.data?.employees.length

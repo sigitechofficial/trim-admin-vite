@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 export default function CouponDetails() {
   const location = useLocation()
   const couponDetail = location.state.data
-  // console.log("🚀 ~ CouponDetails ~ data:", data)
   return (
     <Layout
       content={

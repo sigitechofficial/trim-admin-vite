@@ -1,18 +1,20 @@
 // @ts-nocheck
 import React, { useState } from "react";
 import { CiCalendarDate } from "react-icons/ci";
-import { FilterMatchMode, FilterOperator } from 'primereact/api';
+import { FilterMatchMode } from 'primereact/api';
 import { LuSearch } from "react-icons/lu";
 import { RiFileDownloadLine } from "react-icons/ri";
 import { TbAdjustmentsHorizontal } from "react-icons/tb";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { InputText } from 'primereact/inputtext';
+// import { InputText } from 'primereact/inputtext';
 import Select from "react-select";
 import selectStyles from "../utilities/SelectStyle";
+import { border } from "@chakra-ui/react";
 
 export default function MyDataTable(props) {
   const [globalFilter, setGlobalFilter] = useState('');
+
 
   const onGlobalFilterChange = (event) => {
     setGlobalFilter(event?.target?.value);
@@ -53,7 +55,7 @@ export default function MyDataTable(props) {
 
         <div className={`flex gap-x-5 ${props?.hide ? 'hidden' : 'block'}`}>
 
-          <div className={`${props?.options ? 'block':'hidden'}`}>
+          <div className={`${props?.options ? 'block' : 'hidden'}`}>
             <Select
               options={props?.options}
               defaultValue={props?.selectedOption}
@@ -91,16 +93,27 @@ export default function MyDataTable(props) {
           rows={10}
           rowsPerPageOptions={[10, 25, 50, 100]}
           removableSort
+          filterDisplay="row"
+          dataKey="id"
           emptyMessage="No Data Found"
         >
           {props.columns?.map((col, ind) => (
-            <Column
+            col?.filter ? <Column
               key={ind}
               field={col.field}
               header={col.header}
               sortable={true}
+              filter
+              filterPlaceholder="Search"
               style={{ minWidth: '12rem' }}
-            />
+            /> :
+              <Column
+                key={ind}
+                field={col.field}
+                header={col.header}
+                sortable={true}
+                style={{ minWidth: '12rem' }}
+              />
           ))}
         </DataTable>
       </div>

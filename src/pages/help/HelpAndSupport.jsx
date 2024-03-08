@@ -9,7 +9,6 @@ import Loader from "../../components/Loader";
 
 export default function HelpAndSupport() {
   const { data, reFetch } = GetAPI('admin/help-support')
-  // console.log("🚀 ~ HelpAndSupport ~ data:", data?.data)
 
   const [inputDisability, setInputDisability] = useState({
     email: true,
@@ -43,7 +42,6 @@ export default function HelpAndSupport() {
       "phoneNum": inputData?.phoneNum,
       "address": inputData?.address
     })
-    console.log("🚀 ~ handleSave ~ res:", res)
     reFetch()
   }
 

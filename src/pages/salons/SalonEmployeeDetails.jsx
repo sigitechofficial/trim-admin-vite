@@ -12,7 +12,6 @@ import { BASE_URL } from "../../utilities/URL";
 
 export default function SalonEmployeeDetails() {
   const { data } = GetAPI(`admin/employee-detail/${localStorage.getItem('barberShopEmployeeID')}`)
-  console.log("🚀 ~ SalonEmployeeDetails ~ data:", data?.data)
 
   const [tab, setTab] = useState("services");
 

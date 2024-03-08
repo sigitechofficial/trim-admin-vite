@@ -7,7 +7,6 @@ import Loader from "../../components/Loader";
 
 export default function EarningManagement() {
   const { data, reFetch } = GetAPI('admin/salon-earnings')
-  // console.log("🚀 ~ EarningManagement ~ data:", data)
   const columns = [
     { field: "sn", header: "Sn" },
     { field: "salonName", header: "Salon Name" },

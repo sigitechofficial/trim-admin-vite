@@ -7,7 +7,6 @@ import { LuMapPin } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../utilities/URL";
 export default function SalonProfileCard(props) {
-  console.log(`${BASE_URL}${props?.salonProfileCardData?.coverImage}`);
   return (
     <div
       className={`${ 

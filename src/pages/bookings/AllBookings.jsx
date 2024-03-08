@@ -11,7 +11,6 @@ import Loader from "../../components/Loader";
 export default function AllBookings() {
     const navigate = useNavigate()
     const { data } = GetAPI('admin/appointments')
-    // console.log("🚀 ~ AllBookings ~ data:", data?.data?.appointments)
 
     const columns = [
         { field: "sn", header: "Sn" },

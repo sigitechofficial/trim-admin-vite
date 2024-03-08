@@ -10,12 +10,10 @@ import Loader from "../../components/Loader";
 
 export default function FinancialPeroformanceReport() {
   const [selectedOption, setSelectedOption] = useState({ value: 'complete', label: 'Complete' });
-  // console.log("🚀 ~ FinancialPeroformanceReport ~ selectedOption:", selectedOption)
   // const [para, setPara] = useState('complete')
   
   const {data} = GetAPI(`admin/reports/financial-performance/${selectedOption?.value}`)
 
-  // console.log("🚀 ~ FinancialPeroformanceReport ~ data:", data)
 
   const options = [
     { value: 'complete', label: 'Complete' },

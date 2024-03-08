@@ -9,7 +9,6 @@ import Loader from "../../components/Loader";
 export default function AppointmentReport() {
  
   const { data } = GetAPI('admin/reports/appointment-conversion')
-  console.log("🚀 ~ ClientFileReport ~ data:", data?.data?.report)
 
   const columns = [
     { field: "sn", header: "Sn" },
