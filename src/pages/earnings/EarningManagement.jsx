@@ -15,7 +15,7 @@ export default function EarningManagement() {
     { field: "totalBookings", header: "Total Bookings" },
     { field: "salonAverageRating", header: "Average Customer Rating" },
     { field: "status", header: "Status" },
-  ]
+  ] 
 
   const datas = []
   data?.data?.salons?.map((obj, i) => {

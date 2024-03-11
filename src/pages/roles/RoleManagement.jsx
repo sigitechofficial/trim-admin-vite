@@ -24,6 +24,7 @@ export default function RoleManagement() {
   const closeModal = () => {
     setModal(false);
   };
+
   const columns = [
     {
       name: "Sr",
@@ -51,13 +52,15 @@ export default function RoleManagement() {
       minWidth: "160px",
     },
   ];
+
   return (
     <Layout
       content={
         <div className="space-y-5">
           <div className="w-full flex justify-between items-center">
             <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
-              Roles & Permissions <span className="text-labelColor">(260)</span>
+              Roles & Permissions
+              {/* <span className="text-labelColor">(260)</span> */}
             </h2>
             <button
               className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-transparent
@@ -165,7 +168,6 @@ export default function RoleManagement() {
                         </td>
                       </tr>
 
-
                       <tr className="">
                         <td className="text-labelColor font-workSans font-medium">
                           Bookings
@@ -183,7 +185,6 @@ export default function RoleManagement() {
                           <Checkbox border={"#00000099"} />
                         </td>
                       </tr>
-
 
                       <tr className="">
                         <td className="text-labelColor font-workSans font-medium">
@@ -203,7 +204,6 @@ export default function RoleManagement() {
                         </td>
                       </tr>
 
-
                       <tr className="">
                         <td className="text-labelColor font-workSans font-medium">
                           Earning Management
@@ -221,7 +221,6 @@ export default function RoleManagement() {
                           <Checkbox border={"#00000099"} />
                         </td>
                       </tr>
-
 
                       <tr className="">
                         <td className="text-labelColor font-workSans font-medium">
@@ -241,7 +240,6 @@ export default function RoleManagement() {
                         </td>
                       </tr>
 
-
                       <tr className="">
                         <td className="text-labelColor font-workSans font-medium">
                           All Subscription
@@ -259,7 +257,6 @@ export default function RoleManagement() {
                           <Checkbox border={"#00000099"} />
                         </td>
                       </tr>
-
 
                       <tr className="">
                         <td className="text-labelColor font-workSans font-medium">
