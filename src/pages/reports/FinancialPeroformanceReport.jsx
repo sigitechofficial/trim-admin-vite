@@ -7,13 +7,10 @@ import { FaAngleRight } from "react-icons/fa6";
 import GetAPI from "../../utilities/GetAPI";
 import Loader from "../../components/Loader";
 
-
 export default function FinancialPeroformanceReport() {
   const [selectedOption, setSelectedOption] = useState({ value: 'complete', label: 'Complete' });
-  // const [para, setPara] = useState('complete')
   
   const {data} = GetAPI(`admin/reports/financial-performance/${selectedOption?.value}`)
-
 
   const options = [
     { value: 'complete', label: 'Complete' },
@@ -46,6 +43,7 @@ export default function FinancialPeroformanceReport() {
     })
   })
  
+  
   return data?.length === 0 ? (
     <Loader />
   ) : (

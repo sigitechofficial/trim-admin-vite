@@ -12,14 +12,14 @@ export default function Loader() {
 
 export function MiniLoader() {
   return (
-    <section className="absolute h-full w-full top-0 left-0 z-[100] flex justify-center items-center">
+    <section className="h-full w-full top-0 left-0 z-[100] flex justify-center items-center">
       <CirclesWithBar width={100} height={100} color="black" visible={true} />
     </section>
   );
 }
 export function MiniLoaderTwo() {
   return (
-    <section className="absolute h-full w-full top-0 left-0 z-[100] flex justify-center items-center">
+    <section className="h-full w-full top-0 left-0 z-[100] flex justify-center items-center">
       <CirclesWithBar width={100} height={100} color="white" visible={true} />
     </section>
   );

@@ -94,7 +94,7 @@ export default function MyDataTable(props) {
           filterDisplay="row"
           dataKey="id"
           emptyMessage="No Data Found"
-        >
+        > 
           {props.columns?.map((col, ind) => (
             col?.filter ? <Column
               key={ind}

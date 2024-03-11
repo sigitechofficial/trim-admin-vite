@@ -12,64 +12,72 @@ import {
 import selectStyles from "../utilities/SelectStyle";
 import Select from "react-select";
 import { PostAPI } from "../utilities/PostAPI";
-import { error_toaster, info_toaster, success_toaster } from "../utilities/Toaster";
+import {
+  error_toaster,
+  info_toaster,
+  success_toaster,
+} from "../utilities/Toaster";
 import { MiniLoader } from "../components/Loader";
 
 export default function SubscriptionCard(props) {
   const [subscriptionData, setSubscriptionData] = useState({
     name: props?.title,
     description: props?.desc,
-    featureName: ''
-  })
+    featureName: "",
+  });
 
   const [modal, setModal] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const openModal = () => {
     setModal(true);
   };
 
   const closeModal = () => {
-    localStorage.removeItem('subscriptionProductID')
+    localStorage.removeItem("subscriptionProductID");
     setModal(false);
   };
 
   const handleChange = (e) => {
-    setSubscriptionData({ ...subscriptionData, [e.target.name]: e.target.value })
-  }
+    setSubscriptionData({
+      ...subscriptionData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (subscriptionData?.name === '') {
-      info_toaster('Subscription title cannot be empty')
-    }
-    else if (subscriptionData?.description === '') {
-      info_toaster('Description cannot be empty')
-    }
-    else {
+    if (subscriptionData?.name === "") {
+      info_toaster("Subscription title cannot be empty");
+    } else if (subscriptionData?.description === "") {
+      info_toaster("Description cannot be empty");
+    } else {
       if (subscriptionData?.featureName) {
         props?.includedFeatures.push({
-          name: subscriptionData?.featureName
-        })
+          name: subscriptionData?.featureName,
+        });
       }
-      setLoading(true)
-      const res = await PostAPI('admin/updateSubscription', {
-        "productId": props?.Id,
-        "name": subscriptionData?.name,
-        "description": subscriptionData?.description,
-        "features": subscriptionData?.featureName ? props?.includedFeatures : props?.includedFeatures
-      })
+      setLoading(true);
+      const res = await PostAPI("admin/updateSubscription", {
+        productId: props?.Id,
+        name: subscriptionData?.name,
+        description: subscriptionData?.description,
+        features: subscriptionData?.featureName
+          ? props?.includedFeatures
+          : props?.includedFeatures,
+      });
       if (res?.data?.status === "1") {
-        setLoading(false)
+        setLoading(false);
         props?.reFetch();
-        closeModal()
+        closeModal();
         success_toaster(res?.data?.message);
+        setSubscriptionData({ ...subscriptionData, featureName: "" });
       } else {
-        setLoading(false)
+        setLoading(false);
         error_toaster(res?.data?.message);
       }
     }
-  }
+  };
 
   return (
     <>
@@ -84,8 +92,9 @@ export default function SubscriptionCard(props) {
             color="#12466F"
             className="absolute top-0 right-4 cursor-pointer"
             onClick={() => {
-              localStorage.setItem("subscriptionProductID", props?.Id)
-              openModal()
+              localStorage.setItem("subscriptionProductID", props?.Id);
+              setSubscriptionData({ ...subscriptionData, featureName: "" });
+              openModal();
             }}
           />
         </div>
@@ -97,7 +106,9 @@ export default function SubscriptionCard(props) {
             </div>
             <div className="">
               <p className="font-bold">Price</p>
-              <p className="text-red-800 font-semibold text-lg">${props?.price}</p>
+              <p className="text-red-800 font-semibold text-lg">
+                ${props?.price}
+              </p>
             </div>
           </div>
 
@@ -106,12 +117,16 @@ export default function SubscriptionCard(props) {
               Include Feature in Standard
             </h2>
             <ul className="mt-5 space-y-2">
-              {props?.includedFeatures?.map((values, i) => <li key={i} className="flex items-center gap-x-4">
-                <span><IoMdCheckboxOutline size={26} color="#12466F" /></span>
-                <span className="text-xl font-workSans font-medium">
-                  {values?.name}
-                </span>
-              </li>)}
+              {props?.includedFeatures?.map((values, i) => (
+                <li key={i} className="flex items-center gap-x-4">
+                  <span>
+                    <IoMdCheckboxOutline size={26} color="#12466F" />
+                  </span>
+                  <span className="text-xl font-workSans font-medium">
+                    {values?.name}
+                  </span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -123,72 +138,75 @@ export default function SubscriptionCard(props) {
           <ModalContent>
             <ModalCloseButton />
             <ModalBody>
-              {loading ? <MiniLoader /> : <div className="relative h-full w-full flex flex-col justify-center items-center space-y-6 pt-5 pb-4">
+              <div className="relative h-full w-full flex flex-col justify-center items-center space-y-6 pt-5 pb-4">
                 <div className="text-center">
                   <h2 className="text-xl font-workSans font-medium uppercase">
-                    Update Subscription
+                    {loading ? "Updating Subscription" : "Update Subscription"}
                   </h2>
                 </div>
-
-                <div className="w-full space-y-2">
-                  <div className="space-y-1">
-                    <label
-                      htmlFor="name"
-                      className="text-sm text-labelColor font-workSans font-medium"
-                    >
-                      Subscription title
-                    </label>
-                    <input
-                      onChange={handleChange}
-                      value={subscriptionData?.name}
-                      type="text"
-                      id="name"
-                      name="name"
-                      className="w-full h-[42px] rounded-md px-3 outline-none border font-workSans font-medium 
+                {loading ? (
+                  <MiniLoader />
+                ) : (
+                  <div className="w-full space-y-2">
+                    <div className="space-y-1">
+                      <label
+                        htmlFor="name"
+                        className="text-sm text-labelColor font-workSans font-medium"
+                      >
+                        Subscription title
+                      </label>
+                      <input
+                        onChange={handleChange}
+                        value={subscriptionData?.name}
+                        type="text"
+                        id="name"
+                        name="name"
+                        className="w-full h-[42px] rounded-md px-3 outline-none border font-workSans font-medium 
                             text-labelColor"
-                    />
-                  </div>
+                      />
+                    </div>
 
-                  <div className="space-y-1">
-                    <label
-                      htmlFor="description"
-                      className="text-sm text-labelColor font-workSans font-medium"
-                    >
-                      Description
-                    </label>
-                    <input
-                      onChange={handleChange}
-                      value={subscriptionData?.description}
-                      type="text"
-                      id="description"
-                      name="description"
-                      className="w-full h-[42px] rounded-md px-3 outline-none border font-workSans font-medium 
+                    <div className="space-y-1">
+                      <label
+                        htmlFor="description"
+                        className="text-sm text-labelColor font-workSans font-medium"
+                      >
+                        Description
+                      </label>
+                      <input
+                        onChange={handleChange}
+                        value={subscriptionData?.description}
+                        type="text"
+                        id="description"
+                        name="description"
+                        className="w-full h-[42px] rounded-md px-3 outline-none border font-workSans font-medium 
                             text-labelColor"
-                    />
-                  </div>
+                      />
+                    </div>
 
-                  <div className="space-y-1">
-                    <label
-                      htmlFor="featureName"
-                      className="text-sm text-labelColor font-workSans font-medium"
-                    >
-                      Add New Feature
-                    </label>
-                    <input
-                      onChange={handleChange}
-                      value={subscriptionData?.featureName}
-                      type="text"
-                      id="featureName"
-                      name="featureName"
-                      className="w-full h-[42px] rounded-md px-3 outline-none border font-workSans font-medium 
+                    <div className="space-y-1">
+                      <label
+                        htmlFor="featureName"
+                        className="text-sm text-labelColor font-workSans font-medium"
+                      >
+                        Add New Feature
+                      </label>
+                      <input
+                        onChange={handleChange}
+                        value={subscriptionData?.featureName}
+                        type="text"
+                        id="featureName"
+                        name="featureName"
+                        className="w-full h-[42px] rounded-md px-3 outline-none border font-workSans font-medium 
                             text-labelColor"
-                    />
+                      />
+                    </div>
                   </div>
-                </div>
-              </div>}
+                )}
+              </div>
             </ModalBody>
             <ModalFooter>
-              <div className={`${loading ? 'hidden' : 'flex'} gap-x-3`}>
+              <div className={`${loading ? "hidden" : "flex"} gap-x-3`}>
                 <button
                   className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
                          hover:text-white duration-200"
@@ -208,7 +226,6 @@ export default function SubscriptionCard(props) {
           </ModalContent>
         </form>
       </Modal>
-
     </>
   );
 }

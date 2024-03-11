@@ -3,13 +3,12 @@ import React from "react";
 import Layout from "../../components/Layout";
 import { FaArrowLeft } from "react-icons/fa";
 import SubscriptionCard from "../../components/SubscriptionCard";
-import { useLocation } from 'react-router-dom'
+import { useLocation } from "react-router-dom";
 import Loader from "../../components/Loader";
 import GetAPI from "../../utilities/GetAPI";
 
-
 export default function SubscriptionPlans() {
-  const { data, reFetch } = GetAPI('admin/AllSubscriptions')
+  const { data, reFetch } = GetAPI("admin/AllSubscriptions");
 
   return data?.length === 0 ? (
     <Loader />
@@ -44,19 +43,30 @@ export default function SubscriptionPlans() {
           </div>
 
           <div className="grid grid-col-1 xl:grid-cols-2 2xl:grid-cols-3 gap-y-10 gap-x-20">
-            {data?.data?.listOfPlans.length > 0 ? data?.data?.listOfPlans?.map((values, i) => <SubscriptionCard
-              key={i}
-              Id={values?.id}
-              reFetch={reFetch}
-              bgColor={values?.name.includes("Gold") ? "bg-[#FADD81]" : values?.name.includes("Premium") ? 'bg-[#EEC1FD]' : 'bg-[#ADEEF5]'}
-              title={values?.name}
-              duration={values?.duration}
-              price={values?.price}
-              desc={values?.description}
-              valid="Valid for One Month"
-              includedFeatures={values?.features}
-            />) : <p className="font-bold text-2xl">No Subscription Yet</p>
-            }
+            {data?.data?.listOfPlans.length > 0 ? (
+              data?.data?.listOfPlans?.map((values, i) => (
+                <SubscriptionCard
+                  key={i}
+                  Id={values?.id}
+                  reFetch={reFetch}
+                  bgColor={
+                    values?.name.includes("Gold")
+                      ? "bg-[#FADD81]"
+                      : values?.name.includes("Premium")
+                      ? "bg-[#EEC1FD]"
+                      : "bg-[#ADEEF5]"
+                  }
+                  title={values?.name}
+                  duration={values?.duration}
+                  price={values?.price}
+                  desc={values?.description}
+                  valid="Valid for One Month"
+                  includedFeatures={values?.features}
+                />
+              ))
+            ) : (
+              <p className="font-bold text-2xl">No Subscription Yet</p>
+            )}
           </div>
         </div>
       }
