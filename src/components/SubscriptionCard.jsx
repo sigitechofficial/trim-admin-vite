@@ -81,7 +81,7 @@ export default function SubscriptionCard(props) {
 
   return (
     <>
-      <div className="bg-white shadow-md rounded-lg" key={props?.i}>
+      <div className="bg-white shadow-md rounded-lg relative" key={props?.i}>
         <div
           className={`${props.bgColor} flex rounded-lg flex-col justify-center items-center py-5 space-y-2 relative`}
         >
@@ -138,15 +138,16 @@ export default function SubscriptionCard(props) {
           <ModalContent>
             <ModalCloseButton />
             <ModalBody>
-              <div className="relative h-full w-full flex flex-col justify-center items-center space-y-6 pt-5 pb-4">
-                <div className="text-center">
-                  <h2 className="text-xl font-workSans font-medium uppercase">
-                    {loading ? "Updating Subscription" : "Update Subscription"}
-                  </h2>
-                </div>
-                {loading ? (
-                  <MiniLoader />
-                ) : (
+              {loading ? (
+                <MiniLoader />
+              ) : (
+                <div className="relative h-full w-full flex flex-col justify-center items-center space-y-6 pt-5 pb-4">
+                  <div className="text-center">
+                    <h2 className="text-xl font-workSans font-medium uppercase">
+                      Update Subscription
+                    </h2>
+                  </div>
+
                   <div className="w-full space-y-2">
                     <div className="space-y-1">
                       <label
@@ -202,8 +203,8 @@ export default function SubscriptionCard(props) {
                       />
                     </div>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </ModalBody>
             <ModalFooter>
               <div className={`${loading ? "hidden" : "flex"} gap-x-3`}>

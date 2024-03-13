@@ -11,6 +11,7 @@ import { PutAPI } from "../../utilities/PutAPI";
 import { error_toaster, success_toaster } from "../../utilities/Toaster";
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalOverlay } from "@chakra-ui/react";
 import { AiFillNotification } from "react-icons/ai"
+import { BsExclamationCircle } from "react-icons/bs";
 
 export default function Notifications() {
   const navigate = useNavigate()
@@ -117,19 +118,38 @@ export default function Notifications() {
             <form onSubmit={handleDelete} className="relative">
               <ModalContent className="py-5">
                 <ModalCloseButton />
-                {loading ? <MiniLoader /> : <ModalBody className="space-y-2">
-                  <p className="text-center text-lg font-bold pt-5">Delete the Notification</p>
-                  <p className="text-center text-lg">Are you sure you want to delete Notification ?</p>
+                {loading ? <MiniLoader /> : <ModalBody>
+                  {/* <p className="text-center text-lg font-bold pt-5">Delete the Notification</p>
+                  <p className="text-center text-lg">Are you sure you want to delete Notification ?</p> */}
+                  <div className="flex flex-col justify-center items-center p-5 space-y-4">
+                  <BsExclamationCircle size={30} color="#12466F" />
+                  <div className="text-center space-y-2">
+                    <h2 className="text-xl font-workSans font-medium">
+                      Delete the Role
+                    </h2>
+                    <p className="text-labelColor font-workSans font-medium">
+                      Are you sure you want to delete this Role?
+                    </p>
+                  </div>
+                  <div className="flex gap-x-3">
+                    <button
+                      className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                         hover:text-white duration-200"
+                      onClick={closeModal}
+                    >
+                      No
+                    </button>
+                    <button
+                      className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                         hover:text-white duration-200"
+                      type="Submit"
+                    >
+                      Yes
+                    </button>
+                  </div>
+                </div>
                 </ModalBody>}
-                <ModalFooter>
-                  <button
-                    className={`text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
-                         hover:text-white duration-200 ${loading ? 'hidden' : 'block'}`}
-                    type="submit"
-                  >
-                    Submit
-                  </button>
-                </ModalFooter>
+                
               </ModalContent>
             </form>
           </Modal>
