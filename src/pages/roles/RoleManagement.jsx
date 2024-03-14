@@ -193,6 +193,7 @@ export default function RoleManagement() {
     e.preventDefault();
     if (mode.name === "Edit Role") {
       if (!checboxDisability.name && checboxDisability.other) {
+        setLoading(true)
         const res = await PutAPI(
           `admin/update-role-name/${JSON.parse(
             localStorage.getItem("updateRoleID")
@@ -580,21 +581,24 @@ export default function RoleManagement() {
 
           <Modal onClose={closeModal} isOpen={modal} size="3xl" isCentered>
             <ModalOverlay />
+
             <form onSubmit={handleSubmit}>
               <ModalContent>
                 <ModalHeader paddingTop={5}>
                   <div className="text-center">
                     <h2 className="text-xl font-workSans font-medium uppercase">
                       {/* {loading ? "Adding Role" : "Add Role"} */}
-                      {mode?.name}
+                      {!loading && mode?.name}
                     </h2>
                   </div>
                 </ModalHeader>
                 <ModalCloseButton />
-                <ModalBody>
-                  {loading ? (
+                {loading ? (
+                  <div className="w-[576px] h-[224px]">
                     <MiniLoader />
-                  ) : (
+                  </div>
+                ) : (
+                  <ModalBody>
                     <div className="h-[540px] overflow-auto">
                       <div className="space-y-1 mb-3 pr-4 ">
                         <label
@@ -1196,19 +1200,20 @@ export default function RoleManagement() {
                         </tbody>
                       </table>
                     </div>
-                  )}
-                </ModalBody>
-                <ModalFooter>
-                  <div className="flex gap-x-3">
-                    <button
-                      className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                  </ModalBody>
+                )}
+                {!loading && (
+                  <ModalFooter>
+                    <div className="flex gap-x-3">
+                      <button
+                        className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
                          hover:text-white duration-200"
-                      onClick={closeModal}
-                    >
-                      Cancel
-                    </button>
-                    {mode?.name === "Add Role" ||
-                      (mode?.name === "Edit Role" && (
+                        onClick={closeModal}
+                      >
+                        Cancel
+                      </button>
+                      {(mode?.name === "Add Role" ||
+                        mode?.name === "Edit Role") && (
                         <button
                           className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
                          hover:text-white duration-200"
@@ -1216,23 +1221,25 @@ export default function RoleManagement() {
                         >
                           {mode?.name === "Add Role" ? "Add" : "Update"}
                         </button>
-                      ))}
-                  </div>
-                </ModalFooter>
+                      )}
+                    </div>
+                  </ModalFooter>
+                )}
               </ModalContent>
             </form>
-            )
           </Modal>
 
           <Modal onClose={closeModal2} isOpen={modal2} size={"xl"} isCentered>
             <ModalOverlay />
             <ModalContent>
               <ModalCloseButton />
-              <form onSubmit={deleteRole}>
-                <ModalBody>
-                  {loading ? (
-                    <MiniLoader />
-                  ) : (
+              {loading ? (
+                <div className="w-[576px] h-[224px]">
+                  <MiniLoader />
+                </div>
+              ) : (
+                <form onSubmit={deleteRole}>
+                  <ModalBody>
                     <div className="flex flex-col justify-center items-center p-5 space-y-4">
                       <BsExclamationCircle size={30} color="#12466F" />
                       <div className="text-center space-y-2">
@@ -1260,9 +1267,9 @@ export default function RoleManagement() {
                         </button>
                       </div>
                     </div>
-                  )}
-                </ModalBody>
-              </form>
+                  </ModalBody>
+                </form>
+              )}
             </ModalContent>
           </Modal>
         </div>

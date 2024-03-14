@@ -137,10 +137,12 @@ export default function SubscriptionCard(props) {
         <form onSubmit={handleSubmit}>
           <ModalContent>
             <ModalCloseButton />
-            <ModalBody>
-              {loading ? (
+            {loading ? (
+              <div className="w-[576px] h-[224px]">
                 <MiniLoader />
-              ) : (
+              </div>
+            ) : (
+              <ModalBody>
                 <div className="relative h-full w-full flex flex-col justify-center items-center space-y-6 pt-5 pb-4">
                   <div className="text-center">
                     <h2 className="text-xl font-workSans font-medium uppercase">
@@ -204,8 +206,8 @@ export default function SubscriptionCard(props) {
                     </div>
                   </div>
                 </div>
-              )}
-            </ModalBody>
+              </ModalBody>
+            )}
             <ModalFooter>
               <div className={`${loading ? "hidden" : "flex"} gap-x-3`}>
                 <button

@@ -26,18 +26,18 @@ export default function EmployeeManagement() {
 
 
   const employeeCount = data?.data?.employees.length
-  // const [modal, setModal] = useState(false);
-  // const [visible, setVisible] = useState(false);
-  //   const [modalType, setModalType] = useState(null);
+  const [modal, setModal] = useState(false);
+  const [visible, setVisible] = useState(false);
+    // const [modalType, setModalType] = useState(null);
 
-  // const openModal = (type) => {
-  //   // setModalType(type);
-  //   setModal(true); 
-  // };
+  const openModal = (type) => {
+    // setModalType(type);
+    setModal(true); 
+  };
 
-  // const closeModal = () => {
-  //   setModal(false);
-  // };
+  const closeModal = () => {
+    setModal(false);
+  };
 
   const columns = [
     { field: "sn", header: "Sn" },
@@ -76,7 +76,7 @@ export default function EmployeeManagement() {
             <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
               All Employees <span className="text-labelColor">({employeeCount})</span>
             </h2>
-            {/* <button
+            <button
               className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-transparent
            hover:text-theme duration-200"
               onClick={() => {
@@ -84,12 +84,12 @@ export default function EmployeeManagement() {
               }}
             >
               + Add New Employee
-            </button> */}
+            </button>
           </div>
 
           <MyDataTable columns={columns} data={datas} />
 
-          {/* 
+          
           <Modal onClose={closeModal} isOpen={modal} isCentered size={"2xl"}>
             <ModalOverlay />
             <ModalContent>
@@ -216,7 +216,7 @@ export default function EmployeeManagement() {
                 </div>
               </ModalFooter>
             </ModalContent>
-          </Modal> */}
+          </Modal>
         </div>
       }
     />
