@@ -5,7 +5,7 @@ import HomeCards from "../../components/HomeCards";
 import { BsCardList } from "react-icons/bs";
 import { FaChartLine } from "react-icons/fa6";
 import { PiUsersThreeBold, PiHandbagFill } from "react-icons/pi";
-import { } from "react-icons/pi";
+import {} from "react-icons/pi";
 import HomeMiniCards from "../../components/HomeMiniCards";
 import { LuPackageCheck, LuPackageX } from "react-icons/lu";
 import { FiBox } from "react-icons/fi";
@@ -14,11 +14,11 @@ import Charts from "./Charts";
 import Loader from "../../components/Loader";
 
 export default function Home() {
-  const { data } = GetAPI('admin/dashboard')
-  
+  const { data } = GetAPI("admin/dashboard");
+
   return data?.length === 0 ? (
     <Loader />
-  ) :(
+  ) : (
     <Layout
       content={
         <div className="bg-homeGradient w-full h-44 relative before:absolute before:bg-texture before:w-full before:h-44 before:bg-contain">
@@ -32,7 +32,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 mt-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mt-5">
               <HomeCards
                 title="Total Bookings"
                 total={data?.data?.totalAppointments}
@@ -63,7 +63,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-12">
               <HomeMiniCards
                 title="Upcoming Bookings"
                 total={data?.data?.upcommingConfirmAppointments}
@@ -87,7 +87,12 @@ export default function Home() {
             </div>
 
             <div className="mt-12">
-              <Charts dashboardBarChartData={data?.data?.dashboardBarChartData} dashboardDoughnutChartData={data?.data?.dashboardDoughnutChartData} />
+              <Charts
+                dashboardBarChartData={data?.data?.dashboardBarChartData}
+                dashboardDoughnutChartData={
+                  data?.data?.dashboardDoughnutChartData
+                }
+              />
             </div>
           </div>
         </div>

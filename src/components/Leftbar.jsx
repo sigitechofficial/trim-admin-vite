@@ -57,7 +57,7 @@ export default function Leftbar() {
   };
 
   return (
-    <section className="w-60 lg:w-72 fixed h-full py-5 pl-2 mt-[94px] border-r-2">
+    <section className="w-60 lg:w-72 fixed h-full py-5 pl-2 mt-[94px] border-r-2 max-sm:hidden">
       <ul className="flex flex-col space-y-1 overflow-auto h-[90%]">
         <ListHead title="Dashboard" to="/" Icon={MdDashboard} />
 

@@ -42,7 +42,7 @@ export default function SubscriptionPlans() {
             </button> */}
           </div>
 
-          <div className="grid grid-col-1 xl:grid-cols-2 2xl:grid-cols-3 gap-y-10 gap-x-20">
+          <div className="grid grid-col-1  md:grid-cols-2 xl:grid-cols-3 gap-y-10 md:gap-x-5 lg:gap-x-10 xl:gap-x-15 2xl:gap-x-20">
             {data?.data?.listOfPlans.length > 0 ? (
               data?.data?.listOfPlans?.map((values, i) => (
                 <SubscriptionCard

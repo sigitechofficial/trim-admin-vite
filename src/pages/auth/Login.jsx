@@ -41,10 +41,11 @@ export default function Login() {
         password: values.password,
         dvToken: "182378xnp9d0s83u21809xhddchn08132cdxu89s0m3n",
       });
+      console.log("🚀 ~ onSubmit: ~ res:", res);
 
       if (res?.data?.status === "1") {
         setLoader(false);
-        localStorage.setItem('loginStatus', true)
+        localStorage.setItem("loginStatus", true);
         localStorage.setItem("accessToken", res?.data?.data?.accessToken);
         localStorage.setItem("userId", res?.data?.data?.userId);
         localStorage.setItem("userEmail", res?.data?.data?.email);

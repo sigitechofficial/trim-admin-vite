@@ -196,7 +196,7 @@ export default function RoleManagement() {
         setLoading(true)
         const res = await PutAPI(
           `admin/update-role-name/${JSON.parse(
-            localStorage.getItem("updateRoleID")
+            localStorage.getItem("adminRoleID")
           )}`,
           {
             name: addRoleData?.name,
@@ -207,7 +207,7 @@ export default function RoleManagement() {
           closeModal();
           reFetch();
           success_toaster(res?.data?.message);
-          localStorage.removeItem("updateRoleID");
+          localStorage.removeItem("adminRoleID");
           clearData();
         } else {
           setLoading(false);
@@ -220,7 +220,7 @@ export default function RoleManagement() {
         setLoading(true);
         const res = await PutAPI(
           `admin/update-role-permisiions/${JSON.parse(
-            localStorage.getItem("updateRoleID")
+            localStorage.getItem("adminRoleID")
           )}`,
           {
             permissionRole: addRoleData?.permissionRole,
@@ -230,7 +230,7 @@ export default function RoleManagement() {
           setLoading(false);
           closeModal();
           reFetch();
-          localStorage.removeItem("updateRoleID");
+          localStorage.removeItem("adminRoleID");
           success_toaster(res?.data?.message);
           clearData();
         } else {
@@ -294,7 +294,7 @@ export default function RoleManagement() {
   const handleEdit = async (values) => {
     setMode({ ...mode, name: "Edit Role" });
     setCheckboxDisability({ name: true, other: false });
-    localStorage.setItem("updateRoleID", values?.id);
+    localStorage.setItem("adminRoleID", values?.id);
     let config = {
       headers: {
         accessToken: localStorage.getItem("accessToken"),
@@ -323,13 +323,13 @@ export default function RoleManagement() {
     e.preventDefault();
     setLoading(true);
     const res = await DeleteAPI(
-      `admin/role-delete/${JSON.parse(localStorage.getItem("deleteRoleID"))}`
+      `admin/role-delete/${JSON.parse(localStorage.getItem("adminRoleID"))}`
     );
     console.log("🚀 ~ deleteRole ~ res:", res);
 
     if (res?.data?.status === "1") {
       setLoading(false);
-      localStorage.removeItem("deleteRoleID");
+      localStorage.removeItem("adminRoleID");
       closeModal2();
       reFetch();
       success_toaster(res?.data?.message);
@@ -539,7 +539,7 @@ export default function RoleManagement() {
             className="border border-red-400 rounded-md p-2 text-red-400"
             onClick={() => {
               openModal2();
-              localStorage.setItem("deleteRoleID", values?.id);
+              localStorage.setItem("adminRoleID", values?.id);
             }}
           >
             <MdDelete size={24} />
