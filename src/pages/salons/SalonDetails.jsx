@@ -16,7 +16,6 @@ export default function SalonDetails() {
   const { data } = GetAPI(
     `admin/salon-detail/${JSON.parse(localStorage.getItem("salonID"))}`
   );
-  // console.log("🚀 ~ SalonDetails ~ data:", data.data.detail);
 
   const handleTime = (day) => {
     const temp = data?.data?.detail?.times?.find(

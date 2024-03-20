@@ -84,7 +84,6 @@ export default function EmployeeManagement() {
         localStorage.getItem("adminEmployeeID")
       )}`,"employee_management"
     );
-    // console.log("🚀 ~ deleteRole ~ res:", res);
 
     if (res?.data?.status === "1") {
       setLoading(false);

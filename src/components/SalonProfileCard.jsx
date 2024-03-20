@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { BASE_URL } from "../utilities/URL";
 import StarRating from "../utilities/StarRating";
 export default function SalonProfileCard(props) {
-  console.log(props.ratingCount);
   return (
     <div
       className={`${

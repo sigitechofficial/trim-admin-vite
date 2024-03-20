@@ -31,7 +31,6 @@ import { DeleteAPI } from "../../utilities/DeleteAPI";
 
 export default function RoleManagement() {
   const { data, reFetch } = GetAPI("admin/role-list", "roles_management");
-  // console.log("🚀 ~ RoleManagement ~ data:", data?.data?.rolesList);
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -332,7 +331,6 @@ export default function RoleManagement() {
       `admin/role-delete/${JSON.parse(localStorage.getItem("adminRoleID"))}`,
       "roles_management"
     );
-    console.log("🚀 ~ deleteRole ~ res:", res);
 
     if (res?.data?.status === "1") {
       setLoading(false);
