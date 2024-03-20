@@ -16,11 +16,11 @@ import { useNavigate } from "react-router-dom";
 // } from "@chakra-ui/react";
 // import selectStyles from "../../utilities/SelectStyle";
 // import Select from "react-select";
- 
+
 export default function Coupons() {
   const navigate = useNavigate();
 
-  const { data, reFetch } = GetAPI('admin/coupons')
+  const { data, reFetch } = GetAPI("admin/coupons", "coupons");
   // const [modal, setModal] = useState(false);
   // //   const [modalType, setModalType] = useState(null);
 
@@ -32,7 +32,6 @@ export default function Coupons() {
   // const closeModal = () => {
   //   setModal(false);
   // };
-
 
   const columns = [
     { field: "serialNo", header: "Sr" },
@@ -71,7 +70,7 @@ export default function Coupons() {
     },
   ];
 
-  const datas = []
+  const datas = [];
   data?.data?.map((obj, i) => {
     return datas.push({
       serialNo: i + 1,
@@ -82,32 +81,37 @@ export default function Coupons() {
       couponType: obj?.type,
       limit: obj?.limit,
       duration: obj?.till,
-      status: <div>
-        {obj?.status ? (
-          <div className="bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
-            Active
-          </div>
-        ) : (
-          <div className="bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
-            Inactive
-          </div>
-        )}
-      </div>
-      ,
-      action: <button
-        className="border border-yellow-400 rounded-md p-2 text-yellow-400"
-        onClick={() =>
-          navigate("/coupon-details", {
-            state: { data : obj },
-          })
-        }
-      >
-        <FaEye size={24} />
-      </button>
-    })
-  })
+      status: (
+        <div>
+          {obj?.status ? (
+            <div className="bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
+              Active
+            </div>
+          ) : (
+            <div className="bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
+              Inactive
+            </div>
+          )}
+        </div>
+      ),
+      action: (
+        <button
+          className="border border-yellow-400 rounded-md p-2 text-yellow-400"
+          onClick={() =>
+            navigate("/coupon-details", {
+              state: { data: obj },
+            })
+          }
+        >
+          <FaEye size={24} />
+        </button>
+      ),
+    });
+  });
 
-  return data.length === 0 ? <Loader /> : (
+  return data.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">

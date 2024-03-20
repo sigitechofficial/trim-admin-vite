@@ -8,7 +8,10 @@ import Loader from "../../components/Loader";
 import GetAPI from "../../utilities/GetAPI";
 
 export default function SubscriptionPlans() {
-  const { data, reFetch } = GetAPI("admin/AllSubscriptions");
+  const { data, reFetch } = GetAPI(
+    "admin/AllSubscriptions",
+    "all_subscription"
+  );
 
   return data?.length === 0 ? (
     <Loader />

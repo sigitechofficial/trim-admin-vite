@@ -46,8 +46,8 @@ export default function EmployeeManagement() {
     roleId: "",
   });
 
-  const { data, reFetch } = GetAPI("admin/employees");
-  const { data: rolesData } = GetAPI("admin/role-list");
+  const { data, reFetch } = GetAPI("admin/employees","employee_management" );
+  const { data: rolesData } = GetAPI("admin/role-list", "employee_management");
 
   const openModal = (type) => {
     // setModalType(type);
@@ -67,7 +67,7 @@ export default function EmployeeManagement() {
   };
 
   const handleStatus = async (userId) => {
-    let res = await PutAPI(`admin/employee-change-status/${userId}`);
+    let res = await PutAPI(`admin/employee-change-status/${userId}`,"employee_management");
     if (res?.data?.status === "1") {
       success_toaster(res?.data?.message);
       reFetch();
@@ -82,9 +82,9 @@ export default function EmployeeManagement() {
     const res = await DeleteAPI(
       `admin/employee-delete/${JSON.parse(
         localStorage.getItem("adminEmployeeID")
-      )}`
+      )}`,"employee_management"
     );
-    console.log("🚀 ~ deleteRole ~ res:", res);
+    // console.log("🚀 ~ deleteRole ~ res:", res);
 
     if (res?.data?.status === "1") {
       setLoading(false);
@@ -109,7 +109,7 @@ export default function EmployeeManagement() {
     e.preventDefault();
     setLoading(true);
 
-    const res = await PostAPI("admin/employee", {
+    const res = await PostAPI("admin/employee", "employee_management",{
       firstName: addEmployee?.firstName,
       lastName: addEmployee?.lastName,
       email: addEmployee?.email,

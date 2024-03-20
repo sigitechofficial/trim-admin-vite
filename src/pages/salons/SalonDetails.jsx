@@ -8,21 +8,26 @@ import TeamMemberCard from "../../components/TeamMemberCard";
 import GetAPI from "../../utilities/GetAPI";
 import Loader from "../../components/Loader";
 import { BASE_URL } from "../../utilities/URL";
-import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Accordion, AccordionTab } from "primereact/accordion";
+import StarRating from "../../utilities/StarRating";
 
 export default function SalonDetails() {
   const [tab, setTab] = useState("about");
-  const { data } = GetAPI(`admin/salon-detail/${JSON.parse(localStorage.getItem('salonID'))}`);
+  const { data } = GetAPI(
+    `admin/salon-detail/${JSON.parse(localStorage.getItem("salonID"))}`
+  );
+  // console.log("🚀 ~ SalonDetails ~ data:", data.data.detail);
 
   const handleTime = (day) => {
-    const temp = data?.data?.detail?.times?.find(obj => obj?.day.toLowerCase() === day.toLowerCase())
+    const temp = data?.data?.detail?.times?.find(
+      (obj) => obj?.day.toLowerCase() === day.toLowerCase()
+    );
     if (temp) {
-      return `${temp?.openingTime} - ${temp?.closingTime}`
+      return `${temp?.openingTime} - ${temp?.closingTime}`;
+    } else {
+      return "Closed";
     }
-    else {
-      return 'Closed'
-    }
-  }
+  };
 
   return data.length === 0 ? (
     <Loader />
@@ -61,8 +66,9 @@ export default function SalonDetails() {
             <div className="py-3 bg-tabColor px-10 xl:px-20">
               <ul className="flex flex-wrap gap-x-10 gap-y-3">
                 <li
-                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${tab === "about" ? "text-theme" : "text-black"
-                    }`}
+                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
+                    tab === "about" ? "text-theme" : "text-black"
+                  }`}
                   onClick={() => {
                     setTab("about");
                   }}
@@ -70,8 +76,9 @@ export default function SalonDetails() {
                   About
                 </li>
                 <li
-                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${tab === "gallery" ? "text-theme" : "text-black"
-                    }`}
+                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
+                    tab === "gallery" ? "text-theme" : "text-black"
+                  }`}
                   onClick={() => {
                     setTab("gallery");
                   }}
@@ -79,8 +86,9 @@ export default function SalonDetails() {
                   Gallery
                 </li>
                 <li
-                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${tab === "services" ? "text-theme" : "text-black"
-                    }`}
+                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
+                    tab === "services" ? "text-theme" : "text-black"
+                  }`}
                   onClick={() => {
                     setTab("services");
                   }}
@@ -88,8 +96,9 @@ export default function SalonDetails() {
                   Services
                 </li>
                 <li
-                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${tab === "reviews" ? "text-theme" : "text-black"
-                    }`}
+                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
+                    tab === "reviews" ? "text-theme" : "text-black"
+                  }`}
                   onClick={() => {
                     setTab("reviews");
                   }}
@@ -97,8 +106,9 @@ export default function SalonDetails() {
                   Reviews
                 </li>
                 <li
-                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${tab === "days & hours" ? "text-theme" : "text-black"
-                    }`}
+                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
+                    tab === "days & hours" ? "text-theme" : "text-black"
+                  }`}
                   onClick={() => {
                     setTab("days & hours");
                   }}
@@ -106,8 +116,9 @@ export default function SalonDetails() {
                   Days & hours
                 </li>
                 <li
-                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${tab === "team members" ? "text-theme" : "text-black"
-                    }`}
+                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
+                    tab === "team members" ? "text-theme" : "text-black"
+                  }`}
                   onClick={() => {
                     setTab("team members");
                   }}
@@ -128,13 +139,15 @@ export default function SalonDetails() {
               ) : tab === "gallery" ? (
                 <div className="grid grid-cols-6 gap-x-4">
                   {data?.data?.detail?.salonImages?.map((obj, i) => {
-                    return <div key={i} className="w-full">
-                      <img
-                        src={`${BASE_URL}${obj?.imageUrl}`}
-                        alt=""
-                        className="rounded-xl w-full h-full object-fill"
-                      />
-                    </div>
+                    return (
+                      <div key={i} className="w-full">
+                        <img
+                          src={`${BASE_URL}${obj?.imageUrl}`}
+                          alt=""
+                          className="rounded-xl w-full h-full object-fill"
+                        />
+                      </div>
+                    );
                   })}
                   {/* <div className="grid grid-rows-3 gap-y-4">
                     <div className="row-span-2">
@@ -222,21 +235,32 @@ export default function SalonDetails() {
               ) : tab === "services" ? (
                 <div className="space-y-3">
                   <Accordion className="!rounded-t-lg">
-                    {data?.data?.detail?.categories?.map(obj => <AccordionTab header={obj?.categoryName} className="bg-theme text-white  overflow-hidden">
-                      {
-                        obj?.services?.map((service, j) => <div>
-                          <div className={`text-white border border-theme bg-theme flex justify-between px-4 py-2 m-0`}>
-                            <div className="flex flex-col">
-                              <div className="font-workSans font-medium">
-                                {service?.serviceName}
+                    {data?.data?.detail?.categories?.map((obj) => (
+                      <AccordionTab
+                        header={obj?.categoryName}
+                        className="bg-theme text-white  overflow-hidden"
+                      >
+                        {obj?.services?.map((service, j) => (
+                          <div>
+                            <div
+                              className={`text-white border border-theme bg-theme flex justify-between px-4 py-2 m-0`}
+                            >
+                              <div className="flex flex-col">
+                                <div className="font-workSans font-medium">
+                                  {service?.serviceName}
+                                </div>
+                                <p className="text-sm rounded">
+                                  {service?.duration} min
+                                </p>
                               </div>
-                              <p className="text-sm rounded">{service?.duration} min</p>
+                              <div className="font-workSans font-medium">
+                                ${service?.price}/hr
+                              </div>
                             </div>
-                            <div className="font-workSans font-medium">${service?.price}/hr</div>
                           </div>
-                        </div>)
-                      }
-                    </AccordionTab>)}
+                        ))}
+                      </AccordionTab>
+                    ))}
                   </Accordion>
                 </div>
               ) : tab === "reviews" ? (
@@ -245,41 +269,44 @@ export default function SalonDetails() {
                     Reviews
                   </h2>
                   <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
-                    {data?.data?.detail?.ratings?.map(obj => <div className="bg-white rounded-lg shadow-lg p-4 space-y-3">
-                      <div className="flex justify-between">
-                        <div className="flex gap-x-3">
-                          <img
-                            src={`${BASE_URL}${obj?.user?.image}`}
-                            alt="salon-detail"
-                            className="w-16 h-16 rounded-full"
-                          />
-                          <div className="space-y-1">
-                            <h2 className="text-xl font-medium font-workSans">
-                              {/* Ehsan Shaukat */}
-                              {obj?.user?.firstName} {obj?.user?.lastName}
-                            </h2>
-                            <div className="flex gap-x-1 items-center">
-                              <HiOutlineStar />
-                              <HiOutlineStar />
-                              <HiOutlineStar />
-                              <HiOutlineStar />
-                              <HiOutlineStar />
+                    {data?.data?.detail?.ratings?.map((obj) => (
+                      <div className="bg-white rounded-lg shadow-lg p-4 space-y-3">
+                        <div className="flex justify-between">
+                          <div className="flex gap-x-3">
+                            <img
+                              src={`${BASE_URL}${obj?.user?.image}`}
+                              alt="salon-detail"
+                              className="w-16 h-16 rounded-full"
+                            />
+                            <div className="space-y-1">
+                              <h2 className="text-xl font-medium font-workSans">
+                                {/* Ehsan Shaukat */}
+                                {obj?.user?.firstName} {obj?.user?.lastName}
+                              </h2>
+                              <div className="flex gap-x-1 items-center">
+                                {/* <HiOutlineStar />
+                                <HiOutlineStar />
+                                <HiOutlineStar />
+                                <HiOutlineStar />
+                                <HiOutlineStar /> */}
+                                <StarRating
+                                  rating={
+                                    data?.data?.detail?.salonAverageRating
+                                  }
+                                />{" "}
+                                {data?.data?.detail?.salonAverageRating}
+                              </div>
                             </div>
+                          </div>
+                          <div className="text-labelColor font-workSans font-medium">
+                            {obj?.createdAt.slice(0, 10)}
                           </div>
                         </div>
                         <div className="text-labelColor font-workSans font-medium">
-                          {/* 27/07/2023 */}
-                          {obj?.createdAt.slice(0, 10)}
+                          {obj?.comment}
                         </div>
                       </div>
-                      <div className="text-labelColor font-workSans font-medium">
-                        {/* Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id es Excepteur
-                        sint occaecat cupidatat non proident, sunt in culpa qui
-                        officia deserunt mollit anim id es */}
-                        {obj?.comment}
-                      </div>
-                    </div>)}
+                    ))}
                   </div>
                 </div>
               ) : tab === "days & hours" ? (
@@ -299,20 +326,32 @@ export default function SalonDetails() {
                     </ul>
 
                     <ul className="space-y-2">
-                      <li className="text-xl font-workSans">{handleTime('monday')}</li>
-                      <li className="text-xl font-workSans">{handleTime('tuesday')}</li>
-                      <li className="text-xl font-workSans">{handleTime('wednesday')}</li>
-                      <li className="text-xl font-workSans">{handleTime('thursday')}</li>
-                      <li className="text-xl font-workSans">{handleTime('friday')}</li>
-                      <li className="text-xl font-workSans">{handleTime('saturday')}</li>
-                      <li className="text-xl font-workSans">{handleTime('sunday')}</li>
+                      <li className="text-xl font-workSans">
+                        {handleTime("monday")}
+                      </li>
+                      <li className="text-xl font-workSans">
+                        {handleTime("tuesday")}
+                      </li>
+                      <li className="text-xl font-workSans">
+                        {handleTime("wednesday")}
+                      </li>
+                      <li className="text-xl font-workSans">
+                        {handleTime("thursday")}
+                      </li>
+                      <li className="text-xl font-workSans">
+                        {handleTime("friday")}
+                      </li>
+                      <li className="text-xl font-workSans">
+                        {handleTime("saturday")}
+                      </li>
+                      <li className="text-xl font-workSans">
+                        {handleTime("sunday")}
+                      </li>
                     </ul>
                   </div>
                 </div>
               ) : tab === "team members" ? (
-
                 <TeamMemberCard employees={data?.data?.detail?.employees} />
-
               ) : null}
             </div>
           </div>

@@ -33,7 +33,7 @@ export default function OffPeakTimeReport() {
     { value: 'no-show', label: 'No Show' },
   ];
 
-  const { data: SalonData } = GetAPI('admin/salon-view')
+  const { data: SalonData } = GetAPI('admin/salon-view',"reports")
 
   const columns = [
     { field: "sn", header: "Sn" },

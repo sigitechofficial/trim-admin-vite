@@ -9,7 +9,7 @@ import Loader from "../../components/Loader";
 
 export default function Subscription() {
   const navigate = useNavigate()
-  const { data, reFetch } = GetAPI('admin/subscriptions')
+  const { data, reFetch } = GetAPI('admin/subscriptions',"all_subscription")
 
   const columns = [
     { field: "sn", header: "Sn" },

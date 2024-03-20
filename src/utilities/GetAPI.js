@@ -3,63 +3,59 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "./URL";
 import { info_toaster } from "./Toaster";
-const GetAPI = (url) => {
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        var config = {
-            headers: {
-                accessToken: localStorage.getItem("accessToken"),
-            },
-        };
-        const fetchData = () => {
-            axios
-                .get(BASE_URL + url, config)
-                .then((dat) => {
-                    setData(dat.data);
-                });
-        };
-        fetchData();
-    }, [url]);
-
-    const reFetch = async () => {
-        var config = {
-            headers: {
-                accessToken: localStorage.getItem("accessToken"),
-            },
-        };
-        try {
-            axios
-                .get(BASE_URL + url, config)
-                .then((dat) => {
-                    setData(dat.data);
-                });
-        } catch (err) {
-            info_toaster(err);
-        }
+const GetAPI = (url, key) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    var config = {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
     };
+    const fetchData = () => {
+      axios.get(BASE_URL + `${url}?feature=${key}`, config).then((dat) => {
+        setData(dat.data);
+      });
+    };
+    fetchData();
+  }, [url]);
 
-    return { data, reFetch };
+  const reFetch = async () => {
+    var config = {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    };
+    try {
+      axios.get(BASE_URL + `${url}?feature=${key}`, config).then((dat) => {
+        setData(dat.data);
+      });
+    } catch (err) {
+      info_toaster(err);
+    }
+  };
+
+  return { data, reFetch };
 };
 
 export const GetPackages = (url) => {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(BASE_URL + url, {
-                    headers: {
-                        accessToken: localStorage.getItem("accessToken"),
-                    },
-                });
-                setData(response.data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(BASE_URL + url, {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        });
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-        fetchData();
-    }, [url]);
-    return data
-}
+    fetchData();
+  }, [url]);
+  return data;
+};
 export default GetAPI;

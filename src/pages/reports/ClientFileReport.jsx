@@ -8,7 +8,7 @@ import GetAPI from "../../utilities/GetAPI";
 import Loader from "../../components/Loader";
 
 export default function ClientFileReport() {
-  const { data } = GetAPI('admin/reports/client-file')
+  const { data } = GetAPI('admin/reports/client-file',"reports")
 
   const columns = [
     { field: "sn", header: "Sn" },

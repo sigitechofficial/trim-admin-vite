@@ -9,7 +9,7 @@ import Loader from "../../components/Loader";
 
 export default function UpcomingBookings() {
   const navigate = useNavigate()
-  const { data } = GetAPI('admin/appointments')
+  const { data } = GetAPI('admin/appointments', "bookings")
 
   const columns = [
     { field: "sn", header: "Sn" },

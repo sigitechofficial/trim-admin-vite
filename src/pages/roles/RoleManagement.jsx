@@ -30,7 +30,7 @@ import { BsExclamationCircle } from "react-icons/bs";
 import { DeleteAPI } from "../../utilities/DeleteAPI";
 
 export default function RoleManagement() {
-  const { data, reFetch } = GetAPI("admin/role-list");
+  const { data, reFetch } = GetAPI("admin/role-list", "roles_management");
   // console.log("🚀 ~ RoleManagement ~ data:", data?.data?.rolesList);
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
@@ -193,11 +193,12 @@ export default function RoleManagement() {
     e.preventDefault();
     if (mode.name === "Edit Role") {
       if (!checboxDisability.name && checboxDisability.other) {
-        setLoading(true)
+        setLoading(true);
         const res = await PutAPI(
           `admin/update-role-name/${JSON.parse(
             localStorage.getItem("adminRoleID")
           )}`,
+          "roles_management",
           {
             name: addRoleData?.name,
           }
@@ -222,6 +223,7 @@ export default function RoleManagement() {
           `admin/update-role-permisiions/${JSON.parse(
             localStorage.getItem("adminRoleID")
           )}`,
+          "roles_management",
           {
             permissionRole: addRoleData?.permissionRole,
           }
@@ -246,7 +248,11 @@ export default function RoleManagement() {
         info_toaster("Enter your Role Title");
       } else {
         setLoading(true);
-        const res = await PostAPI("admin/add-role", addRoleData);
+        const res = await PostAPI(
+          "admin/add-role",
+          "roles_management",
+          addRoleData
+        );
         if (res?.data?.status === "1") {
           setLoading(false);
           closeModal();
@@ -323,7 +329,8 @@ export default function RoleManagement() {
     e.preventDefault();
     setLoading(true);
     const res = await DeleteAPI(
-      `admin/role-delete/${JSON.parse(localStorage.getItem("adminRoleID"))}`
+      `admin/role-delete/${JSON.parse(localStorage.getItem("adminRoleID"))}`,
+      "roles_management"
     );
     console.log("🚀 ~ deleteRole ~ res:", res);
 
@@ -343,7 +350,10 @@ export default function RoleManagement() {
   };
 
   const handleStatus = async (id) => {
-    const res = await PutAPI(`admin/role-change-status/${id}`);
+    const res = await PutAPI(
+      `admin/role-change-status/${id}`,
+      "roles_management"
+    );
     if (res?.data?.status === "1") {
       reFetch();
       success_toaster(res?.data?.message);

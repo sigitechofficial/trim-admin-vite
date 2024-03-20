@@ -8,7 +8,7 @@ import { Input } from "@chakra-ui/react";
 import Loader from "../../components/Loader";
 
 export default function HelpAndSupport() {
-  const { data, reFetch } = GetAPI('admin/help-support')
+  const { data, reFetch } = GetAPI('admin/help-support', "help_&_support")
 
   const [inputDisability, setInputDisability] = useState({
     email: true,
@@ -36,7 +36,7 @@ export default function HelpAndSupport() {
   const handleSave = async (e) => {
     e.preventDefault()
 
-    const res = await PutAPI(`admin/help-support/${inputData?.id}`, {
+    const res = await PutAPI(`admin/help-support/${inputData?.id}`,"help_&_support", {
       "email": inputData?.email,
       "countryCode": inputData?.countryCode,
       "phoneNum": inputData?.phoneNum,

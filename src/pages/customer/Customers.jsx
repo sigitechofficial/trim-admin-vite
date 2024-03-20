@@ -14,10 +14,10 @@ import Loader from "../../components/Loader";
 
 export default function Customers() {
   const navigate = useNavigate();
-  const { data, reFetch } = GetAPI("admin/customer");
+  const { data, reFetch } = GetAPI("admin/customer", "customer_management");
 
   const handleStatus = async (customerId) => {
-    let res = await PutAPI(`admin/customer-change-status/${customerId}`);
+    let res = await PutAPI(`admin/customer-change-status/${customerId}`, "customer_management");
     if (res?.data?.status === "1") {
       success_toaster(res?.data?.message);
       reFetch();

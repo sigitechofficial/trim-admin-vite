@@ -59,11 +59,15 @@ export default function SendNotifications() {
       info_toaster("Message cannot be empty");
     } else {
       setLoading(true);
-      const res = await PostAPI("/admin/throw-notification", {
-        sendTo: selectedOption?.value,
-        title: data?.title,
-        body: data?.body,
-      });
+      const res = await PostAPI(
+        "/admin/throw-notification",
+        "push_notifications",
+        {
+          sendTo: selectedOption?.value,
+          title: data?.title,
+          body: data?.body,
+        }
+      );
       if (res?.data?.status === "1") {
         setLoading(false);
         navigate("/send-notifications");

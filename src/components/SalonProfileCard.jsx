@@ -6,19 +6,25 @@ import { LuClock3 } from "react-icons/lu";
 import { LuMapPin } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../utilities/URL";
+import StarRating from "../utilities/StarRating";
 export default function SalonProfileCard(props) {
+  console.log(props.ratingCount);
   return (
     <div
-      className={`${ 
+      className={`${
         props.bgColor
       } p-4 lg:p-6 rounded-xl grid grid-cols-2 gap-x-10 ${
         props.shadow === true ? "shadow-lg" : "shadow-none"
-      }`} 
-    > 
+      }`}
+    >
       <div className="h-64">
-        <img src={`${BASE_URL}${props?.coverImage}`} alt="barbershop" className="object-fill h-full w-full rounded-md" />
+        <img
+          src={`${BASE_URL}${props?.coverImage}`}
+          alt="barbershop"
+          className="object-fill h-full w-full rounded-md"
+        />
       </div>
- 
+
       <div className="space-y-3">
         <div className="space-y-2">
           <h2 className="text-2xl font-medium font-workSans">
@@ -26,12 +32,14 @@ export default function SalonProfileCard(props) {
           </h2>
           <div className="flex gap-x-1 items-center">
             {/* <HiOutlineStar className={`${}`} /> */}
+            {/* <HiOutlineStar />
             <HiOutlineStar />
             <HiOutlineStar />
-            <HiOutlineStar />
-            <HiOutlineStar />
+            <HiOutlineStar /> */}
+            <StarRating rating={props.ratingCount} />
+
             <span className="text-themeLightGray font-workSans font-medium">
-              ({props?.ratingCount} Reviews) 
+              ({props?.ratingCount} Reviews)
             </span>
           </div>
         </div>

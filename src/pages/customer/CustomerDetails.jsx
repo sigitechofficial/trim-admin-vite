@@ -17,15 +17,16 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalOverlay, 
+  ModalOverlay,
 } from "@chakra-ui/react";
 import { MdOutlineEmail } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
 
 export default function CustomerDetails() {
   const { data } = GetAPI(
-    `admin/customer-detail/${localStorage.getItem('customerID')}`
+    `admin/customer-detail/${localStorage.getItem('customerID')}`, "customer_management"
   );
+
   const [modal, setModal] = useState(false);
   const [bookingData, setBookingData] = useState("");
 
@@ -90,7 +91,7 @@ export default function CustomerDetails() {
       )} to ${formatTimeFromDB(values?.endTime)}`,
 
       createdAt: formatDateFromDB(values?.createdAt),
-      price: `${data?.data?.currencyUnit}${values?.total}`,
+      price: values?.total,
       status: (
         <>
           {values?.status === "complete" ? (
@@ -150,10 +151,11 @@ export default function CustomerDetails() {
               <ProfileCard
                 bgColor="bg-themeGray"
                 shadow="shadow-none"
-                customerId={data?.data?.id}
-                customerName={`${data?.data?.firstName} ${data?.data?.lastName}`}
-                customerNo={`${data?.data?.countryCode}-${data?.data?.phoneNum}`}
-                customerEmail={data?.data?.email}
+                employeeName={`${data?.data?.firstName} ${data?.data?.lastName}`}
+                coverImage={data?.data?.image}
+                employeeID={data?.data?.id}
+                employeeEmail={data?.data?.email}
+                employeePhoneNumber={`${data?.data?.countryCode}-${data?.data?.phoneNum}`}
               />
             </div>
           </div>
@@ -244,7 +246,7 @@ export default function CustomerDetails() {
                             By {job?.employee?.user?.firstName}
                           </div>
                           <div className="text-[#323F4B] font-workSans font-medium">
-                            {`${data?.data?.currencyUnit}${job?.total}`}
+                           {job?.total}
                           </div>
                         </div>
                       ))}
@@ -252,10 +254,10 @@ export default function CustomerDetails() {
 
                     <div className="flex justify-between">
                       <h2 className="text-[#323F4B] text-xl font-chivo font-semibold">
-                      Total
+                        Total
                       </h2>
                       <p className="text-[#323F4B] text-xl font-workSans font-semibold">
-                      {`${data?.data?.currencyUnit}${bookingData?.total}`}
+                        {bookingData?.total}
                       </p>
                     </div>
                   </div>

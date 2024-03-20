@@ -12,7 +12,7 @@ import { BASE_URL } from "../../utilities/URL";
 import Loader from "../../components/Loader";
 
 export default function BookingDetails() {
-  const { data } = GetAPI(`admin/appointment-detail/${JSON.parse(localStorage.getItem('bookingDetailsID'))}`)
+  const { data } = GetAPI(`admin/appointment-detail/${JSON.parse(localStorage.getItem('bookingDetailsID'))}`,"bookings")
 
   // const calculateTotals = (val) => {
   //   let tipTotal = 0
@@ -53,7 +53,7 @@ export default function BookingDetails() {
               <ProfileCard shadow="shadow-none" bgColor="bg-themeGray"
                 employeeName={`${data?.data?.appointments?.user?.firstName} ${data?.data?.appointments?.user?.lastName}`}
                 coverImage={data?.data?.appointments?.user?.image}
-                employeeID={data?.data?.appointments?.user?.id}
+                employeeID={data?.data?.appointments?.user?.id} 
                 employeeEmail={data?.data?.appointments?.user?.email}
                 employeePhoneNumber={`${data?.data?.appointments?.user?.countryCode} ${data?.data?.appointments?.user?.phoneNum}`}
               // profileCardData={data?.data?.appointments?.user}

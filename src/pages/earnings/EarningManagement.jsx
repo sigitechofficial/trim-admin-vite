@@ -6,7 +6,10 @@ import GetAPI from "../../utilities/GetAPI";
 import Loader from "../../components/Loader";
 
 export default function EarningManagement() {
-  const { data, reFetch } = GetAPI('admin/salon-earnings')
+  const { data, reFetch } = GetAPI(
+    "admin/salon-earnings",
+    "earnings_management"
+  );
   const columns = [
     { field: "sn", header: "Sn" },
     { field: "salonName", header: "Salon Name" },
@@ -15,9 +18,9 @@ export default function EarningManagement() {
     { field: "totalBookings", header: "Total Bookings" },
     { field: "salonAverageRating", header: "Average Customer Rating" },
     { field: "status", header: "Status" },
-  ] 
+  ];
 
-  const datas = []
+  const datas = [];
   data?.data?.salons?.map((obj, i) => {
     return datas.push({
       sn: i + 1,
@@ -26,20 +29,21 @@ export default function EarningManagement() {
       revenue: obj?.revenue,
       totalBookings: obj?.totalBookings,
       addressDB: `${obj?.addressDB?.postalCode} ${obj?.addressDB?.streetAddress} ${obj?.addressDB?.city} ${obj?.addressDB?.country}`,
-      status: <div>
-        {obj?.status ? (
-          <div className="bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
-            Active
-          </div>
-        ) : (
-          <div className="bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
-            Inactive
-          </div>
-        )}
-      </div>
-    })
-  })
-
+      status: (
+        <div>
+          {obj?.status ? (
+            <div className="bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
+              Active
+            </div>
+          ) : (
+            <div className="bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
+              Inactive
+            </div>
+          )}
+        </div>
+      ),
+    });
+  });
 
   return data?.length === 0 ? (
     <Loader />

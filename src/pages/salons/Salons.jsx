@@ -1,4 +1,4 @@
-// @ts-nocheck 
+// @ts-nocheck
 import React from "react";
 import Layout from "../../components/Layout";
 import MyDataTable from "../../components/MyDataTable";
@@ -10,10 +10,10 @@ import { useNavigate } from "react-router-dom";
 import Switch from "react-switch";
 import { PutAPI } from "../../utilities/PutAPI";
 import { error_toaster, success_toaster } from "../../utilities/Toaster";
- 
+
 export default function Salons() {
   const { data, reFetch } = GetAPI("admin/salon-view");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleStatus = async (userId) => {
     let res = await PutAPI(`admin/salon-change-status/${userId}`);
@@ -86,7 +86,6 @@ export default function Salons() {
           )}
         </div>
       ),
-
       changeStatus: (
         <label>
           <Switch
@@ -108,8 +107,8 @@ export default function Salons() {
           <button
             className="border border-yellow-400 rounded-md p-2 text-yellow-400"
             onClick={() => {
-              localStorage.setItem('salonID', JSON.stringify(values?.id))
-              navigate("/barbershop-details")
+              localStorage.setItem("salonID", JSON.stringify(values?.id));
+              navigate("/barbershop-details");
             }}
           >
             <FaEye size={24} />
@@ -131,7 +130,6 @@ export default function Salons() {
           <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
             All Barbershops
           </h2>
-
           <MyDataTable columns={columns} data={datas} />
         </div>
       }

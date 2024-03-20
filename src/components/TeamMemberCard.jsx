@@ -8,9 +8,9 @@ export default function TeamMemberCard(props) {
   const navigate = useNavigate()
 
   const handleBarberShopDetail = (employee) => {
-    localStorage.setItem('barbershopDetailsID', employee?.user?.id)
+    localStorage.setItem('barberShopEmployeeID', employee?.user?.id)
     navigate('/barbershop-details/saloon-employee-details')
-  }
+  } 
 
   return (
     // <Link to={props.to}>

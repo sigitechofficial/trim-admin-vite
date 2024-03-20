@@ -25,7 +25,7 @@ export default function Notifications() {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
-  const { data, reFetch } = GetAPI("/admin/notifications");
+  const { data, reFetch } = GetAPI("/admin/notifications","push_notifications");
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ export default function Notifications() {
     const res = await PutAPI(
       `admin/delete-notification/${JSON.parse(
         localStorage.getItem("deleteNotificationID")
-      )}`
+      )}`,"push_notifications"
     );
     if (res?.data?.status === "1") {
       setLoading(false);
@@ -50,7 +50,7 @@ export default function Notifications() {
 
   const handleResendNotification = async (id) => {
     setLoading2(true);
-    const res = await PostAPI(`admin/re-send-notification/${id}`);
+    const res = await PostAPI(`admin/re-send-notification/${id}`,"push_notifications");
     if (res?.data?.status === "1") {
       setLoading2(false);
       reFetch();

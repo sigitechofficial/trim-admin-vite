@@ -15,7 +15,7 @@ import { BASE_URL } from "../../utilities/URL";
 import Loader, { MiniLoader } from "../../components/Loader";
 import {
   error_toaster,
-  info_toaster, 
+  info_toaster,
   success_toaster,
 } from "../../utilities/Toaster";
 import { PostAPI } from "../../utilities/PostAPI";
@@ -27,7 +27,7 @@ export default function Services() {
   const [dropDown, setDropDown] = useState(false);
   const [modalType, setModalType] = useState(null);
   const [dropDownInd, setDropDownInd] = useState();
-  const { data, reFetch } = GetAPI("admin/service-type/view");
+  const { data, reFetch } = GetAPI("admin/service-type/view", "services");
   const [loader, setLoader] = useState(false);
   const [serviceId, setServiceId] = useState("");
   const [updateImg, setUpdateImg] = useState(false);
@@ -100,7 +100,7 @@ export default function Services() {
       const formData = new FormData();
       formData.append("typeName", addService.typeName);
       formData.append("image", addService.image);
-      let res = await PostAPI("admin/service-type", formData);
+      let res = await PostAPI("admin/service-type", "services", formData);
       if (res?.data?.status === "1") {
         reFetch();
         setLoader(false);
@@ -130,6 +130,7 @@ export default function Services() {
       formData.append("image", updateService.updateImg);
       let res = await PutAPI(
         `admin/service-type/edit/${updateService.id}`,
+        "services",
         formData
       );
       if (res?.data?.status === "1") {
@@ -147,7 +148,10 @@ export default function Services() {
   // Delete Service
   const deleteService = async () => {
     setLoader(true);
-    let res = await DeleteAPI(`admin/service-type/delete/${serviceId}`);
+    let res = await DeleteAPI(
+      `admin/service-type/delete/${serviceId}`,
+      "services"
+    );
     if (res?.data?.status === "1") {
       reFetch();
       setModal(false);
@@ -182,7 +186,10 @@ export default function Services() {
 
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-10 pt-5">
             {data?.data?.map((services, index) => (
-              <div  key={index} className="bg-white p-5 rounded-lg shadow-textShadow flex flex-col gap-y-4 justify-center items-center relative">
+              <div
+                key={index}
+                className="bg-white p-5 rounded-lg shadow-textShadow flex flex-col gap-y-4 justify-center items-center relative"
+              >
                 <img
                   src={`${BASE_URL}${services?.image}`}
                   alt="services"

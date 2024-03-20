@@ -1,7 +1,7 @@
 // @ts-nocheck
 import axios from "axios";
 import { BASE_URL } from "./URL"
-export const PostAPI = async (url, postData) => {
+export const PostAPI = async (url,key, postData) => {
   let config = {
     headers: {
       accessToken: localStorage.getItem("accessToken"),
@@ -9,7 +9,7 @@ export const PostAPI = async (url, postData) => {
   };
   try {
     let response = await axios.post(
-      BASE_URL + url,
+      BASE_URL + `${url}?feature=${key}`,
       postData,
       config
     );
