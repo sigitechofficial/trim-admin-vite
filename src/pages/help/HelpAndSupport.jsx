@@ -6,44 +6,54 @@ import { PutAPI } from "../../utilities/PutAPI";
 import PhoneInput from "react-phone-input-2";
 import { Input } from "@chakra-ui/react";
 import Loader from "../../components/Loader";
+import { error_toaster, success_toaster } from "../../utilities/Toaster";
 
 export default function HelpAndSupport() {
-  const { data, reFetch } = GetAPI('admin/help-support', "help_&_support")
+  const { data, reFetch } = GetAPI("admin/help-support", "help_&_support");
 
   const [inputDisability, setInputDisability] = useState({
     email: true,
     countryCode: true,
     phone: true,
-    address: true
-  })
+    address: true,
+  });
 
   const [inputData, setInputData] = useState({
-    id: '',
-    address: '',
-    email: '',
-    countryCode: '',
-    phoneNum: ''
-  })
+    id: "",
+    address: "",
+    email: "",
+    countryCode: "",
+    phoneNum: "",
+  });
 
   const handleReset = () => {
     setInputData({
-      address: '',
-      email: '',
-      countryCode: '',
-      phoneNum: ''
-    })
-  }
-  const handleSave = async (e) => {
-    e.preventDefault()
+      address: "",
+      email: "",
+      countryCode: "",
+      phoneNum: "",
+    });
+  };
 
-    const res = await PutAPI(`admin/help-support/${inputData?.id}`,"help_&_support", {
-      "email": inputData?.email,
-      "countryCode": inputData?.countryCode,
-      "phoneNum": inputData?.phoneNum,
-      "address": inputData?.address
-    })
-    reFetch()
-  }
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const res = await PutAPI(
+      `admin/help-support/${inputData?.id}`,
+      "help_&_support",
+      {
+        email: inputData?.email,
+        countryCode: inputData?.countryCode,
+        phoneNum: inputData?.phoneNum,
+        address: inputData?.address,
+      }
+    );
+    if (res?.data?.status === "1") {
+      success_toaster(res?.data?.message);
+      reFetch();
+    } else {
+      error_toaster(res?.data?.message);
+    }
+  };
 
   useEffect(() => {
     setInputData({
@@ -51,9 +61,9 @@ export default function HelpAndSupport() {
       address: data?.data?.address,
       countryCode: data?.data?.countryCode,
       email: data?.data?.email,
-      phoneNum: `${data?.data?.countryCode}${data?.data?.phoneNum}`
-    })
-  }, [data])
+      phoneNum: `${data?.data?.countryCode}${data?.data?.phoneNum}`,
+    });
+  }, [data]);
 
   return data?.length === 0 ? (
     <Loader />
@@ -83,13 +93,20 @@ export default function HelpAndSupport() {
                       disabled={inputDisability?.email}
                       className="w-full h-[42px] rounded-md px-3 outline-none border font-workSans font-medium 
                             text-labelColor"
-                      onChange={(e) => setInputData({ ...inputData, email: e.target.value })}
+                      onChange={(e) =>
+                        setInputData({ ...inputData, email: e.target.value })
+                      }
                     />
                     <FaEdit
                       size={24}
                       color="#12466F"
                       className="absolute top-8 right-3 cursor-pointer"
-                      onClick={() => setInputDisability({ ...inputDisability, email: !inputDisability?.email })}
+                      onClick={() =>
+                        setInputDisability({
+                          ...inputDisability,
+                          email: !inputDisability?.email,
+                        })
+                      }
                     />
                   </div>
 
@@ -125,12 +142,6 @@ export default function HelpAndSupport() {
                         }
                       />
                       <input
-                        // style={{
-                        //   width: "100%",
-                        //   height: "40px",
-                        //   display: "block",
-                        //   marginLeft: "0px",
-                        // }}
                         className="w-full h-[42px] rounded-md px-3 outline-none border font-workSans font-medium 
                         text-labelColor"
                         disabled={inputDisability?.phone}
@@ -140,22 +151,20 @@ export default function HelpAndSupport() {
                         name="phoneNum"
                         value={inputData?.phoneNum}
                         placeholder="Phone number"
-                      // value={userData.phoneNum}
-                      // onChange={(e) =>
-                      //   setUserData({
-                      //     ...userData,
-                      //     [e.target.name]: e.target.value,
-                      //   })
-                      // }
                       />
                       <FaEdit
                         size={24}
                         color="#12466F"
                         className="absolute z-10 right-3 cursor-pointer"
-                        onClick={() => setInputDisability({ ...inputDisability, phone: !inputDisability?.phone, countryCode: !inputDisability?.countryCode })}
+                        onClick={() =>
+                          setInputDisability({
+                            ...inputDisability,
+                            phone: !inputDisability?.phone,
+                            countryCode: !inputDisability?.countryCode,
+                          })
+                        }
                       />
                     </div>
-
                   </div>
 
                   <div className="space-y-1 relative">
@@ -177,7 +186,12 @@ export default function HelpAndSupport() {
                       size={24}
                       color="#12466F"
                       className="absolute top-8 right-3 cursor-pointer"
-                      onClick={() => setInputDisability({ ...inputDisability, address: !inputDisability?.address })}
+                      onClick={() =>
+                        setInputDisability({
+                          ...inputDisability,
+                          address: !inputDisability?.address,
+                        })
+                      }
                     />
                   </div>
 

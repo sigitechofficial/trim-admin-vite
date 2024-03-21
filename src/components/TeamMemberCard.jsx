@@ -13,7 +13,6 @@ export default function TeamMemberCard(props) {
   } 
 
   return (
-    // <Link to={props.to}>
     <>
       <h2 className="text-2xl font-workSans font-medium">Team Members</h2>
       <div>
@@ -29,7 +28,6 @@ export default function TeamMemberCard(props) {
               className="bg-white border w-16 shadow-md rounded-xl flex justify-center gap-x-2 items-center font-workSans
          font-medium absolute top-24 left-14"
             >
-              {/* 4.0 */}
               {employee?.employeeAverageRating}
               <MdOutlineStar size={20} />
             </div>
@@ -42,6 +40,5 @@ export default function TeamMemberCard(props) {
         </div>
       </div>
     </>
-    // </Link>
   );
 }

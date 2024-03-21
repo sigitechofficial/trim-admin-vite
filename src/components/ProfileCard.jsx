@@ -1,6 +1,5 @@
 import React from "react";
 import { FiPhone } from "react-icons/fi";
-// import { LuMapPin } from "react-icons/lu";
 import { MdOutlineEmail } from "react-icons/md";
 import { BASE_URL } from "../utilities/URL";
 

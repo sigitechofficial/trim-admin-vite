@@ -50,7 +50,6 @@ export default function EmployeeManagement() {
   const { data: rolesData } = GetAPI("admin/role-list", "employee_management");
 
   const openModal = (type) => {
-    // setModalType(type);
     setModal(true);
   };
 

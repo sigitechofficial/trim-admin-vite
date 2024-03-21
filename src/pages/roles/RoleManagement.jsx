@@ -38,6 +38,7 @@ export default function RoleManagement() {
     name: false,
     other: false,
   });
+
   const [mode, setMode] = useState({
     name: "",
   });
@@ -566,7 +567,6 @@ export default function RoleManagement() {
           <div className="w-full flex justify-between items-center">
             <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
               Roles & Permissions
-              {/* <span className="text-labelColor">(260)</span> */}
             </h2>
             <button
               className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-transparent
@@ -589,7 +589,6 @@ export default function RoleManagement() {
 
           <Modal onClose={closeModal} isOpen={modal} size="3xl" isCentered>
             <ModalOverlay />
-
             <form onSubmit={handleSubmit}>
               <ModalContent>
                 <ModalHeader paddingTop={5}>
@@ -666,7 +665,99 @@ export default function RoleManagement() {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr className="">
+                          {[
+                            "Home",
+                            "Admin Earnings",
+                            "Customer Management",
+                            "Bookings",
+                            "BaberShops",
+                            "Earning Management",
+                            "Coupons",
+                            "All Subscriptions",
+                            "Push Notifications",
+                            "Report",
+                            "Help & Support",
+                          ].map((val, index) => (
+                            <tr className="">
+                              <td
+                                className="text-labelColor font-workSans font-medium"
+                                key={index}
+                              >
+                                {val}
+                              </td>
+                              {/* <td className="text-center pt-4">
+                                <Checkbox
+                                  disabled={checboxDisability?.other}
+                                  isChecked={
+                                    addRoleData.permissionRole[index]
+                                      .permissions.create
+                                  }
+                                  border={"#00000099"}
+                                  onChange={() =>
+                                    handleRoleChange(index, "create")
+                                  }
+                                />
+                              </td> */}
+                              {/* <td className="text-center pt-4">
+                                <Checkbox
+                                  disabled={checboxDisability?.other}
+                                  isChecked={
+                                    addRoleData.permissionRole[index]
+                                      .permissions.read
+                                  }
+                                  border={"#00000099"}
+                                  onChange={() =>
+                                    handleRoleChange(index, "read")
+                                  }
+                                />
+                              </td> */}
+                              {/* <td className="text-center pt-4">
+                                <Checkbox
+                                  disabled={checboxDisability?.other}
+                                  isChecked={
+                                    addRoleData.permissionRole[index]
+                                      .permissions.update
+                                  }
+                                  border={"#00000099"}
+                                  onChange={() =>
+                                    handleRoleChange(index, "update")
+                                  }
+                                />
+                              </td> */}
+                              {/* <td className="text-center pt-4">
+                                <Checkbox
+                                  disabled={checboxDisability?.other}
+                                  isChecked={
+                                    addRoleData.permissionRole[index]
+                                      .permissions.delete
+                                  }
+                                  border={"#00000099"}
+                                  onChange={() =>
+                                    handleRoleChange(index, "delete")
+                                  }
+                                />
+                              </td> */}
+                              {["create", "read", "update", "delete"].map(
+                                (val, i) => (
+                                  <td className="text-center pt-4" key={i}>
+                                    <Checkbox
+                                      disabled={checboxDisability?.other}
+                                      isChecked={
+                                        addRoleData.permissionRole[index]
+                                          .permissions[val]
+                                      }
+                                      border={"#00000099"}
+                                      onChange={() =>
+                                        handleRoleChange(index, val)
+                                      }
+                                    />
+                                  </td>
+                                )
+                              )}
+                            </tr>
+                          ))}
+
+                          {/* <tr className="">
                             <td className="text-labelColor font-workSans font-medium">
                               Home
                             </td>
@@ -713,9 +804,9 @@ export default function RoleManagement() {
                                 onChange={() => handleRoleChange(0, "delete")}
                               />
                             </td>
-                          </tr>
+                          </tr> */}
 
-                          <tr className="">
+                          {/* <tr className="">
                             <td className="text-labelColor font-workSans font-medium">
                               Admin Earnings
                             </td>
@@ -762,9 +853,9 @@ export default function RoleManagement() {
                                 onChange={() => handleRoleChange(1, "delete")}
                               />
                             </td>
-                          </tr>
+                          </tr> */}
 
-                          <tr className="">
+                          {/* <tr className="">
                             <td className="text-labelColor font-workSans font-medium">
                               Customer Management
                             </td>
@@ -811,9 +902,9 @@ export default function RoleManagement() {
                                 onChange={() => handleRoleChange(2, "delete")}
                               />
                             </td>
-                          </tr>
+                          </tr> */}
 
-                          <tr className="">
+                          {/* <tr className="">
                             <td className="text-labelColor font-workSans font-medium">
                               Bookings
                             </td>
@@ -860,9 +951,9 @@ export default function RoleManagement() {
                                 onChange={() => handleRoleChange(3, "delete")}
                               />
                             </td>
-                          </tr>
+                          </tr> */}
 
-                          <tr className="">
+                          {/* <tr className="">
                             <td className="text-labelColor font-workSans font-medium">
                               BaberShops
                             </td>
@@ -909,9 +1000,9 @@ export default function RoleManagement() {
                                 onChange={() => handleRoleChange(4, "delete")}
                               />
                             </td>
-                          </tr>
+                          </tr> */}
 
-                          <tr className="">
+                          {/* <tr className="">
                             <td className="text-labelColor font-workSans font-medium">
                               Earning Management
                             </td>
@@ -958,9 +1049,9 @@ export default function RoleManagement() {
                                 onChange={() => handleRoleChange(5, "delete")}
                               />
                             </td>
-                          </tr>
+                          </tr> */}
 
-                          <tr className="">
+                          {/* <tr className="">
                             <td className="text-labelColor font-workSans font-medium">
                               Coupons
                             </td>
@@ -1007,9 +1098,9 @@ export default function RoleManagement() {
                                 onChange={() => handleRoleChange(6, "delete")}
                               />
                             </td>
-                          </tr>
+                          </tr> */}
 
-                          <tr className="">
+                          {/* <tr className="">
                             <td className="text-labelColor font-workSans font-medium">
                               All Subscription
                             </td>
@@ -1056,9 +1147,9 @@ export default function RoleManagement() {
                                 onChange={() => handleRoleChange(7, "delete")}
                               />
                             </td>
-                          </tr>
+                          </tr> */}
 
-                          <tr className="">
+                          {/* <tr className="">
                             <td className="text-labelColor font-workSans font-medium">
                               Push Notifications
                             </td>
@@ -1105,9 +1196,9 @@ export default function RoleManagement() {
                                 onChange={() => handleRoleChange(8, "delete")}
                               />
                             </td>
-                          </tr>
+                          </tr> */}
 
-                          <tr className="">
+                          {/* <tr className="">
                             <td className="text-labelColor font-workSans font-medium">
                               Report
                             </td>
@@ -1154,9 +1245,9 @@ export default function RoleManagement() {
                                 onChange={() => handleRoleChange(9, "delete")}
                               />
                             </td>
-                          </tr>
+                          </tr> */}
 
-                          <tr className="">
+                          {/* <tr className="">
                             <td className="text-labelColor font-workSans font-medium">
                               Help & Support
                             </td>
@@ -1204,7 +1295,7 @@ export default function RoleManagement() {
                                 onChange={() => handleRoleChange(10, "delete")}
                               />
                             </td>
-                          </tr>
+                          </tr> */}
                         </tbody>
                       </table>
                     </div>
@@ -1217,6 +1308,7 @@ export default function RoleManagement() {
                         className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                         onClick={closeModal}
+                        type="button"
                       >
                         Cancel
                       </button>
@@ -1262,6 +1354,7 @@ export default function RoleManagement() {
                         <button
                           className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
                          hover:text-white duration-200"
+                          type="button"
                           onClick={closeModal2}
                         >
                           No

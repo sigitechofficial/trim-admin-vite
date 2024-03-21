@@ -58,7 +58,6 @@ export default function SalonEmployeeDetails() {
               employeeID={data?.data?.employee?.employee?.id}
               employeeEmail={data?.data?.employee?.email}
               employeePhoneNumber={`${data?.data?.employee?.countryCode} ${data?.data?.employee?.phoneNum}`}
-              // profileCardData={data?.data?.employee}
             />
           </div>
 
@@ -256,7 +255,7 @@ export default function SalonEmployeeDetails() {
                             key={key}
                             title={key}
                             total={value}
-                            Icon={BsCardList} // Assuming you want to use the same icon for all cards
+                            Icon={BsCardList} 
                             bgColor="bg-[#12466F4D]"
                             iconBg="bg-theme"
                             iconColor="white"

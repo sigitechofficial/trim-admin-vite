@@ -14,21 +14,6 @@ import Loader from "../../components/Loader";
 export default function BookingDetails() {
   const { data } = GetAPI(`admin/appointment-detail/${JSON.parse(localStorage.getItem('bookingDetailsID'))}`,"bookings")
 
-  // const calculateTotals = (val) => {
-  //   let tipTotal = 0
-  //   let grandTotal = 0
-  //   data?.data?.appointments?.jobs.map((job) => {
-  //     tipTotal += parseInt(job?.tip)
-  //     grandTotal += parseInt(job?.total)
-  //   })
-
-  //   if (val === 'tip') {
-  //     return tipTotal
-  //   } else if (val === 'grandTotal') {
-  //     return grandTotal
-  //   }
-  // }
-
   return data?.length === 0 ? (
     <Loader />
   ) : (
@@ -56,7 +41,6 @@ export default function BookingDetails() {
                 employeeID={data?.data?.appointments?.user?.id} 
                 employeeEmail={data?.data?.appointments?.user?.email}
                 employeePhoneNumber={`${data?.data?.appointments?.user?.countryCode} ${data?.data?.appointments?.user?.phoneNum}`}
-              // profileCardData={data?.data?.appointments?.user}
               />
 
               <SalonProfileCard shadow={false}
@@ -67,8 +51,6 @@ export default function BookingDetails() {
                 ratingCount={data?.data?.appointments?.salonDetail?.ratingCount}
                 salonAddress={`${data?.data?.appointments?.salonDetail?.addressDB?.streetAddress},${data?.data?.appointments?.salonDetail?.addressDB?.district},${data?.data?.appointments?.salonDetail?.addressDB?.city},${data?.data?.appointments?.salonDetail?.addressDB?.country}`}
                 socialLinks={data?.data?.socialLinks}
-
-              // salonProfileCardData={data?.data?.appointments?.salonDetail}
               />
             </div>
 

@@ -6,36 +6,13 @@ import GetAPI from "../../utilities/GetAPI";
 import Loader from "../../components/Loader";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-// import {
-//   Modal,
-//   ModalOverlay,
-//   ModalContent,
-//   ModalBody,
-//   ModalCloseButton,
-//   ModalFooter,
-// } from "@chakra-ui/react";
-// import selectStyles from "../../utilities/SelectStyle";
-// import Select from "react-select";
 
 export default function Coupons() {
   const navigate = useNavigate();
-
   const { data, reFetch } = GetAPI("admin/coupons", "coupons");
-  // const [modal, setModal] = useState(false);
-  // //   const [modalType, setModalType] = useState(null);
-
-  // const openModal = (type) => {
-  //   // setModalType(type);
-  //   setModal(true);
-  // };
-
-  // const closeModal = () => {
-  //   setModal(false);
-  // };
 
   const columns = [
     { field: "serialNo", header: "Sr" },
-    // { field: "id", header: "Id" },
     {
       field: "name",
       header: "Salon Name",

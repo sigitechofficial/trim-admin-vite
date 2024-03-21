@@ -13,7 +13,6 @@ export default function BarChart({ dashboardBarChartData }) {
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 0,
                 data: dashboardBarChartData?.datasets[0]?.data,
-                // data: [20, 10, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 borderRadius: 5,
             },
         ],
