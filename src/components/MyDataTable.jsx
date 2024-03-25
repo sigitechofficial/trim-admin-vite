@@ -35,7 +35,7 @@ export default function MyDataTable(props) {
             onChange={onGlobalFilterChange}
             //  placeholder="Global Search"
             placeholder="Search by ID, product, or others..."
-            className="w-96 h-12 bg-themeGray rounded-lg px-10 outline-none placeholder:font-workSans placeholder:font-medium focus:bg-gray-200"
+            className="w-[330px] sm:w-96 h-12 bg-themeGray rounded-lg px-10 outline-none placeholder:font-workSans placeholder:font-medium focus:bg-gray-200"
           />
           <LuSearch
             size={20}
@@ -64,19 +64,19 @@ export default function MyDataTable(props) {
               styles={selectStyles} />
           </div>
 
-          <button
+          {/* <button
             className="flex items-center gap-x-2 p-3 bg-themeGray rounded-lg hover:bg-gray-200 duration-200"
             onClick={props.onClick}
           >
             <TbAdjustmentsHorizontal size={24} color="#A0AEC0" />
             <span className="text-[#718096] font-workSans">Filters</span>
-          </button>
-          <button className="flex items-center gap-x-2 p-3 bg-themeGray rounded-lg hover:bg-gray-200 duration-200">
+          </button> */}
+          {/* <button className="flex items-center gap-x-2 p-3 bg-themeGray rounded-lg hover:bg-gray-200 duration-200">
             <CiCalendarDate size={24} color="#A0AEC0" />
             <span className="text-[#718096] font-workSans">
               April 11 - April 24
             </span>
-          </button>
+          </button> */}
           <button className="flex items-center gap-x-2 p-3 bg-themeGray rounded-lg hover:bg-gray-200 duration-200">
             <RiFileDownloadLine size={24} color="#A0AEC0" />
             <span className="text-[#718096] font-workSans">Download</span>

@@ -18,8 +18,9 @@ import { PiChartBar } from "react-icons/pi";
 import { RiAdminLine } from "react-icons/ri";
 import ListItems from "./ListItems";
 import { info_toaster } from "../utilities/Toaster";
+import { ImCross } from "react-icons/im";
 
-export default function Leftbar() {
+export default function Leftbar(props) {
   const location = useLocation().pathname;
   const navigate = useNavigate();
   const isActive = useMemo(() => {
@@ -57,7 +58,23 @@ export default function Leftbar() {
   };
 
   return (
-    <section className="w-60 lg:w-72 fixed h-full py-5 pl-2 mt-[94px] border-r-2 max-sm:hidden">
+    <section
+      className={`bg-white w-full sm:w-60 lg:w-72 ${
+        props?.navbarVis ? "fixed" : "hidden"
+      } h-full sm:py-5 sm:pl-2 mt-0 sm:mt-[94px] border-r-2 z-50`}
+    >
+      <div className="sm:hidden flex justify-between items-center py-3 w-11/12 mx-auto">
+        <div>
+          {" "}
+          <img src="/images/logo2.webp" alt="logo" className="w-16" />
+        </div>
+        <div
+          className="sm:hidden"
+          onClick={() => props?.setNavbarVis(!props?.navbarVis)}
+        >
+          <ImCross size="25px" />
+        </div>
+      </div>
       <ul className="flex flex-col space-y-1 overflow-auto h-[90%]">
         <ListHead title="Dashboard" to="/" Icon={MdDashboard} />
 
