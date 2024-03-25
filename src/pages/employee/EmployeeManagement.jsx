@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import MyDataTable from "../../components/MyDataTable";
 import {
@@ -9,6 +9,7 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalFooter,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import PhoneInput from "react-phone-input-2";
 import { FaEye } from "react-icons/fa";
@@ -28,6 +29,8 @@ import { DeleteAPI } from "../../utilities/DeleteAPI";
 import { PostAPI } from "../../utilities/PostAPI";
 
 export default function EmployeeManagement() {
+  const isSmScreen = useMediaQuery("(max-width: 639px)");
+
   const [selectedOption, setSelectedOption] = useState({
     value: "",
     label: "",
@@ -46,7 +49,7 @@ export default function EmployeeManagement() {
     roleId: "",
   });
 
-  const { data, reFetch } = GetAPI("admin/employees","employee_management" );
+  const { data, reFetch } = GetAPI("admin/employees", "employee_management");
   const { data: rolesData } = GetAPI("admin/role-list", "employee_management");
 
   const openModal = (type) => {
@@ -66,7 +69,10 @@ export default function EmployeeManagement() {
   };
 
   const handleStatus = async (userId) => {
-    let res = await PutAPI(`admin/employee-change-status/${userId}`,"employee_management");
+    let res = await PutAPI(
+      `admin/employee-change-status/${userId}`,
+      "employee_management"
+    );
     if (res?.data?.status === "1") {
       success_toaster(res?.data?.message);
       reFetch();
@@ -81,7 +87,8 @@ export default function EmployeeManagement() {
     const res = await DeleteAPI(
       `admin/employee-delete/${JSON.parse(
         localStorage.getItem("adminEmployeeID")
-      )}`,"employee_management"
+      )}`,
+      "employee_management"
     );
 
     if (res?.data?.status === "1") {
@@ -107,7 +114,7 @@ export default function EmployeeManagement() {
     e.preventDefault();
     setLoading(true);
 
-    const res = await PostAPI("admin/employee", "employee_management",{
+    const res = await PostAPI("admin/employee", "employee_management", {
       firstName: addEmployee?.firstName,
       lastName: addEmployee?.lastName,
       email: addEmployee?.email,
@@ -230,7 +237,7 @@ export default function EmployeeManagement() {
     <Layout
       content={
         <div className="space-y-5">
-          <div className="w-full flex justify-between items-center">
+          <div className="w-full flex flex-col gap-y-2 justify-start sm:flex-row sm:justify-between sm:items-center">
             <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
               All Employees{" "}
               <span className="text-labelColor">
@@ -238,8 +245,8 @@ export default function EmployeeManagement() {
               </span>
             </h2>
             <button
-              className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-transparent
-           hover:text-theme duration-200"
+              className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-2.5 hover:bg-transparent
+           hover:text-theme duration-200 max-sm:w-60"
               onClick={() => {
                 openModal();
                 setAddEmployee({
@@ -259,7 +266,12 @@ export default function EmployeeManagement() {
 
           <MyDataTable columns={columns} data={datas} />
 
-          <Modal onClose={closeModal} isOpen={modal} isCentered size={"2xl"}>
+          <Modal
+            onClose={closeModal}
+            isOpen={modal}
+            isCentered
+            size={isSmScreen[0] ? "sm" : "2xl"}
+          >
             <ModalOverlay />
             <form onSubmit={handleSubmit}>
               <ModalContent>
@@ -421,14 +433,14 @@ export default function EmployeeManagement() {
                   <ModalFooter>
                     <div className="flex gap-x-3">
                       <button
-                        className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                        className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                         onClick={closeModal}
                       >
                         Cancel
                       </button>
                       <button
-                        className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                        className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                         type="submit"
                       >
@@ -441,7 +453,7 @@ export default function EmployeeManagement() {
             </form>
           </Modal>
 
-          <Modal onClose={closeModal2} isOpen={modal2} size={"xl"} isCentered>
+          <Modal onClose={closeModal2} isOpen={modal2} size={"md"} isCentered>
             <ModalOverlay />
             <ModalContent>
               <ModalCloseButton />
@@ -464,14 +476,14 @@ export default function EmployeeManagement() {
                       </div>
                       <div className="flex gap-x-3">
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           onClick={closeModal2}
                         >
                           No
                         </button>
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           type="submit"
                         >

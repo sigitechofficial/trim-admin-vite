@@ -19,7 +19,7 @@ export default function ListHead(props) {
         >
           <div className="flex gap-x-2">
             <Icon size={25} />
-            <h1 className="font-chivo font-medium text-sm lg:text-base">
+            <h1 className="font-chivo font-medium text-lg sm:text-sm lg:text-base">
               {props.title}
             </h1>
           </div>

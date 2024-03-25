@@ -35,10 +35,10 @@ export default function SubscriptionPlans() {
             </div>
 
             {/* <button
-              className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-transparent
+              className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-transparent
            hover:text-theme duration-200"
             onClick={() => {
-              openModal("Add Employe");
+              openModal("Add Employee");
             }}
             >
               + Add New Subscription

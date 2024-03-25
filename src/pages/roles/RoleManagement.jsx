@@ -11,6 +11,7 @@ import {
   ModalCloseButton,
   Checkbox,
   ModalFooter,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import Switch from "react-switch";
 import { PostAPI } from "../../utilities/PostAPI";
@@ -30,6 +31,7 @@ import { BsExclamationCircle } from "react-icons/bs";
 import { DeleteAPI } from "../../utilities/DeleteAPI";
 
 export default function RoleManagement() {
+  const isSmScreen = useMediaQuery("(max-width: 639px)");
   const { data, reFetch } = GetAPI("admin/role-list", "roles_management");
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
@@ -569,7 +571,7 @@ export default function RoleManagement() {
               Roles & Permissions
             </h2>
             <button
-              className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-transparent
+              className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-transparent
            hover:text-theme duration-200"
               onClick={() => {
                 openModal("Add Employe");
@@ -587,7 +589,7 @@ export default function RoleManagement() {
 
           <MyDataTable columns={columns} data={datas} />
 
-          <Modal onClose={closeModal} isOpen={modal} size="3xl" isCentered>
+          <Modal onClose={closeModal} isOpen={modal} size={isSmScreen[0] ? "sm":"3xl"} isCentered>
             <ModalOverlay />
             <form onSubmit={handleSubmit}>
               <ModalContent>
@@ -656,7 +658,7 @@ export default function RoleManagement() {
                       </div>
                       <table className="w-full">
                         <thead>
-                          <tr className="font-semibold text-xl">
+                          <tr className="font-semibold sm:text-xl">
                             <td>Name</td>
                             <td className="text-center">Create</td>
                             <td className="text-center">Read</td>
@@ -1305,7 +1307,7 @@ export default function RoleManagement() {
                   <ModalFooter>
                     <div className="flex gap-x-3">
                       <button
-                        className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                        className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                         onClick={closeModal}
                         type="button"
@@ -1315,7 +1317,7 @@ export default function RoleManagement() {
                       {(mode?.name === "Add Role" ||
                         mode?.name === "Edit Role") && (
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           type="submit"
                         >
@@ -1329,7 +1331,7 @@ export default function RoleManagement() {
             </form>
           </Modal>
 
-          <Modal onClose={closeModal2} isOpen={modal2} size={"xl"} isCentered>
+          <Modal onClose={closeModal2} isOpen={modal2} size={isSmScreen[0] ? "sm":"xl"} isCentered>
             <ModalOverlay />
             <ModalContent>
               <ModalCloseButton />
@@ -1352,15 +1354,15 @@ export default function RoleManagement() {
                       </div>
                       <div className="flex gap-x-3">
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           type="button"
                           onClick={closeModal2}
-                        >
+                        > 
                           No
                         </button>
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           type="submit"
                         >

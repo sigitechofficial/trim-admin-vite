@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import Header from "./Header";
 import Leftbar from "./Leftbar";
 import MainSection from "./MainSection";
+import { useMediaQuery } from "@chakra-ui/react";
 
 export default function Layout(props) {
-  const [navbarVis, setNavbarVis] = useState(false);
+  const [navbarVis, setNavbarVis] = useState(
+    window.innerWidth < 640 ? false : true
+  );
 
   return (
     <>

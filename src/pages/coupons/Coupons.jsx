@@ -257,14 +257,14 @@ export default function Coupons() {
               <ModalFooter>
                 <div className="flex gap-x-3">
                   <button
-                    className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                    className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                     onClick={closeModal}
                   >
                     Cancel
                   </button>
                   <button
-                    className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                    className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                   >
                     Add

@@ -25,7 +25,10 @@ export default function Notifications() {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
-  const { data, reFetch } = GetAPI("/admin/notifications","push_notifications");
+  const { data, reFetch } = GetAPI(
+    "/admin/notifications",
+    "push_notifications"
+  );
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -33,7 +36,8 @@ export default function Notifications() {
     const res = await PutAPI(
       `admin/delete-notification/${JSON.parse(
         localStorage.getItem("deleteNotificationID")
-      )}`,"push_notifications"
+      )}`,
+      "push_notifications"
     );
     if (res?.data?.status === "1") {
       setLoading(false);
@@ -50,7 +54,10 @@ export default function Notifications() {
 
   const handleResendNotification = async (id) => {
     setLoading2(true);
-    const res = await PostAPI(`admin/re-send-notification/${id}`,"push_notifications");
+    const res = await PostAPI(
+      `admin/re-send-notification/${id}`,
+      "push_notifications"
+    );
     if (res?.data?.status === "1") {
       setLoading2(false);
       reFetch();
@@ -112,13 +119,13 @@ export default function Notifications() {
     <Layout
       content={
         <div className="space-y-5">
-          <div className="w-full flex justify-between items-center">
+          <div className="w-full flex flex-col max-sm:gap-y-2 sm:flex-row sm:justify-between sm:items-center">
             <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
               All Notifications <span className="text-labelColor">(260)</span>
             </h2>
             <button
-              className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-transparent
-           hover:text-theme duration-200"
+              className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-transparent
+           hover:text-theme duration-200 max-sm:w-60"
               onClick={() => {
                 navigate("/send-notifications");
               }}
@@ -156,14 +163,14 @@ export default function Notifications() {
                       </div>
                       <div className="flex gap-x-3">
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           onClick={closeModal}
                         >
                           No
                         </button>
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           type="Submit"
                         >

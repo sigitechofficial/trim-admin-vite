@@ -174,7 +174,7 @@ export default function Services() {
               All Services
             </h2>
             <button
-              className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-transparent
+              className="text-white bg-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-transparent
              hover:text-theme duration-200"
               onClick={() => {
                 openModal("Add New Service");
@@ -264,14 +264,14 @@ export default function Services() {
                       </div>
                       <div className="flex gap-x-3">
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           onClick={closeModal}
                         >
                           No
                         </button>
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           onClick={deleteService}
                         >
@@ -341,14 +341,14 @@ export default function Services() {
 
                       <div className="flex gap-x-3">
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           onClick={closeModal}
                         >
                           Cancel
                         </button>
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           onClick={addNewService}
                         >
@@ -412,14 +412,14 @@ export default function Services() {
 
                       <div className="flex gap-x-3">
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                      hover:text-white duration-200"
                           onClick={closeModal}
                         >
                           Cancel
                         </button>
                         <button
-                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                          className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                      hover:text-white duration-200"
                           onClick={editService}
                         >

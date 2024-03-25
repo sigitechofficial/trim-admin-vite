@@ -8,6 +8,7 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalFooter,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import selectStyles from "../utilities/SelectStyle";
 import Select from "react-select";
@@ -20,11 +21,12 @@ import {
 import { MiniLoader } from "../components/Loader";
 
 export default function SubscriptionCard(props) {
+  const isSmScreen = useMediaQuery("(max-width: 639px)");
   const [subscriptionData, setSubscriptionData] = useState({
     name: props?.title,
     description: props?.desc,
     featureName: "",
-  });
+  }); 
 
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -83,14 +85,14 @@ export default function SubscriptionCard(props) {
     <>
       <div className="bg-white shadow-md rounded-lg relative" key={props?.i}>
         <div
-          className={`${props.bgColor} flex rounded-lg flex-col justify-center items-center py-5 space-y-2 relative`}
+          className={`${props.bgColor} flex rounded-lg flex-col justify-center items-center py-3 sm:py-5 space-y-1 sm:space-y-2 relative`}
         >
           <h2 className="text-3xl font-chivo font-medium">{props?.title}</h2>
           <p className="text-2xl font-chivo font-medium">{props?.desc}</p>
           <FaEdit
             size={26}
             color="#12466F"
-            className="absolute top-0 right-4 cursor-pointer"
+            className="absolute top-1 sm:top-0 right-4 cursor-pointer"
             onClick={() => {
               localStorage.setItem("subscriptionProductID", props?.Id);
               setSubscriptionData({ ...subscriptionData, featureName: "" });
@@ -98,7 +100,7 @@ export default function SubscriptionCard(props) {
             }}
           />
         </div>
-        <div className="py-5 px-10 space-y-8">
+        <div className="py-5 px-10 space-y-4 sm:space-y-8">
           <div className="flex justify-between items-center [&>div]:space-y-1  [&>div]:text-xl">
             <div>
               <p className="font-bold">Duration</p>
@@ -132,7 +134,7 @@ export default function SubscriptionCard(props) {
         </div>
       </div>
 
-      <Modal onClose={closeModal} isOpen={modal} isCentered size={"2xl"}>
+      <Modal onClose={closeModal} isOpen={modal} isCentered size={isSmScreen[0] ? "sm":"2xl"}>
         <ModalOverlay />
         <form onSubmit={handleSubmit}>
           <ModalContent>
@@ -211,14 +213,14 @@ export default function SubscriptionCard(props) {
             <ModalFooter>
               <div className={`${loading ? "hidden" : "flex"} gap-x-3`}>
                 <button
-                  className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                  className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                   onClick={closeModal}
                 >
                   Reset
                 </button>
                 <button
-                  className="text-theme font-workSans font-medium border border-theme rounded-lg px-8 py-2.5 hover:bg-theme
+                  className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                   type="submit"
                 >
