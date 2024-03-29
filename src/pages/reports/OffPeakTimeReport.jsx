@@ -20,6 +20,7 @@ import selectStyles from "../../utilities/SelectStyle";
 import { BASE_URL } from "../../utilities/URL";
 import { error_toaster, success_toaster } from "../../utilities/Toaster";
 import Loader from "../../components/Loader";
+import { formateDate } from "../../utilities/DateTime";
 
 export default function OffPeakTimeReport() {
   const [modal, setModal] = useState(false);
@@ -39,9 +40,9 @@ export default function OffPeakTimeReport() {
   const { data: SalonData } = GetAPI("admin/salon-view", "reports");
 
   const columns = [
-    { field: "sn", header: "Sn" },
-    { field: "salonName", header: "Salon Name" },
-    { field: "employeeCount", header: "Employee Count" },
+    { field: "sn", header: "Sn" ,sort: true},
+    { field: "salonName", header: "Salon Name",sort: true },
+    { field: "employeeCount", header: "Employee Count",sort: true },
     { field: "action", header: "Action" },
   ];
 
@@ -131,7 +132,7 @@ export default function OffPeakTimeReport() {
   salonReportData?.report?.map((values, index) => {
     return datasReport.push({
       sn: index + 1,
-      day: values?.day,
+      day: formateDate(values?.day),
       hd0: findCount("8:00", values?.hours),
       hd1: findCount("9:00", values?.hours),
       hd2: findCount("10:00", values?.hours),
@@ -210,6 +211,7 @@ export default function OffPeakTimeReport() {
                     className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                        hover:text-white duration-200"
                     onClick={closeModal}
+                    type="button"
                   >
                     Cancel
                   </button>

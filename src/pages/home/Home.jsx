@@ -47,7 +47,7 @@ export default function Home() {
                 iconBg="bg-white"
               />
               <HomeCards
-                title="Total Customer"
+                title="Total Customers"
                 total={data?.data?.totalCustomers}
                 Icon={PiUsersThreeBold}
                 bgColor="bg-homeCards"

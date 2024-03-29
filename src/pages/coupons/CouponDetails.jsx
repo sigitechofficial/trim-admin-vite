@@ -2,10 +2,11 @@ import React from "react";
 import Layout from "../../components/Layout";
 import { FaArrowLeft } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
+import { formateDate } from "../../utilities/DateTime";
 
 export default function CouponDetails() {
-  const location = useLocation()
-  const couponDetail = location.state.data
+  const location = useLocation();
+  const couponDetail = location.state.data;
   return (
     <Layout
       content={
@@ -48,7 +49,8 @@ export default function CouponDetails() {
                 <h2 className="font-workSans font-medium">Duration</h2>
                 <p className="font-workSans font-medium text-labelColor">
                   {/* 20 Jul,2023 - 10 Aug, 2023 */}
-                  {couponDetail?.from} - {couponDetail?.till}
+                  {formateDate(couponDetail?.from)} -{" "}
+                  {formateDate(couponDetail?.till)}
                 </p>
               </div>
 
@@ -60,10 +62,11 @@ export default function CouponDetails() {
               </div>
 
               <div>
-                <h2 className="font-workSans font-medium">
-                  Discount
-                </h2>
-                <p className="font-workSans font-medium text-labelColor"> {couponDetail?.value} %</p>
+                <h2 className="font-workSans font-medium">Discount</h2>
+                <p className="font-workSans font-medium text-labelColor">
+                  {" "}
+                  {couponDetail?.value} %
+                </p>
               </div>
             </div>
           </div>

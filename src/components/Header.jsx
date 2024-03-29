@@ -13,9 +13,9 @@ export default function Header(props) {
         </Link>
 
         <div className="flex items-center gap-x-3 max-sm:hidden">
-          <div>
+          {/* <div>
             <FaRegBell size={26} />
-          </div>
+          </div> */}
           <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
             <PiUserBold size={28} color="white" />
           </div>

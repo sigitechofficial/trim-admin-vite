@@ -24,7 +24,8 @@ import { FiPhone } from "react-icons/fi";
 
 export default function CustomerDetails() {
   const { data } = GetAPI(
-    `admin/customer-detail/${localStorage.getItem('customerID')}`, "customer_management"
+    `admin/customer-detail/${localStorage.getItem("customerID")}`,
+    "customer_management"
   );
 
   const [modal, setModal] = useState(false);
@@ -41,30 +42,36 @@ export default function CustomerDetails() {
 
   const columns = [
     { field: "sn", header: "Sn" },
-    { field: "id", header: "Id" },
+    // { field: "id", header: "Id" },
     {
       field: "salonName",
       header: "Salon name",
+      sort: true,
     },
     {
       field: "services",
       header: "Services",
+      sort: true,
     },
     {
       field: "scheduleDate",
       header: "Schedule Date",
+      sort: true,
     },
     {
       field: "scheduleTime",
       header: "Schedule Time",
+      sort: true,
     },
     {
       field: "createdAt",
       header: "Created At",
+      sort: true,
     },
     {
       field: "price",
       header: "Price",
+      sort: true,
     },
     {
       field: "status",
@@ -80,7 +87,7 @@ export default function CustomerDetails() {
   data?.data?.bookings?.map((values, index) => {
     return datas.push({
       sn: index + 1,
-      id: values?.id,
+      // id: values?.id,
       salonName: values?.salonDetail?.salonName,
       services: values?.jobs
         ?.map((dat, ind) => dat?.service?.serviceName)
@@ -246,7 +253,7 @@ export default function CustomerDetails() {
                             By {job?.employee?.user?.firstName}
                           </div>
                           <div className="text-[#323F4B] font-workSans font-medium">
-                           {job?.total}
+                            {job?.total}
                           </div>
                         </div>
                       ))}

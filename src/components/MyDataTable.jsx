@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState } from "react";
 import { CiCalendarDate } from "react-icons/ci";
-import { FilterMatchMode } from 'primereact/api';
+import { FilterMatchMode } from "primereact/api";
 import { LuSearch } from "react-icons/lu";
 import { RiFileDownloadLine } from "react-icons/ri";
 import { TbAdjustmentsHorizontal } from "react-icons/tb";
@@ -12,11 +12,11 @@ import Select from "react-select";
 import selectStyles from "../utilities/SelectStyle";
 
 export default function MyDataTable(props) {
-  const [globalFilter, setGlobalFilter] = useState('');
+  const [globalFilter, setGlobalFilter] = useState("");
 
   const onGlobalFilterChange = (event) => {
     setGlobalFilter(event?.target?.value);
-  };
+  }; 
 
   const filteredData = props?.data?.filter((item) =>
     Object.values(item).some(
@@ -34,8 +34,8 @@ export default function MyDataTable(props) {
             value={globalFilter}
             onChange={onGlobalFilterChange}
             //  placeholder="Global Search"
-            placeholder="Search by ID, product, or others..."
-            className="w-[330px] sm:w-96 h-12 bg-themeGray rounded-lg px-10 outline-none placeholder:font-workSans placeholder:font-medium focus:bg-gray-200"
+            placeholder={props?.placeholder}
+            className="w-[330px] sm:w-[430px] h-12 bg-themeGray rounded-lg ps-10 pe-5 outline-none placeholder:font-workSans placeholder:font-medium focus:bg-gray-200"
           />
           <LuSearch
             size={20}
@@ -48,20 +48,19 @@ export default function MyDataTable(props) {
           onChange={onGlobalFilterChange}
           placeholder="Global Search"
         /> */}
-
         </div>
 
-        <div className={`flex gap-x-5 ${props?.hide ? 'hidden' : 'block'}`}>
-
-          <div className={`${props?.options ? 'block' : 'hidden'}`}>
+        <div className={`flex gap-x-5 ${props?.hide ? "hidden" : "block"}`}>
+          <div className={`${props?.options ? "block" : "hidden"}`}>
             <Select
               options={props?.options}
               defaultValue={props?.selectedOption}
               onChange={(val) => {
                 // getSalonReport(salonID, val?.value)
-                props?.setSelectedOption(val)
+                props?.setSelectedOption(val);
               }}
-              styles={selectStyles} />
+              styles={selectStyles}
+            />
           </div>
 
           {/* <button
@@ -84,35 +83,37 @@ export default function MyDataTable(props) {
         </div>
       </div>
       <div className="manageTable ">
-
         <DataTable
           value={filteredData}
           paginator
           rows={10}
           rowsPerPageOptions={[10, 25, 50, 100]}
           removableSort
-          filterDisplay="row"
+          // filterDisplay="row"
           dataKey="id"
           emptyMessage="No Data Found"
-        > 
-          {props.columns?.map((col, ind) => (
-            col?.filter ? <Column
-              key={ind}
-              field={col.field}
-              header={col.header}
-              sortable={true}
-              filter
-              filterPlaceholder="Search"
-              style={{ minWidth: '12rem' }}
-            /> :
+        >
+          {props.columns?.map((col, ind) =>
+            col?.filter ? (
               <Column
                 key={ind}
                 field={col.field}
                 header={col.header}
-                sortable={true}
-                style={{ minWidth: '12rem' }}
+                sortable={col?.sort}
+                filter
+                filterPlaceholder="Search"
+                style={{ minWidth: "12rem" }}
               />
-          ))}
+            ) : (
+              <Column
+                key={ind}
+                field={col.field}
+                header={col.header}
+                sortable={col?.sort}
+                style={{ minWidth: "12rem" }}
+              />
+            )
+          )}
         </DataTable>
       </div>
     </div>

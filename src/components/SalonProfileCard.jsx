@@ -12,11 +12,11 @@ export default function SalonProfileCard(props) {
     <div
       className={`${
         props.bgColor
-      } p-4 lg:p-6 rounded-xl grid grid-cols-2 gap-x-10 ${
+      } p-4 lg:p-6 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-x-10 ${
         props.shadow === true ? "shadow-lg" : "shadow-none"
       }`}
     >
-      <div className="h-64">
+      <div className="h-64 w-full order-last sm:order-last">
         <img
           src={`${BASE_URL}${props?.coverImage}`}
           alt="barbershop"
@@ -24,7 +24,7 @@ export default function SalonProfileCard(props) {
         />
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-3 order-first sm:order-last">
         <div className="space-y-2">
           <h2 className="text-2xl font-medium font-workSans">
             {props?.salonName}
@@ -53,8 +53,8 @@ export default function SalonProfileCard(props) {
             <span>11:00am - 11:00pm</span>
           </li> */}
           <li className="flex items-center gap-x-2 text-themeLightGray font-medium font-workSans">
-            <LuMapPin size={20} color="#12466F" />
-            <span>{props?.salonAddress}</span>
+            <LuMapPin size={15} color="#12466F" />
+            <p>{props?.salonAddress}</p>
           </li>
         </ul>
 

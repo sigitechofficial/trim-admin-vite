@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { AiFillNotification } from "react-icons/ai";
 import { BsExclamationCircle } from "react-icons/bs";
+import { formateDate } from "../../utilities/DateTime";
 
 export default function Notifications() {
   const navigate = useNavigate();
@@ -73,11 +74,11 @@ export default function Notifications() {
   };
 
   const columns = [
-    { field: "sn", header: "Sn" },
+    { field: "sn", header: "Sn" ,sort: true},
     { field: "to", header: "Send to" },
-    { field: "title", header: "Title" },
-    { field: "body", header: "Message" },
-    { field: "at", header: "Date" },
+    { field: "title", header: "Title",sort: true },
+    { field: "body", header: "Message",sort: true },
+    { field: "at", header: "Date",sort: true },
     { field: "action", header: "Action" },
   ];
 
@@ -88,7 +89,7 @@ export default function Notifications() {
       to: values?.to,
       title: values?.title,
       body: values?.body,
-      at: values?.at.slice(2, 10),
+      at: formateDate(values?.at.slice(0, 11)),
       action: (
         <div className="flex gap-x-2 items-center">
           <button className="border border-red-400 rounded-md p-2 text-red-400">
@@ -166,6 +167,7 @@ export default function Notifications() {
                           className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           onClick={closeModal}
+                          type="button"
                         >
                           No
                         </button>

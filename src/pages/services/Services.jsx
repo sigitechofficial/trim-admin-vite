@@ -9,6 +9,7 @@ import {
   ModalContent,
   ModalBody,
   ModalCloseButton,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import GetAPI from "../../utilities/GetAPI";
 import { BASE_URL } from "../../utilities/URL";
@@ -23,6 +24,7 @@ import { PutAPI } from "../../utilities/PutAPI";
 import { DeleteAPI } from "../../utilities/DeleteAPI";
 
 export default function Services() {
+  const isSmScreen = useMediaQuery("(max-width: 639px)");
   const [modal, setModal] = useState(false);
   const [dropDown, setDropDown] = useState(false);
   const [modalType, setModalType] = useState(null);
@@ -36,6 +38,7 @@ export default function Services() {
     image: "",
     imgShow: "",
   });
+
   const [updateService, setUpdateService] = useState({
     id: "",
     updateTypeName: "",
@@ -156,7 +159,7 @@ export default function Services() {
       reFetch();
       setModal(false);
       setLoader(false);
-      success_toaster(res?.data?.message);
+      success_toaster("Service deleted successfully");
     } else {
       setLoader(false);
       error_toaster(res?.data?.message);
@@ -235,7 +238,12 @@ export default function Services() {
               </div>
             ))}
           </div>
-          <Modal onClose={closeModal} isOpen={modal} size={"xl"} isCentered>
+          <Modal
+            onClose={closeModal}
+            isOpen={modal}
+            size={isSmScreen[0] ? "sm" : "xl"}
+            isCentered
+          >
             <ModalOverlay />
             <ModalContent>
               <ModalCloseButton />
@@ -267,6 +275,7 @@ export default function Services() {
                           className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           onClick={closeModal}
+                          type="button"
                         >
                           No
                         </button>
@@ -312,7 +321,7 @@ export default function Services() {
                       <div>
                         <label
                           htmlFor="image"
-                          className="w-[520px] flex justify-center items-center border border-theme cursor-pointer"
+                          className="w-[335px] sm:w-[520px] flex justify-center items-center border border-theme cursor-pointer"
                         >
                           {addService.imgShow ? (
                             <img src={addService.imgShow} alt="banner" />

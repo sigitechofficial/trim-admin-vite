@@ -6,69 +6,79 @@ import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import GetAPI from "../../utilities/GetAPI";
 import Loader from "../../components/Loader";
+import formatDateFromDB, {
+  formatTimeFromDB,
+  formateDate,
+} from "../../utilities/DateTime";
 
 export default function UpcomingBookings() {
-  const navigate = useNavigate()
-  const { data } = GetAPI('admin/appointments', "bookings")
+  const navigate = useNavigate();
+  const { data } = GetAPI("admin/appointments", "bookings");
 
   const columns = [
-    { field: "sn", header: "Sn" },
-    { field: "id", header: "Booking Id" },
-    { field: "name", header: "Name" },
-    { field: "salonName", header: "Salon" },
-    { field: "on", header: "Schedule Date" },
-    { field: "createdAt", header: "Booking Date" },
-    { field: "serviceCount", header: "Service Count" },
+    { field: "sn", header: "Sn", sort: true },
+    { field: "id", header: "Booking Id", sort: true },
+    { field: "name", header: "Name", sort: true },
+    { field: "salonName", header: "Salon", sort: true },
+    { field: "on", header: "Schedule Date", sort: true },
+    { field: "createdAt", header: "Booking Date", sort: true },
+    { field: "serviceCount", header: "Service Count", sort: true },
     { field: "currentStatus", header: "Booking Status" },
-    { field: "action", header: "Action" }
-  ]
+    { field: "action", header: "Action" },
+  ];
 
-  const datas = []
+  const datas = [];
   data?.data?.appointments?.filter((values, index) => {
-    return values?.status ===  "no-show" && datas.push({
-      sn: index + 1,
-      id: values?.id,
-      name: `${values?.user?.firstName} ${values?.user?.lastName}`,
-      salonName: values?.salonDetail?.salonName,
-      on: `${values?.on} ${values?.startTime}`,
-      createdAt: values?.createdAt.slice(0, 10),
-      serviceCount: values?.jobs?.length,
-      currentStatus: (
-        <div>
-          {values?.status === "complete" ? (
-            <div className="bg-themeGreen text-white font-semibold p-2 rounded-md flex justify-center">
-              Active
-            </div>
-          ) : values?.status === "no-show" ? (
-            <div className="bg-themeLightGray text-white font-semibold p-2 rounded-md flex justify-center">
-              No Show
-            </div>
-          ) : values?.status === "cancel" ? <div className="bg-red-600 text-white font-semibold p-2 rounded-md flex justify-center">
-            Cancel
-          </div> : <div className="bg-themeYellow text-white font-semibold p-2 rounded-md flex justify-center">
-            Pending
-          </div>}
-        </div>
-      ),
-      action: (
-        <div className="flex gap-x-2">
-          <button
-            className="border border-yellow-400 rounded-md p-2 text-yellow-400"
-            onClick={() => {
-              navigate("/booking-details")
-              localStorage.setItem('bookingDetailsID', values?.id)
-            }}
-          >
-            <FaEye size={24} />
-          </button>
-          {/* <button className="border border-red-400 rounded-md p-2 text-red-400">
+    return (
+      values?.status === "no-show" &&
+      datas.push({
+        sn: index + 1,
+        id: values?.id,
+        name: `${values?.user?.firstName} ${values?.user?.lastName}`,
+        salonName: values?.salonDetail?.salonName,
+        on: `${formateDate(values?.on)} ${formatTimeFromDB(values?.startTime)}`,
+        createdAt: formateDate(values?.createdAt.slice(0, 10)),
+        serviceCount: values?.jobs?.length,
+        currentStatus: (
+          <div>
+            {values?.status === "complete" ? (
+              <div className="w-24 bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
+                Completed
+              </div>
+            ) : values?.status === "no-show" ? (
+              <div className="w-24 bg-[#d4fffb] text-[#01C7B8] font-semibold p-2 rounded-md flex justify-center">
+                No Show
+              </div>
+            ) : values?.status === "cancel" ? (
+              <div className="w-24 bg-red-100 text-red-500 font-semibold p-2 rounded-md flex justify-center">
+                Cancel
+              </div>
+            ) : (
+              <div className="w-24 bg-yellow-100 text-yellow-500 font-semibold p-2 rounded-md flex justify-center">
+                Pending
+              </div>
+            )}
+          </div>
+        ),
+        action: (
+          <div className="flex gap-x-2">
+            <button
+              className="border border-yellow-400 rounded-md p-2 text-yellow-400"
+              onClick={() => {
+                navigate("/booking-details");
+                localStorage.setItem("bookingDetailsID", values?.id);
+              }}
+            >
+              <FaEye size={24} />
+            </button>
+            {/* <button className="border border-red-400 rounded-md p-2 text-red-400">
                     <MdDelete size={24} />
                 </button> */}
-        </div>
-      ),
-    });
+          </div>
+        ),
+      })
+    );
   });
-
 
   return data?.length === 0 ? (
     <Loader />
@@ -79,7 +89,11 @@ export default function UpcomingBookings() {
           <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
             No Show Bookings
           </h2>
-          <MyDataTable columns={columns} data={datas} />
+          <MyDataTable
+            columns={columns}
+            data={datas}
+            placeholder={"Search by Booking ID, Name, Salon and Date"}
+          />
         </div>
       }
     />

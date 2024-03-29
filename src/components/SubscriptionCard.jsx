@@ -87,8 +87,8 @@ export default function SubscriptionCard(props) {
         <div
           className={`${props.bgColor} flex rounded-lg flex-col justify-center items-center py-3 sm:py-5 space-y-1 sm:space-y-2 relative`}
         >
-          <h2 className="text-3xl font-chivo font-medium">{props?.title}</h2>
-          <p className="text-2xl font-chivo font-medium">{props?.desc}</p>
+          <h2 className="text-2xl sm:text-3xl font-chivo font-medium">{props?.title}</h2>
+          <p className="text-lg sm:text-2xl font-chivo font-medium">{props?.desc}</p>
           <FaEdit
             size={26}
             color="#12466F"
@@ -100,8 +100,8 @@ export default function SubscriptionCard(props) {
             }}
           />
         </div>
-        <div className="py-5 px-10 space-y-4 sm:space-y-8">
-          <div className="flex justify-between items-center [&>div]:space-y-1  [&>div]:text-xl">
+        <div className="py-2 sm:py-5 px-10 space-y-4 sm:space-y-8">
+          <div className="flex justify-between items-center [&>div]:space-y-1 [&>div]:text-lg sm:[&>div]:text-xl">
             <div>
               <p className="font-bold">Duration</p>
               <p className="text-red-800 font-semibold">{props?.duration}</p>
@@ -115,16 +115,16 @@ export default function SubscriptionCard(props) {
           </div>
 
           <div className="flex flex-col justify-center">
-            <h2 className="text-2xl font-chivo font-medium">
+            <h2 className="text-xl sm:text-2xl font-chivo font-medium">
               Include Feature in Standard
             </h2>
-            <ul className="mt-5 space-y-2">
+            <ul className="mt-3 sm:mt-5 space-y-2">
               {props?.includedFeatures?.map((values, i) => (
-                <li key={i} className="flex items-center gap-x-4">
+                <li key={i} className="flex items-center gap-x-2 sm:gap-x-4">
                   <span>
                     <IoMdCheckboxOutline size={26} color="#12466F" />
                   </span>
-                  <span className="text-xl font-workSans font-medium">
+                  <span className="text-lg sm:text-xl font-workSans font-medium">
                     {values?.name}
                   </span>
                 </li>
@@ -216,6 +216,7 @@ export default function SubscriptionCard(props) {
                   className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                   onClick={closeModal}
+                  type="button"
                 >
                   Reset
                 </button>

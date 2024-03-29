@@ -26,27 +26,31 @@ export default function Salons() {
   };
 
   const columns = [
-    { field: "sn", header: "Sn" },
-    { field: "id", header: "Id" },
+    { field: "sn", header: "Sn", sort: true },
     {
       field: "shopName",
       header: "Shop Name",
+      sort: true,
     },
     {
       field: "address",
       header: "Address",
+      sort: true,
     },
     {
       field: "email",
       header: "Email",
+      sort: true,
     },
     {
       field: "phone",
       header: "Phone",
+      sort: true,
     },
     {
       field: "ownerName",
       header: "Owner name",
+      sort: true,
     },
     {
       field: "currentStatus",
@@ -67,7 +71,6 @@ export default function Salons() {
   data?.data?.map((values, index) => {
     return datas.push({
       sn: index + 1,
-      id: values?.user?.id,
       shopName: values?.salonName,
       address: `${values?.addressDB?.streetAddress}, ${values?.addressDB?.city}, ${values?.addressDB?.country}`,
       email: values?.user?.email,
@@ -76,11 +79,11 @@ export default function Salons() {
       currentStatus: (
         <div>
           {values?.user?.status ? (
-            <div className="bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
+            <div className="w-24 bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
               Active
             </div>
           ) : (
-            <div className="bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
+            <div className="w-24 bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
               Inactive
             </div>
           )}
@@ -130,7 +133,11 @@ export default function Salons() {
           <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
             All Barbershops
           </h2>
-          <MyDataTable columns={columns} data={datas} />
+          <MyDataTable
+            columns={columns}
+            data={datas}
+            placeholder={"Search by Shop name, Address and Email"}
+          />
         </div>
       }
     />

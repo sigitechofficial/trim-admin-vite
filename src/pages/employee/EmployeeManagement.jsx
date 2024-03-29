@@ -23,10 +23,15 @@ import Loader, { MiniLoader } from "../../components/Loader";
 import Switch from "react-switch";
 import { PutAPI } from "../../utilities/PutAPI";
 import { MdDelete } from "react-icons/md";
-import { error_toaster, success_toaster } from "../../utilities/Toaster";
+import {
+  error_toaster,
+  info_toaster,
+  success_toaster,
+} from "../../utilities/Toaster";
 import { BsExclamationCircle } from "react-icons/bs";
 import { DeleteAPI } from "../../utilities/DeleteAPI";
 import { PostAPI } from "../../utilities/PostAPI";
+import { formateDate } from "../../utilities/DateTime";
 
 export default function EmployeeManagement() {
   const isSmScreen = useMediaQuery("(max-width: 639px)");
@@ -112,48 +117,64 @@ export default function EmployeeManagement() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    const res = await PostAPI("admin/employee", "employee_management", {
-      firstName: addEmployee?.firstName,
-      lastName: addEmployee?.lastName,
-      email: addEmployee?.email,
-      countryCode: addEmployee?.countryCode,
-      phoneNum: addEmployee?.phoneNum,
-      password: addEmployee?.password,
-      roleId: selectedOption?.value,
-    });
-
-    if (res?.data?.status === "1") {
-      setLoading(false);
-      closeModal();
-      reFetch();
-      success_toaster(res?.data?.message);
-      setAddEmployee({
-        firstName: "",
-        lastName: "",
-        email: "",
-        countryCode: "",
-        phoneNum: "",
-        password: "",
-        roleId: "",
-      });
+    if (addEmployee?.firstName === "") {
+      info_toaster("Please enter first name");
+    } else if (addEmployee?.lastName === "") {
+      info_toaster("Please enter last name");
+    } else if (addEmployee?.email === "") {
+      info_toaster("Please enter email");
+    } else if (addEmployee?.countryCode === "") {
+      info_toaster("Please enter country code");
+    } else if (addEmployee?.phoneNum === "") {
+      info_toaster("Please enter phone number");
+    } else if (addEmployee?.password === "") {
+      info_toaster("Please enter password");
+    } else if (selectedOption?.value === "") {
+      info_toaster("Please select role");
     } else {
-      setLoading(false);
-      if (!res || !res.data) {
-        error_toaster("Something went wrong");
+      setLoading(true);
+
+      const res = await PostAPI("admin/employee", "employee_management", {
+        firstName: addEmployee?.firstName,
+        lastName: addEmployee?.lastName,
+        email: addEmployee?.email,
+        countryCode: addEmployee?.countryCode,
+        phoneNum: addEmployee?.phoneNum,
+        password: addEmployee?.password,
+        roleId: selectedOption?.value,
+      });
+      console.log(res);
+      if (res?.data?.status === "1") {
+        setLoading(false);
+        closeModal();
+        reFetch();
+        success_toaster(res?.data?.message);
+        setAddEmployee({
+          firstName: "",
+          lastName: "",
+          email: "",
+          countryCode: "",
+          phoneNum: "",
+          password: "",
+          roleId: "",
+        });
+      } else {
+        setLoading(false);
+        if (!res || !res.data) {
+          error_toaster("Something went wrong");
+        }
+        error_toaster(res?.data?.message);
       }
-      error_toaster(res?.data?.message);
     }
   };
 
   const columns = [
-    { field: "sn", header: "Sn" },
-    { field: "name", header: "Name" },
-    { field: "role", header: "Role" },
-    { field: "email", header: "Email" },
-    { field: "phoneNum", header: "Phone No" },
-    { field: "createdAt", header: "Created At" },
+    { field: "sn", header: "Sn", sort: true },
+    { field: "name", header: "Name", sort: true },
+    { field: "role", header: "Role", sort: true },
+    { field: "email", header: "Email", sort: true },
+    { field: "phoneNum", header: "Phone No", sort: true },
+    { field: "createdAt", header: "Created At", sort: true },
     {
       field: "currentStatus",
       header: "Current Status",
@@ -176,15 +197,15 @@ export default function EmployeeManagement() {
       role: values?.role?.name,
       email: values?.email,
       phoneNum: `${values?.countryCode}-${values?.phoneNum}`,
-      createdAt: values?.createdAt.slice(0, 10),
+      createdAt: formateDate(values?.createdAt.slice(0, 10)),
       currentStatus: (
         <div>
           {values?.status ? (
-            <div className="bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
+            <div className="w-24 bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
               Active
             </div>
           ) : (
-            <div className="bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
+            <div className="w-24 bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
               Inactive
             </div>
           )}
@@ -264,7 +285,11 @@ export default function EmployeeManagement() {
             </button>
           </div>
 
-          <MyDataTable columns={columns} data={datas} />
+          <MyDataTable
+            columns={columns}
+            data={datas}
+            placeholder={"Search by Name, Contact, Email and Date"}
+          />
 
           <Modal
             onClose={closeModal}
@@ -436,6 +461,7 @@ export default function EmployeeManagement() {
                         className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                         onClick={closeModal}
+                        type="button"
                       >
                         Cancel
                       </button>
@@ -479,6 +505,7 @@ export default function EmployeeManagement() {
                           className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                           onClick={closeModal2}
+                          type="button"
                         >
                           No
                         </button>

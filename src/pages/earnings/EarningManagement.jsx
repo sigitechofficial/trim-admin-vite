@@ -11,12 +11,16 @@ export default function EarningManagement() {
     "earnings_management"
   );
   const columns = [
-    { field: "sn", header: "Sn" },
-    { field: "salonName", header: "Salon Name" },
-    { field: "addressDB", header: "Address" },
-    { field: "revenue", header: "Total Earnings" },
-    { field: "totalBookings", header: "Total Bookings" },
-    { field: "salonAverageRating", header: "Average Customer Rating" },
+    { field: "sn", header: "Sn", sort: true },
+    { field: "salonName", header: "Salon Name", sort: true },
+    { field: "addressDB", header: "Address", sort: true },
+    { field: "revenue", header: "Total Earnings", sort: true },
+    { field: "totalBookings", header: "Total Bookings", sort: true },
+    {
+      field: "salonAverageRating",
+      header: "Average Customer Rating",
+      sort: true,
+    },
     { field: "status", header: "Status" },
   ];
 
@@ -32,11 +36,11 @@ export default function EarningManagement() {
       status: (
         <div>
           {obj?.status ? (
-            <div className="bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
+            <div className="w-24 bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
               Active
             </div>
           ) : (
-            <div className="bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
+            <div className="w-24 bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
               Inactive
             </div>
           )}
@@ -54,7 +58,11 @@ export default function EarningManagement() {
           <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
             All Earnings
           </h2>
-          <MyDataTable columns={columns} data={datas} />
+          <MyDataTable
+            columns={columns}
+            data={datas}
+            placeholder={"Search by Salon name, Address and bookings"}
+          />
         </div>
       }
     />

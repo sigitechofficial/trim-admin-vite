@@ -12,12 +12,12 @@ export default function Subscription() {
   const { data, reFetch } = GetAPI('admin/subscriptions',"all_subscription")
 
   const columns = [
-    { field: "sn", header: "Sn" },
-    { field: "name", header: "Name" },
-    { field: "price", header: "Price" },
-    { field: "teamSize", header: "Team Size" },
-    { field: "duration", header: "Duration" },
-    { field: "subscriptionFeaturesCount", header: "Features Count" },
+    { field: "sn", header: "Sn",sort: true },
+    { field: "name", header: "Name",sort: true },
+    { field: "price", header: "Price",sort: true },
+    { field: "teamSize", header: "Team Size",sort: true },
+    { field: "duration", header: "Duration",sort: true },
+    { field: "subscriptionFeaturesCount", header: "Features Count",sort: true },
     {
       field: "action",
       header: "Action",

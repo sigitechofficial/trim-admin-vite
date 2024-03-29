@@ -29,6 +29,7 @@ import { BASE_URL } from "../../utilities/URL";
 import { PutAPI } from "../../utilities/PutAPI";
 import { BsExclamationCircle } from "react-icons/bs";
 import { DeleteAPI } from "../../utilities/DeleteAPI";
+import formatDateFromDB, { formateDate } from "../../utilities/DateTime";
 
 export default function RoleManagement() {
   const isSmScreen = useMediaQuery("(max-width: 639px)");
@@ -340,7 +341,7 @@ export default function RoleManagement() {
       localStorage.removeItem("adminRoleID");
       closeModal2();
       reFetch();
-      success_toaster(res?.data?.message);
+      success_toaster("Role deleted successfully");
     } else {
       setLoading(false);
       if (!res || !res.data) {
@@ -486,9 +487,9 @@ export default function RoleManagement() {
   };
 
   const columns = [
-    { field: "sn", header: "Sn" },
-    { field: "name", header: "Name" },
-    { field: "createdAt", header: "Created At" },
+    { field: "sn", header: "Sn",sort: true },
+    { field: "name", header: "Name",sort: true },
+    { field: "createdAt", header: "Created At",sort: true },
     { field: "currentStatus", header: "Current Status" },
     {
       field: "changeStatus",
@@ -502,17 +503,17 @@ export default function RoleManagement() {
     return datas.push({
       sn: index + 1,
       name: values?.name,
-      createdAt: values?.createdAt.slice(0, 10),
+      createdAt: formateDate(values?.createdAt.slice(0, 10)),
       currentStatus: (
         <div>
           {values?.status ? (
-            <div className="bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
-              Active
-            </div>
-          ) : (
-            <div className="bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
-              Inactive
-            </div>
+           <div className="w-24 bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
+           Active
+         </div>
+       ) : (
+         <div className="w-24 bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
+           Inactive
+         </div>
           )}
         </div>
       ),
@@ -558,7 +559,7 @@ export default function RoleManagement() {
         </div>
       ),
     });
-  });
+  }); 
 
   return data?.length === 0 ? (
     <Loader />

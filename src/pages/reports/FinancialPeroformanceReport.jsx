@@ -19,14 +19,14 @@ export default function FinancialPeroformanceReport() {
   ];
 
   const columns = [
-    { field: "sn", header: "Sn" },
-    { field: "salonName", header: "Salon Name" },
-    { field: "revenue", header: "Revenue" },
-    { field: "averageBookingTotal", header: "Avg. Total Bookings" },
-    { field: "totalAppointments", header: "Total Appointments" },
-    { field: "totalEmployees", header: "Total Employees" },
-    { field: "salonAverageRating", header: "Salon Avg. Rating" },
-    { field: "ratingCount", header: "Rating Count" },
+    { field: "sn", header: "Sn",sort: true },
+    { field: "salonName", header: "Salon Name",sort: true },
+    { field: "revenue", header: "Revenue",sort: true },
+    { field: "averageBookingTotal", header: "Avg. Total Bookings",sort: true },
+    { field: "totalAppointments", header: "Total Appointments",sort: true },
+    { field: "totalEmployees", header: "Total Employees",sort: true },
+    { field: "salonAverageRating", header: "Salon Avg. Rating",sort: true },
+    { field: "ratingCount", header: "Rating Count",sort: true },
   ]
 
   const datas = []

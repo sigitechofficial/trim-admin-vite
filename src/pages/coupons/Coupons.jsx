@@ -6,25 +6,26 @@ import GetAPI from "../../utilities/GetAPI";
 import Loader from "../../components/Loader";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { formateDate } from "../../utilities/DateTime";
 
 export default function Coupons() {
   const navigate = useNavigate();
   const { data, reFetch } = GetAPI("admin/coupons", "coupons");
 
   const columns = [
-    { field: "serialNo", header: "Sr" },
+    { field: "serialNo", header: "Sr" , sort: true},
     {
       field: "name",
       header: "Salon Name",
-    },
+     sort: true},
     {
       field: "code",
       header: "Coupon Code",
-    },
+     sort: true},
     {
       field: "discount",
       header: "Discount",
-    },
+     sort: true},
     {
       field: "couponType",
       header: "Coupon Type",
@@ -32,10 +33,12 @@ export default function Coupons() {
     {
       field: "limit",
       header: "Person Limit",
+      sort: true
     },
     {
       field: "duration",
       header: "Duration",
+      sort: true
     },
     {
       field: "status",
@@ -57,15 +60,15 @@ export default function Coupons() {
       discount: `${obj?.value} %`,
       couponType: obj?.type,
       limit: obj?.limit,
-      duration: obj?.till,
+      duration: formateDate(obj?.till),
       status: (
         <div>
           {obj?.status ? (
-            <div className="bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
+            <div className="w-24 bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
               Active
             </div>
           ) : (
-            <div className="bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
+            <div className="w-24 bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
               Inactive
             </div>
           )}

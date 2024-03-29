@@ -10,6 +10,7 @@ import Loader from "../../components/Loader";
 import { BASE_URL } from "../../utilities/URL";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import StarRating from "../../utilities/StarRating";
+import { formateDate } from "../../utilities/DateTime";
 
 export default function SalonDetails() {
   const [tab, setTab] = useState("about");
@@ -62,7 +63,7 @@ export default function SalonDetails() {
           </div>
 
           <div className="bg-white shadow-lg rounded-xl py-6 space-y-5">
-            <div className="py-3 bg-tabColor px-10 xl:px-20">
+            <div className="py-3 bg-tabColor px-5 sm:px-10 xl:px-20">
               <ul className="flex flex-wrap gap-x-10 gap-y-3">
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
@@ -127,7 +128,7 @@ export default function SalonDetails() {
               </ul>
             </div>
 
-            <div className="px-10 xl:px-20 h-full">
+            <div className="px-5 sm:px-10 xl:px-20 h-full">
               {tab === "about" ? (
                 <div className="space-y-3">
                   <h2 className="text-2xl font-workSans font-medium">About</h2>
@@ -136,10 +137,10 @@ export default function SalonDetails() {
                   </p>
                 </div>
               ) : tab === "gallery" ? (
-                <div className="grid grid-cols-6 gap-x-4">
+                <div className="grid grid-cols-2 sm:grid-cols-6 gap-4">
                   {data?.data?.detail?.salonImages?.map((obj, i) => {
                     return (
-                      <div key={i} className="w-full">
+                      <div key={i} className="w-full max-sm:h-28">
                         <img
                           src={`${BASE_URL}${obj?.imageUrl}`}
                           alt=""
@@ -298,7 +299,7 @@ export default function SalonDetails() {
                             </div>
                           </div>
                           <div className="text-labelColor font-workSans font-medium">
-                            {obj?.createdAt.slice(0, 10)}
+                            {formateDate(obj?.createdAt.slice(0, 10))}
                           </div>
                         </div>
                         <div className="text-labelColor font-workSans font-medium">
@@ -310,42 +311,28 @@ export default function SalonDetails() {
                 </div>
               ) : tab === "days & hours" ? (
                 <div>
-                  <h2 className="text-2xl font-workSans font-medium">
+                  <h2 className="text-lg sm:text-2xl font-workSans font-medium">
                     Days & hours
                   </h2>
-                  <div className="grid grid-cols-2 mt-6">
-                    <ul className="space-y-2">
-                      <li className="text-xl font-workSans">Monday</li>
-                      <li className="text-xl font-workSans">Tuesday</li>
-                      <li className="text-xl font-workSans">Wednesday</li>
-                      <li className="text-xl font-workSans">Thursday</li>
-                      <li className="text-xl font-workSans">Friday</li>
-                      <li className="text-xl font-workSans">Saturday</li>
-                      <li className="text-xl font-workSans">Sunday</li>
+                  <div className="grid grid-cols-3 mt-6">
+                    <ul className="space-y-2 text-lg sm:[&>li]:text-xl [&>li]:font-workSans">
+                      <li>Monday</li>
+                      <li>Tuesday</li>
+                      <li>Wednesday</li>
+                      <li>Thursday</li>
+                      <li>Friday</li>
+                      <li>Saturday</li>
+                      <li>Sunday</li>
                     </ul>
 
-                    <ul className="space-y-2">
-                      <li className="text-xl font-workSans">
-                        {handleTime("monday")}
-                      </li>
-                      <li className="text-xl font-workSans">
-                        {handleTime("tuesday")}
-                      </li>
-                      <li className="text-xl font-workSans">
-                        {handleTime("wednesday")}
-                      </li>
-                      <li className="text-xl font-workSans">
-                        {handleTime("thursday")}
-                      </li>
-                      <li className="text-xl font-workSans">
-                        {handleTime("friday")}
-                      </li>
-                      <li className="text-xl font-workSans">
-                        {handleTime("saturday")}
-                      </li>
-                      <li className="text-xl font-workSans">
-                        {handleTime("sunday")}
-                      </li>
+                    <ul className="space-y-2 col-span-2 text-lg sm:[&>li]:text-xl [&>li]:font-workSans">
+                      <li>{handleTime("monday")}</li>
+                      <li>{handleTime("tuesday")}</li>
+                      <li>{handleTime("wednesday")}</li>
+                      <li>{handleTime("thursday")}</li>
+                      <li>{handleTime("friday")}</li>
+                      <li>{handleTime("saturday")}</li>
+                      <li>{handleTime("sunday")}</li>
                     </ul>
                   </div>
                 </div>

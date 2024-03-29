@@ -11,15 +11,15 @@ export default function AppointmentReport() {
   const { data } = GetAPI('admin/reports/appointment-conversion',"reports")
 
   const columns = [
-    { field: "sn", header: "Sn" },
-    { field: "salonName", header: "Salon Name" },
-    { field: "totalAppointments", header: "No. of bookings" },
-    { field: "revenue", header: "Revenue" },
-    { field: "totalEmployees", header: "Total Employees" },
-    { field: "completeBookingCount", header: "Complete Bookings" },
-    { field: "cancelBookingCount", header: "Cancel Bookings" },
-    { field: "noShowBookingCount", header: "No Show" },
-    { field: "reScheduleCount", header: "Re-Schedule" },
+    { field: "sn", header: "Sn" ,sort: true},
+    { field: "salonName", header: "Salon Name",sort: true },
+    { field: "totalAppointments", header: "No. of bookings",sort: true },
+    { field: "revenue", header: "Revenue" ,sort: true},
+    { field: "totalEmployees", header: "Total Employees",sort: true },
+    { field: "completeBookingCount", header: "Complete Bookings",sort: true },
+    { field: "cancelBookingCount", header: "Cancel Bookings",sort: true },
+    { field: "noShowBookingCount", header: "No Show",sort: true },
+    { field: "reScheduleCount", header: "Re-Schedule",sort: true },
   ]
 
   const datas = [];

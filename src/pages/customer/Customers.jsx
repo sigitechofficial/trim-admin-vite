@@ -17,7 +17,10 @@ export default function Customers() {
   const { data, reFetch } = GetAPI("admin/customer", "customer_management");
 
   const handleStatus = async (customerId) => {
-    let res = await PutAPI(`admin/customer-change-status/${customerId}`, "customer_management");
+    let res = await PutAPI(
+      `admin/customer-change-status/${customerId}`,
+      "customer_management"
+    );
     if (res?.data?.status === "1") {
       success_toaster(res?.data?.message);
       reFetch();
@@ -30,30 +33,30 @@ export default function Customers() {
     {
       field: "sn",
       header: "Sn",
-      // filter: true
-    },
-    {
-      field: "id",
-      header: "Id",
+      sort: true
       // filter: true
     },
     {
       field: "name",
       header: "Name",
+      sort: true
       // filter: true
     },
     {
       field: "contact",
       header: "Contact",
+      sort: true
       // filter: true
     },
     {
       field: "email",
       header: "Email",
+      sort: true
     },
     {
       field: "dateTime",
       header: "Date & Time",
+      sort: true
     },
     {
       field: "currentStatus",
@@ -74,7 +77,6 @@ export default function Customers() {
   data?.data?.map((values, index) => {
     return datas.push({
       sn: index + 1,
-      id: values?.id,
       name: `${values?.firstName} ${values?.lastName}`,
       contact: `${values?.countryCode}-${values?.phoneNum}`,
       email: values?.email,
@@ -82,11 +84,11 @@ export default function Customers() {
       currentStatus: (
         <div>
           {values?.status ? (
-            <div className="bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
+            <div className="w-24 bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
               Active
             </div>
           ) : (
-            <div className="bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
+            <div className="w-24 bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
               Inactive
             </div>
           )}
@@ -119,9 +121,9 @@ export default function Customers() {
           >
             <FaEye size={24} />
           </button>
-          <button className="border border-red-400 rounded-md p-2 text-red-400">
+          {/* <button className="border border-red-400 rounded-md p-2 text-red-400">
             <MdDelete size={24} />
-          </button>
+          </button> */}
         </div>
       ),
     });
@@ -136,7 +138,11 @@ export default function Customers() {
           <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
             All Customers
           </h2>
-          <MyDataTable columns={columns} data={datas} />
+          <MyDataTable
+            columns={columns}
+            data={datas}
+            placeholder={"Search by Name, Contact, Email and Date"}
+          />
         </div>
       }
     />

@@ -9,6 +9,7 @@ import HomeCards from "../../components/HomeCards";
 import { BsCardList } from "react-icons/bs";
 import GetAPI from "../../utilities/GetAPI";
 import { BASE_URL } from "../../utilities/URL";
+import { formateDate } from "../../utilities/DateTime";
 
 export default function SalonEmployeeDetails() {
   const { data } = GetAPI(
@@ -179,7 +180,7 @@ export default function SalonEmployeeDetails() {
                               </div>
                               <div className="text-labelColor font-workSans font-medium">
                                 {/* 27/07/2023 */}
-                                {values?.createdAt.slice(1, 10)}
+                                {formateDate(values?.createdAt.slice(1, 10))}
                               </div>
                             </div>
                             <div className="text-labelColor font-workSans font-medium">
@@ -255,7 +256,7 @@ export default function SalonEmployeeDetails() {
                             key={key}
                             title={key}
                             total={value}
-                            Icon={BsCardList} 
+                            Icon={BsCardList}
                             bgColor="bg-[#12466F4D]"
                             iconBg="bg-theme"
                             iconColor="white"

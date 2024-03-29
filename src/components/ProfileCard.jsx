@@ -6,14 +6,14 @@ import { BASE_URL } from "../utilities/URL";
 export default function ProfileCard(props) {
   return (
     <div className={`${props.bgColor} ${props.shadow} rounded-2xl p-4 lg:p-6`}>
-      <div className="flex gap-x-5">
+      <div className="flex flex-col-reverse sm:flex-row sm:gap-x-5">
         <img
           src={props?.coverImage ? `${BASE_URL}${props?.coverImage}`:'/images/defaultProfileImg.webp'}
           alt="salon-detail"
-          className="w-48 h-44 object-cover"
-        />
-        <div className="space-y-3">
-          <div className="space-y-2">
+          className="w-full sm:w-48 h-44 object-cover max-sm:mt-2"
+        /> 
+        <div className="space-y-1 sm:space-y-3">
+          <div className="space-y-1 sm:space-y-2">
             <h2 className="text-themeLightGray text-2xl font-medium font-workSans">
               ID # {props?.employeeID}
             </h2>

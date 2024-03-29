@@ -10,7 +10,7 @@ export default function BarChart({ dashboardBarChartData }) {
             {
                 label: 'Revenue',
                 backgroundColor: 'rgb(36,142,207,1)',
-                borderColor: 'rgba(0,0,0,1)',
+                borderColor: 'rgba(0,0,0,1)', 
                 borderWidth: 0,
                 data: dashboardBarChartData?.datasets[0]?.data,
                 borderRadius: 5,
@@ -44,13 +44,13 @@ export default function BarChart({ dashboardBarChartData }) {
                             },
                         },
                     },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'right',
-                        },
-                    },
-                    responsive: true,
+                    // plugins: {
+                    //     legend: {
+                    //         display: true,
+                    //         position: 'right',
+                    //     },
+                    // },
+                    // responsive: true,
                 }}
             />
         </div>

@@ -11,13 +11,13 @@ export default function ClientFileReport() {
   const { data } = GetAPI('admin/reports/client-file',"reports")
 
   const columns = [
-    { field: "sn", header: "Sn" },
-    { field: "name", header: "Name" },
-    { field: "averageSpent", header: "Avg. Spent" },
-    { field: "completeBookingCount", header: "Complete Booking" },
-    { field: "cancelBookingCount", header: "Cancel Booking" },
-    { field: "noShowBookingCount", header: "No Show" },
-    { field: "reScheduleCount", header: "Re-Schedule" },
+    { field: "sn", header: "Sn" ,sort: true},
+    { field: "name", header: "Name",sort: true },
+    { field: "averageSpent", header: "Avg. Spent",sort: true },
+    { field: "completeBookingCount", header: "Complete Booking",sort: true },
+    { field: "cancelBookingCount", header: "Cancel Booking",sort: true },
+    { field: "noShowBookingCount", header: "No Show" ,sort: true},
+    { field: "reScheduleCount", header: "Re-Schedule" ,sort: true},
   ]
  
   const datas = [];

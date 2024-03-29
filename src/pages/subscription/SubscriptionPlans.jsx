@@ -11,11 +11,11 @@ export default function SubscriptionPlans() {
   const { data, reFetch } = GetAPI(
     "admin/AllSubscriptions",
     "all_subscription"
-  );
+  ); 
 
   return data?.length === 0 ? (
-    <Loader />
-  ) : (
+    <Loader /> 
+  ) : ( 
     <Layout
       content={
         <div className="space-y-5">
@@ -66,11 +66,11 @@ export default function SubscriptionPlans() {
                   valid="Valid for One Month"
                   includedFeatures={values?.features}
                 />
-              ))
+              )) 
             ) : (
               <p className="font-bold text-2xl">No Subscription Yet</p>
-            )}
-          </div>
+            )} 
+          </div> 
         </div>
       }
     />
