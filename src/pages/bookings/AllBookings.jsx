@@ -9,6 +9,7 @@ import formatDateFromDB, {
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
+import { Tooltip } from "@chakra-ui/react";
 
 export default function AllBookings() {
   const navigate = useNavigate();
@@ -39,35 +40,43 @@ export default function AllBookings() {
       currentStatus: (
         <div>
           {values?.status === "complete" ? (
-            <div className="w-24 bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
+            <div className="w-24 bg-green-100 text-green-500 font-semibold p-2 rounded-md flex justify-center">
               Completed
             </div>
           ) : values?.status === "no-show" ? (
             <div className="w-24 bg-[#d4fffb] text-[#01C7B8] font-semibold p-2 rounded-md flex justify-center">
               No Show
             </div>
-          ) : values?.status === "cancel" ? (
+          ) : values?.status === "cancelled" ? (
             <div className="w-24 bg-red-100 text-red-500 font-semibold p-2 rounded-md flex justify-center">
-              Cancel
+              Cancelled
             </div>
-          ) : (
+          ) : values?.status === "save-unpaid" ? (
+            <div className="w-24 bg-[#ffe6db] text-[#EC8559] font-semibold p-2 rounded-md flex justify-center">
+              Unpaid
+            </div>
+          ) : values?.status === "pending" || values.status === "book" ? (
             <div className="w-24 bg-yellow-100 text-yellow-500 font-semibold p-2 rounded-md flex justify-center">
               Pending
             </div>
+          ) : (
+            <></>
           )}
         </div>
       ),
       action: (
         <div className="flex gap-x-2">
-          <button
-            className="border border-yellow-400 rounded-md p-2 text-yellow-400"
-            onClick={() => {
-              navigate("/booking-details");
-              localStorage.setItem("bookingDetailsID", values?.id);
-            }}
-          >
-            <FaEye size={24} />
-          </button>
+          <Tooltip label="View detail">
+            <button
+              className="border border-yellow-400 rounded-md p-2 text-yellow-400"
+              onClick={() => {
+                navigate("/booking-details");
+                localStorage.setItem("bookingDetailsID", values?.id);
+              }}
+            >
+              <FaEye size={24} />
+            </button>
+          </Tooltip>
           {/* <button className="border border-red-400 rounded-md p-2 text-red-400">
                         <MdDelete size={24} />
                     </button> */}

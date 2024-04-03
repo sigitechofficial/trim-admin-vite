@@ -14,6 +14,7 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalFooter,
+  Tooltip,
 } from "@chakra-ui/react";
 import Select from "react-select";
 import selectStyles from "../../utilities/SelectStyle";
@@ -40,9 +41,9 @@ export default function OffPeakTimeReport() {
   const { data: SalonData } = GetAPI("admin/salon-view", "reports");
 
   const columns = [
-    { field: "sn", header: "Sn" ,sort: true},
-    { field: "salonName", header: "Salon Name",sort: true },
-    { field: "employeeCount", header: "Employee Count",sort: true },
+    { field: "sn", header: "Sn", sort: true },
+    { field: "salonName", header: "Salon Name", sort: true },
+    { field: "employeeCount", header: "Employee Count", sort: true },
     { field: "action", header: "Action" },
   ];
 
@@ -110,21 +111,23 @@ export default function OffPeakTimeReport() {
       salonName: values?.salonName,
       employeeCount: values?.employeeCount,
       action: (
-        <button
-          className="border border-yellow-400 rounded-md p-2 text-yellow-400"
-          onClick={() => {
-            setModal(true);
-          }}
-        >
-          <FaEye
-            size={24}
+        <Tooltip label="View detail">
+          <button
+            className="border border-yellow-400 rounded-md p-2 text-yellow-400"
             onClick={() => {
-              getSalonReport(values?.id, "complete");
-              setSalonID(values?.id);
-              setSelectedOption({ value: "complete", label: "Complete" });
+              setModal(true);
             }}
-          />
-        </button>
+          >
+            <FaEye
+              size={24}
+              onClick={() => {
+                getSalonReport(values?.id, "complete");
+                setSalonID(values?.id);
+                setSelectedOption({ value: "complete", label: "Complete" });
+              }}
+            />
+          </button>
+        </Tooltip>
       ),
     });
   });
@@ -170,7 +173,11 @@ export default function OffPeakTimeReport() {
               Off Peak Times Report
             </h2>
           </div>
-          <MyDataTable columns={columns} data={datas} />
+          <MyDataTable
+            columns={columns}
+            data={datas}
+            placeholder={"Search by Salon name "}
+          />
 
           <Modal onClose={closeModal} isOpen={modal} isCentered size={"6xl"}>
             <ModalOverlay />

@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Switch from "react-switch";
 import { PutAPI } from "../../utilities/PutAPI";
 import { error_toaster, success_toaster } from "../../utilities/Toaster";
+import { Tooltip } from "@chakra-ui/react";
 
 export default function Salons() {
   const { data, reFetch } = GetAPI("admin/salon-view");
@@ -107,18 +108,17 @@ export default function Salons() {
       ),
       action: (
         <div className="flex gap-x-2">
-          <button
-            className="border border-yellow-400 rounded-md p-2 text-yellow-400"
-            onClick={() => {
-              localStorage.setItem("salonID", JSON.stringify(values?.id));
-              navigate("/barbershop-details");
-            }}
-          >
-            <FaEye size={24} />
-          </button>
-          <button className="border border-red-400 rounded-md p-2 text-red-400">
-            <MdDelete size={24} />
-          </button>
+          <Tooltip label="View detail">
+            <button
+              className="border border-yellow-400 rounded-md p-2 text-yellow-400"
+              onClick={() => {
+                localStorage.setItem("salonID", JSON.stringify(values?.id));
+                navigate("/barbershop-details");
+              }}
+            >
+              <FaEye size={24} />
+            </button>
+          </Tooltip>
         </div>
       ),
     });

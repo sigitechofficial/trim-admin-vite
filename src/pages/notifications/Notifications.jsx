@@ -16,10 +16,12 @@ import {
   ModalContent,
   ModalFooter,
   ModalOverlay,
+  Tooltip,
 } from "@chakra-ui/react";
 import { AiFillNotification } from "react-icons/ai";
 import { BsExclamationCircle } from "react-icons/bs";
 import { formateDate } from "../../utilities/DateTime";
+import { RiNotificationBadgeFill } from "react-icons/ri";
 
 export default function Notifications() {
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ export default function Notifications() {
       setLoading(false);
       reFetch();
       setModal(false);
-      success_toaster(res?.data?.message);
+      success_toaster("Notification deleted successfully");
       localStorage.removeItem("deleteNotificationID");
     } else {
       setLoading(false);
@@ -62,7 +64,7 @@ export default function Notifications() {
     if (res?.data?.status === "1") {
       setLoading2(false);
       reFetch();
-      success_toaster(res?.data?.message);
+      success_toaster("Notification resend successfully");
     } else {
       setLoading2(false);
       error_toaster(res?.data?.message);
@@ -74,11 +76,11 @@ export default function Notifications() {
   };
 
   const columns = [
-    { field: "sn", header: "Sn" ,sort: true},
+    { field: "sn", header: "Sn", sort: true },
     { field: "to", header: "Send to" },
-    { field: "title", header: "Title",sort: true },
-    { field: "body", header: "Message",sort: true },
-    { field: "at", header: "Date",sort: true },
+    { field: "title", header: "Title", sort: true },
+    { field: "body", header: "Message", sort: true },
+    { field: "at", header: "Date", sort: true },
     { field: "action", header: "Action" },
   ];
 
@@ -92,22 +94,26 @@ export default function Notifications() {
       at: formateDate(values?.at.slice(0, 11)),
       action: (
         <div className="flex gap-x-2 items-center">
-          <button className="border border-red-400 rounded-md p-2 text-red-400">
-            <MdDelete
-              size={24}
-              onClick={() => {
-                localStorage.setItem("deleteNotificationID", values?.id);
-                setModal(true);
-              }}
-            />
-          </button>
+          <Tooltip label="Delete notification">
+            <button className="border border-red-400 rounded-md p-2 text-red-400">
+              <MdDelete
+                size={24}
+                onClick={() => {
+                  localStorage.setItem("deleteNotificationID", values?.id);
+                  setModal(true);
+                }}
+              />
+            </button>
+          </Tooltip>
           {/* <div className="border "> */}
-          <button>
-            <AiFillNotification
-              size={28}
-              onClick={() => handleResendNotification(values?.id)}
-            />
-          </button>
+          <Tooltip label="Resend notification">
+            <button>
+              <RiNotificationBadgeFill
+                size={28}
+                onClick={() => handleResendNotification(values?.id)}
+              />
+            </button>
+          </Tooltip>
           {/* </div> */}
         </div>
       ),
@@ -138,7 +144,11 @@ export default function Notifications() {
           {loading2 ? (
             <MiniLoader />
           ) : (
-            <MyDataTable columns={columns} data={datas} />
+            <MyDataTable
+              columns={columns}
+              data={datas}
+              placeholder={"Search by Send to, Title, Message, date "}
+            />
           )}
 
           <Modal onClose={closeModal} isOpen={modal} isCentered size={"lg"}>
@@ -156,10 +166,10 @@ export default function Notifications() {
                       <BsExclamationCircle size={30} color="#12466F" />
                       <div className="text-center space-y-2">
                         <h2 className="text-xl font-workSans font-medium">
-                          Delete the Role
+                          Delete Notification
                         </h2>
                         <p className="text-labelColor font-workSans font-medium">
-                          Are you sure you want to delete this Role?
+                          Are you sure you want to delete this Notification?
                         </p>
                       </div>
                       <div className="flex gap-x-3">

@@ -1,25 +1,16 @@
-// @ts-nocheck
 import React from "react";
 import Layout from "../../components/Layout";
 import MyDataTable from "../../components/MyDataTable";
-import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import GetAPI from "../../utilities/GetAPI";
+import { FaEye } from "react-icons/fa";
 import Loader from "../../components/Loader";
-import formatDateFromDB, {
-  formatTimeFromDB,
-  formateDate,
-} from "../../utilities/DateTime";
+import { formatTimeFromDB, formateDate } from "../../utilities/DateTime";
 import { Tooltip } from "@chakra-ui/react";
 
-export default function CancelledBookings() {
+export default function UnpaidBookings() {
   const navigate = useNavigate();
   const { data } = GetAPI("admin/appointments", "bookings");
-
-  let i = 0;
-  const handleIndexValue = () => {
-    return (i = i + 1);
-  };
 
   const columns = [
     { field: "sn", header: "Sn", sort: true },
@@ -33,10 +24,15 @@ export default function CancelledBookings() {
     { field: "action", header: "Action" },
   ];
 
+  let i = 0;
+  const handleIndexValue = () => {
+    return (i = i + 1);
+  };
+
   const datas = [];
   data?.data?.appointments?.filter((values, index) => {
     return (
-      values?.status === "cancel" &&
+      values?.status === "save-unpaid" &&
       datas.push({
         sn: handleIndexValue(),
         id: values?.id,
@@ -46,8 +42,8 @@ export default function CancelledBookings() {
         createdAt: formateDate(values?.createdAt.slice(0, 10)),
         serviceCount: values?.jobs?.length,
         currentStatus: (
-          <div className="w-24 bg-red-100 text-red-500 font-semibold p-2 rounded-md flex justify-center">
-            Cancelled
+          <div className="w-24 bg-[#ffe6db] text-[#EC8559] font-semibold p-2 rounded-md flex justify-center">
+            Unpaid
           </div>
         ),
         action: (
@@ -79,7 +75,7 @@ export default function CancelledBookings() {
       content={
         <div className="space-y-5">
           <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
-            Cancelled Bookings
+            Unpaid Bookings
           </h2>
           <MyDataTable
             columns={columns}

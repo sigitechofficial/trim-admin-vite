@@ -28,7 +28,9 @@ export default function Leftbar(props) {
       location === "/all-bookings" ||
       location === "/completed-bookings" ||
       location === "/cancelled-bookings" ||
-      location === "/noshow-bookings"
+      location === "/noshow-bookings" ||
+      location === "/upcoming-bookings" ||
+      location === "/unpaid-bookings"
     );
   }, [location]);
 
@@ -107,6 +109,8 @@ export default function Leftbar(props) {
               <ListItems title="Completed Bookings" to="/completed-bookings" />
               <ListItems title="Cancelled Bookings" to="/cancelled-bookings" />
               <ListItems title="No Show Bookings" to="/noshow-bookings" />
+              <ListItems title="Upcoming Bookings" to="/upcoming-bookings" />
+              <ListItems title="Unpaid Bookings" to="/unpaid-bookings" />
             </div>
             <hr className="w-full" />
           </>

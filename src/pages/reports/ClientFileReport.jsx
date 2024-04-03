@@ -55,7 +55,7 @@ export default function ClientFileReport() {
               Client File Report
             </h2>
           </div>
-          <MyDataTable columns={columns} data={datas} />
+          <MyDataTable columns={columns} data={datas} placeholder={"Search by Salon name "} />
         </div>
       }
     />

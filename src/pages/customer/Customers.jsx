@@ -11,6 +11,7 @@ import { error_toaster, success_toaster } from "../../utilities/Toaster";
 import { PutAPI } from "../../utilities/PutAPI";
 import formatDateFromDB from "../../utilities/DateTime";
 import Loader from "../../components/Loader";
+import { Tooltip } from "@chakra-ui/react";
 
 export default function Customers() {
   const navigate = useNavigate();
@@ -33,30 +34,30 @@ export default function Customers() {
     {
       field: "sn",
       header: "Sn",
-      sort: true
+      sort: true,
       // filter: true
     },
     {
       field: "name",
       header: "Name",
-      sort: true
+      sort: true,
       // filter: true
     },
     {
       field: "contact",
       header: "Contact",
-      sort: true
+      sort: true,
       // filter: true
     },
     {
       field: "email",
       header: "Email",
-      sort: true
+      sort: true,
     },
     {
       field: "dateTime",
       header: "Date & Time",
-      sort: true
+      sort: true,
     },
     {
       field: "currentStatus",
@@ -112,18 +113,17 @@ export default function Customers() {
       ),
       action: (
         <div className="flex gap-x-2">
-          <button
-            className="border border-yellow-400 rounded-md p-2 text-yellow-400"
-            onClick={() => {
-              navigate("/customer-details");
-              localStorage.setItem("customerID", values?.id);
-            }}
-          >
-            <FaEye size={24} />
-          </button>
-          {/* <button className="border border-red-400 rounded-md p-2 text-red-400">
-            <MdDelete size={24} />
-          </button> */}
+          <Tooltip label="View detail" >
+            <button
+              className="border border-yellow-400 rounded-md p-2 text-yellow-400"
+              onClick={() => {
+                navigate("/customer-details");
+                localStorage.setItem("customerID", values?.id);
+              }}
+            >
+              <FaEye size={24} />
+            </button>
+          </Tooltip>
         </div>
       ),
     });

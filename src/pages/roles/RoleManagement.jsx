@@ -12,6 +12,7 @@ import {
   Checkbox,
   ModalFooter,
   useMediaQuery,
+  Tooltip,
 } from "@chakra-ui/react";
 import Switch from "react-switch";
 import { PostAPI } from "../../utilities/PostAPI";
@@ -487,9 +488,9 @@ export default function RoleManagement() {
   };
 
   const columns = [
-    { field: "sn", header: "Sn",sort: true },
-    { field: "name", header: "Name",sort: true },
-    { field: "createdAt", header: "Created At",sort: true },
+    { field: "sn", header: "Sn", sort: true },
+    { field: "name", header: "Name", sort: true },
+    { field: "createdAt", header: "Created At", sort: true },
     { field: "currentStatus", header: "Current Status" },
     {
       field: "changeStatus",
@@ -507,13 +508,13 @@ export default function RoleManagement() {
       currentStatus: (
         <div>
           {values?.status ? (
-           <div className="w-24 bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
-           Active
-         </div>
-       ) : (
-         <div className="w-24 bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
-           Inactive
-         </div>
+            <div className="w-24 bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
+              Active
+            </div>
+          ) : (
+            <div className="w-24 bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
+              Inactive
+            </div>
           )}
         </div>
       ),
@@ -535,31 +536,37 @@ export default function RoleManagement() {
       ),
       action: (
         <div className="flex gap-x-2">
-          <button
-            className="border border-yellow-400 rounded-md p-2 text-yellow-400"
-            onClick={() => handleView(values?.id)}
-          >
-            <FaEye size={24} />
-          </button>
-          <button
-            className="border border-theme rounded-md p-2 text-theme"
-            onClick={() => handleEdit(values)}
-          >
-            <FaEdit size={24} />
-          </button>
-          <button
-            className="border border-red-400 rounded-md p-2 text-red-400"
-            onClick={() => {
-              openModal2();
-              localStorage.setItem("adminRoleID", values?.id);
-            }}
-          >
-            <MdDelete size={24} />
-          </button>
+          <Tooltip label="View detail">
+            <button
+              className="border border-yellow-400 rounded-md p-2 text-yellow-400"
+              onClick={() => handleView(values?.id)}
+            >
+              <FaEye size={24} />
+            </button>
+          </Tooltip>
+          <Tooltip label="Edit role">
+            <button
+              className="border border-theme rounded-md p-2 text-theme"
+              onClick={() => handleEdit(values)}
+            >
+              <FaEdit size={24} />
+            </button>
+          </Tooltip>
+          <Tooltip label="Delete role">
+            <button
+              className="border border-red-400 rounded-md p-2 text-red-400"
+              onClick={() => {
+                openModal2();
+                localStorage.setItem("adminRoleID", values?.id);
+              }}
+            >
+              <MdDelete size={24} />
+            </button>
+          </Tooltip>
         </div>
       ),
     });
-  }); 
+  });
 
   return data?.length === 0 ? (
     <Loader />
@@ -588,9 +595,18 @@ export default function RoleManagement() {
             </button>
           </div>
 
-          <MyDataTable columns={columns} data={datas} />
+          <MyDataTable
+            columns={columns}
+            data={datas}
+            placeholder={"Search by name, date "}
+          />
 
-          <Modal onClose={closeModal} isOpen={modal} size={isSmScreen[0] ? "sm":"3xl"} isCentered>
+          <Modal
+            onClose={closeModal}
+            isOpen={modal}
+            size={isSmScreen[0] ? "sm" : "3xl"}
+            isCentered
+          >
             <ModalOverlay />
             <form onSubmit={handleSubmit}>
               <ModalContent>
@@ -1332,7 +1348,12 @@ export default function RoleManagement() {
             </form>
           </Modal>
 
-          <Modal onClose={closeModal2} isOpen={modal2} size={isSmScreen[0] ? "sm":"xl"} isCentered>
+          <Modal
+            onClose={closeModal2}
+            isOpen={modal2}
+            size={isSmScreen[0] ? "sm" : "xl"}
+            isCentered
+          >
             <ModalOverlay />
             <ModalContent>
               <ModalCloseButton />
@@ -1359,7 +1380,7 @@ export default function RoleManagement() {
                          hover:text-white duration-200"
                           type="button"
                           onClick={closeModal2}
-                        > 
+                        >
                           No
                         </button>
                         <button

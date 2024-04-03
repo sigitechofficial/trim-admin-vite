@@ -32,7 +32,9 @@ import SubscriptionReport from './pages/reports/SubscriptionReport';
 import FinancialPeroformanceReport from './pages/reports/FinancialPeroformanceReport';
 import AppointmentReport from './pages/reports/AppointmentReport';
 import AllBookings from './pages/bookings/AllBookings';
-import ProtectedRoute from './utilities/ProtectedRoute';
+import ProtectedRoute from './utilities/ProtectedRoute'; 
+import PendingBookings from './pages/bookings/PendingBookings';
+import UnpaidBookings from './pages/bookings/UnpaidBookings';
 
 function App() {
   return (
@@ -48,6 +50,8 @@ function App() {
             <Route exact path="/noshow-bookings" element={<ProtectedRoute Component={UpcomingBookings} />} />
             <Route exact path="/completed-bookings" element={<ProtectedRoute Component={CompletedBookings} />} />
             <Route exact path="/cancelled-bookings" element={<ProtectedRoute Component={CancelledBookings} />} />
+            <Route exact path="/upcoming-bookings" element={<ProtectedRoute Component={PendingBookings} />} />
+            <Route exact path="/unpaid-bookings" element={<ProtectedRoute Component={UnpaidBookings} />} />
             <Route exact path="/booking-details" element={<ProtectedRoute Component={BookingDetails} />} />
             <Route exact path="/barbershops" element={<ProtectedRoute Component={Salons} />} />
             <Route exact path="/barbershop-details" element={<ProtectedRoute Component={SalonDetails} />} />

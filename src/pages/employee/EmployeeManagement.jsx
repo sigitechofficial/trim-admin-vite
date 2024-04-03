@@ -10,6 +10,7 @@ import {
   ModalCloseButton,
   ModalFooter,
   useMediaQuery,
+  Tooltip,
 } from "@chakra-ui/react";
 import PhoneInput from "react-phone-input-2";
 import { FaEye } from "react-icons/fa";
@@ -229,15 +230,17 @@ export default function EmployeeManagement() {
       ),
       action: (
         <div className="flex gap-x-2">
-          <button
-            className="border border-red-400 rounded-md p-2 text-red-400"
-            onClick={() => {
-              openModal2();
-              localStorage.setItem("adminEmployeeID", values?.id);
-            }}
-          >
-            <MdDelete size={24} />
-          </button>
+          <Tooltip label="Delete Employee">
+            <button
+              className="border border-red-400 rounded-md p-2 text-red-400"
+              onClick={() => {
+                openModal2();
+                localStorage.setItem("adminEmployeeID", values?.id);
+              }}
+            >
+              <MdDelete size={24} />
+            </button>
+          </Tooltip>
         </div>
       ),
     });

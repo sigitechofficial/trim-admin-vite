@@ -56,7 +56,10 @@ export default function SubscriptionReport() {
               SubscriptionReport
             </h2>
           </div>
-          <MyDataTable columns={columns} />
+          <MyDataTable
+            columns={columns}
+            placeholder={"Search by Salon name "}
+          />
         </div>
       }
     />

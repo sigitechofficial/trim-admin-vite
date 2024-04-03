@@ -70,12 +70,12 @@ export default function SendNotifications() {
       );
       if (res?.data?.status === "1") {
         setLoading(false);
-        navigate("/send-notifications");
+        navigate("/notifications");
         setData({
           title: "",
           body: "",
         });
-        success_toaster(res?.data?.message);
+        success_toaster("Notification send successfully");
       } else {
         setLoading(false);
         error_toaster(res?.data?.message);

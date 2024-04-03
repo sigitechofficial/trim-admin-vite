@@ -21,12 +21,13 @@ import {
 import { MiniLoader } from "../components/Loader";
 
 export default function SubscriptionCard(props) {
+  const [disbale, setDisable] = useState(false)
   const isSmScreen = useMediaQuery("(max-width: 639px)");
   const [subscriptionData, setSubscriptionData] = useState({
     name: props?.title,
     description: props?.desc,
     featureName: "",
-  }); 
+  });
 
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -48,7 +49,6 @@ export default function SubscriptionCard(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (subscriptionData?.name === "") {
       info_toaster("Subscription title cannot be empty");
     } else if (subscriptionData?.description === "") {
@@ -59,15 +59,21 @@ export default function SubscriptionCard(props) {
           name: subscriptionData?.featureName,
         });
       }
+      setDisable(true)
       setLoading(true);
-      const res = await PostAPI("admin/updateSubscription", {
-        productId: props?.Id,
-        name: subscriptionData?.name,
-        description: subscriptionData?.description,
-        features: subscriptionData?.featureName
-          ? props?.includedFeatures
-          : props?.includedFeatures,
-      });
+      const res = await PostAPI(
+        "admin/updateSubscription", "subscription",
+        {
+          productId: props?.Id,
+          name: subscriptionData?.name,
+          description: subscriptionData?.description,
+          features: subscriptionData?.featureName
+            ? props?.includedFeatures
+            : props?.includedFeatures,
+        },
+        "all_subscription"
+      );
+      setDisable(false)
       if (res?.data?.status === "1") {
         setLoading(false);
         props?.reFetch();
@@ -87,8 +93,12 @@ export default function SubscriptionCard(props) {
         <div
           className={`${props.bgColor} flex rounded-lg flex-col justify-center items-center py-3 sm:py-5 space-y-1 sm:space-y-2 relative`}
         >
-          <h2 className="text-2xl sm:text-3xl font-chivo font-medium">{props?.title}</h2>
-          <p className="text-lg sm:text-2xl font-chivo font-medium">{props?.desc}</p>
+          <h2 className="text-2xl sm:text-3xl font-chivo font-medium">
+            {props?.title}
+          </h2>
+          <p className="text-lg sm:text-2xl font-chivo font-medium">
+            {props?.desc}
+          </p>
           <FaEdit
             size={26}
             color="#12466F"
@@ -134,7 +144,12 @@ export default function SubscriptionCard(props) {
         </div>
       </div>
 
-      <Modal onClose={closeModal} isOpen={modal} isCentered size={isSmScreen[0] ? "sm":"2xl"}>
+      <Modal
+        onClose={closeModal}
+        isOpen={modal}
+        isCentered
+        size={isSmScreen[0] ? "sm" : "2xl"}
+      >
         <ModalOverlay />
         <form onSubmit={handleSubmit}>
           <ModalContent>
@@ -224,6 +239,7 @@ export default function SubscriptionCard(props) {
                   className="text-theme font-workSans font-medium border border-theme rounded-lg px-5 sm:px-8 py-1.5 sm:py-2.5 hover:bg-theme
                          hover:text-white duration-200"
                   type="submit"
+                  disabled={disbale}
                 >
                   Save
                 </button>

@@ -67,7 +67,7 @@ export default function FinancialPeroformanceReport() {
             </h2>
           </div>
       
-          <MyDataTable columns={columns} data={datas} options={options} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+          <MyDataTable columns={columns} data={datas} options={options} selectedOption={selectedOption} setSelectedOption={setSelectedOption} placeholder={"Search by Salon name "} />
         </div>
       }
     />

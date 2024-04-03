@@ -22,6 +22,10 @@ export default function SalonEmployeeDetails() {
     const temp = data?.data?.employee?.employee?.times?.find(
       (obj) => obj?.day.toLowerCase() === day.toLowerCase()
     );
+    if (day === "friday") {
+      console.log(temp);
+      console.log(day, " ", temp?.openingTime, temp?.closingTime);
+    }
     if (temp) {
       return `${temp?.openingTime} - ${temp?.closingTime}`;
     } else {
@@ -245,7 +249,7 @@ export default function SalonEmployeeDetails() {
                     Earning method
                   </h2>
                   <p className="text-xl font-workSans font-medium text-labelColor">
-                    Commission
+                    Fixed salary
                   </p>
 
                   <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 mt-5">
@@ -265,7 +269,7 @@ export default function SalonEmployeeDetails() {
                       )
                     ) : (
                       <p className="text-center text-xl font-bold col-span-2 xl:col-span-4">
-                        No Earning Methods
+                        No Earnings
                       </p>
                     )}
                   </div>

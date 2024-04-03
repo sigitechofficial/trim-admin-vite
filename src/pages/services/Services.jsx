@@ -130,7 +130,7 @@ export default function Services() {
       setLoader(true);
       const formData = new FormData();
       formData.append("typeName", updateService.updateTypeName);
-      formData.append("image", updateService.updateImg);
+      formData.append("image", updateService.updateImage);
       let res = await PutAPI(
         `admin/service-type/edit/${updateService.id}`,
         "services",
@@ -211,7 +211,7 @@ export default function Services() {
                 {dropDown && dropDownInd === index ? (
                   <div className="bg-white border flex flex-col absolute top-3 right-8 ">
                     <button
-                      className="px-4 py-3 font-workSans font-medium hover:bg-theme hover:text-white duration-200 border-b"
+                      className="px-1 py-3 font-workSans font-medium hover:bg-theme hover:text-white duration-200 border-b"
                       onClick={() => {
                         openModal("Edit Service");
                         setUpdateService({
@@ -224,7 +224,7 @@ export default function Services() {
                       Edit Service
                     </button>
                     <button
-                      className="px-4 py-3 font-workSans font-medium hover:bg-theme hover:text-white duration-200"
+                      className="px-1 py-3 font-workSans font-medium hover:bg-theme hover:text-white duration-200"
                       onClick={() => {
                         openModal("Delete Service", services?.id);
                       }}

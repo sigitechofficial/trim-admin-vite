@@ -7,6 +7,7 @@ import Loader from "../../components/Loader";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { formateDate } from "../../utilities/DateTime";
+import { Tooltip } from "@chakra-ui/react";
 
 export default function Coupons() {
   const navigate = useNavigate();
@@ -75,6 +76,7 @@ export default function Coupons() {
         </div>
       ),
       action: (
+        <Tooltip label="View detail">
         <button
           className="border border-yellow-400 rounded-md p-2 text-yellow-400"
           onClick={() =>
@@ -85,6 +87,7 @@ export default function Coupons() {
         >
           <FaEye size={24} />
         </button>
+        </Tooltip>
       ),
     });
   });
@@ -101,7 +104,7 @@ export default function Coupons() {
             </h2>
           </div>
 
-          <MyDataTable columns={columns} data={datas} />
+          <MyDataTable columns={columns} data={datas} placeholder={"Search by Salon name,coupon code, discount "} />
 
           {/* <Modal onClose={closeModal} isOpen={modal} isCentered size={"6xl"}>
             <ModalOverlay />
