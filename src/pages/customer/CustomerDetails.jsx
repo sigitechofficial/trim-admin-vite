@@ -154,7 +154,7 @@ export default function CustomerDetails() {
                 Customer Profile
               </h2>
             </div>
-            <div className="bg-white p-6 rounded-lg space-y-6">
+            <div className="bg-white p-6 rounded-lg space-y-6 grid grid-cols-1 xl:grid-cols-2">
               <ProfileCard
                 bgColor="bg-themeGray"
                 shadow="shadow-none"

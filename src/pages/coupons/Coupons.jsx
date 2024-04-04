@@ -14,19 +14,22 @@ export default function Coupons() {
   const { data, reFetch } = GetAPI("admin/coupons", "coupons");
 
   const columns = [
-    { field: "serialNo", header: "Sr" , sort: true},
+    { field: "serialNo", header: "Sr", sort: true },
     {
       field: "name",
       header: "Salon Name",
-     sort: true},
+      sort: true,
+    },
     {
       field: "code",
       header: "Coupon Code",
-     sort: true},
+      sort: true,
+    },
     {
       field: "discount",
       header: "Discount",
-     sort: true},
+      sort: true,
+    },
     {
       field: "couponType",
       header: "Coupon Type",
@@ -34,12 +37,12 @@ export default function Coupons() {
     {
       field: "limit",
       header: "Person Limit",
-      sort: true
+      sort: true,
     },
     {
       field: "duration",
       header: "Duration",
-      sort: true
+      sort: true,
     },
     {
       field: "status",
@@ -64,29 +67,29 @@ export default function Coupons() {
       duration: formateDate(obj?.till),
       status: (
         <div>
-          {obj?.status ? (
+          {obj?.status === "active" ? (
             <div className="w-24 bg-[#12466F14] text-theme font-semibold p-2 rounded-md flex justify-center">
               Active
             </div>
           ) : (
             <div className="w-24 bg-[#EE4A4A14] text-[#EE4A4A] font-semibold p-2 rounded-md flex justify-center">
-              Inactive
+              Expire
             </div>
           )}
         </div>
       ),
       action: (
         <Tooltip label="View detail">
-        <button
-          className="border border-yellow-400 rounded-md p-2 text-yellow-400"
-          onClick={() =>
-            navigate("/coupon-details", {
-              state: { data: obj },
-            })
-          }
-        >
-          <FaEye size={24} />
-        </button>
+          <button
+            className="border border-yellow-400 rounded-md p-2 text-yellow-400"
+            onClick={() =>
+              navigate("/coupon-details", {
+                state: { data: obj },
+              })
+            }
+          >
+            <FaEye size={24} />
+          </button>
         </Tooltip>
       ),
     });
@@ -104,7 +107,11 @@ export default function Coupons() {
             </h2>
           </div>
 
-          <MyDataTable columns={columns} data={datas} placeholder={"Search by Salon name,coupon code, discount "} />
+          <MyDataTable
+            columns={columns}
+            data={datas}
+            placeholder={"Search by Salon name,coupon code, discount "}
+          />
 
           {/* <Modal onClose={closeModal} isOpen={modal} isCentered size={"6xl"}>
             <ModalOverlay />
