@@ -64,10 +64,10 @@ export default function SalonDetails() {
 
           <div className="bg-white shadow-lg rounded-xl py-6 space-y-5">
             <div className="py-3 bg-tabColor px-5 sm:px-10 xl:px-20">
-              <ul className="flex flex-wrap gap-x-10 gap-y-3">
+              <ul className="flex flex-wrap gap-x-10 gap-y-3 [&>li]:p-2 [&>li]:rounded-full">
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "about" ? "text-theme" : "text-black"
+                    tab === "about" ? "text-theme bg-themeGray" : "text-black"
                   }`}
                   onClick={() => {
                     setTab("about");
@@ -77,7 +77,7 @@ export default function SalonDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "gallery" ? "text-theme" : "text-black"
+                    tab === "gallery" ? "text-theme  bg-themeGray" : "text-black"
                   }`}
                   onClick={() => {
                     setTab("gallery");
@@ -87,7 +87,7 @@ export default function SalonDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "services" ? "text-theme" : "text-black"
+                    tab === "services" ? "text-theme  bg-themeGray" : "text-black"
                   }`}
                   onClick={() => {
                     setTab("services");
@@ -97,7 +97,7 @@ export default function SalonDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "reviews" ? "text-theme" : "text-black"
+                    tab === "reviews" ? "text-theme bg-themeGray" : "text-black"
                   }`}
                   onClick={() => {
                     setTab("reviews");
@@ -107,7 +107,7 @@ export default function SalonDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "days & hours" ? "text-theme" : "text-black"
+                    tab === "days & hours" ? "text-theme bg-themeGray" : "text-black"
                   }`}
                   onClick={() => {
                     setTab("days & hours");
@@ -117,7 +117,7 @@ export default function SalonDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "team members" ? "text-theme" : "text-black"
+                    tab === "team members" ? "text-theme bg-themeGray" : "text-black"
                   }`}
                   onClick={() => {
                     setTab("team members");
@@ -300,7 +300,7 @@ export default function SalonDetails() {
                           </div>
                           <div className="text-labelColor font-workSans font-medium">
                             {formateDate(obj?.createdAt.slice(0, 10))}
-                          </div>
+                          </div> 
                         </div>
                         <div className="text-labelColor font-workSans font-medium">
                           {obj?.comment}

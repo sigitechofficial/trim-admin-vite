@@ -127,7 +127,7 @@ export default function Salons() {
   return data.length === 0 ? (
     <Loader />
   ) : (
-    <Layout
+    <Layout 
       content={
         <div className="space-y-5">
           <h2 className="text-xl lg:text-2xl font-chivo font-semibold">

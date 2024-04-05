@@ -24,7 +24,7 @@ export default function Header(props) {
               {localStorage.getItem("userName")}
             </h2>
             <p className="text-lightGray text-sm font-normal font-workSans">
-              Admin
+              {localStorage.getItem("userType")}
             </p>
           </div>
         </div>

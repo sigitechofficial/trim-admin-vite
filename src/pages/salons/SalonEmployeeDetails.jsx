@@ -68,10 +68,12 @@ export default function SalonEmployeeDetails() {
 
           <div className="bg-white shadow-lg rounded-xl py-6 space-y-5">
             <div className="py-3 bg-tabColor px-10 xl:px-20">
-              <ul className="flex flex-wrap gap-x-10 gap-y-3">
+              <ul className="flex flex-wrap gap-x-10 gap-y-3 [&>li]:p-2 [&>li]:rounded-full">
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "services" ? "text-theme" : "text-black"
+                    tab === "services"
+                      ? "text-theme bg-themeGray"
+                      : "text-black"
                   }`}
                   onClick={() => {
                     setTab("services");
@@ -81,7 +83,9 @@ export default function SalonEmployeeDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "time slots" ? "text-theme" : "text-black"
+                    tab === "time slots"
+                      ? "text-theme bg-themeGray"
+                      : "text-black"
                   }`}
                   onClick={() => {
                     setTab("time slots");
@@ -91,7 +95,9 @@ export default function SalonEmployeeDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "earning methods" ? "text-theme" : "text-black"
+                    tab === "earning methods"
+                      ? "text-theme bg-themeGray"
+                      : "text-black"
                   }`}
                   onClick={() => {
                     setTab("earning methods");
@@ -101,7 +107,7 @@ export default function SalonEmployeeDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "reviews" ? "text-theme" : "text-black"
+                    tab === "reviews" ? "text-theme bg-themeGray" : "text-black"
                   }`}
                   onClick={() => {
                     setTab("reviews");

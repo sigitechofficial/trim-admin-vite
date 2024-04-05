@@ -54,6 +54,7 @@ export default function Login() {
           "userName",
           `${res?.data?.data?.firstName} ${res?.data?.data?.lastName}`
         );
+        localStorage.setItem("userType", res?.data?.data?.userType);
         localStorage.setItem("rememberMe", rememberMe);
         setLoginStatus(true);
         if (rememberMe) {
