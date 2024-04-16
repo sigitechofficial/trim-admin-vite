@@ -10,6 +10,8 @@ import SalonProfileCard from "../../components/SalonProfileCard";
 import GetAPI from "../../utilities/GetAPI";
 import { BASE_URL } from "../../utilities/URL";
 import Loader from "../../components/Loader";
+import NewProfileCard from "../../components/NewProfileCard";
+import NewSalonProfileCard from "../../components/NewSalonProfileCard";
 
 export default function BookingDetails() {
   const { data } = GetAPI(
@@ -40,7 +42,7 @@ export default function BookingDetails() {
           </div>
           <div className="bg-white p-5 rounded-lg space-y-6">
             <div className="grid xl:grid-cols-2 gap-5">
-              <ProfileCard
+              <NewProfileCard
                 shadow="shadow-none"
                 bgColor="bg-themeGray"
                 employeeName={`${data?.data?.appointments?.user?.firstName} ${data?.data?.appointments?.user?.lastName}`}
@@ -50,7 +52,7 @@ export default function BookingDetails() {
                 employeePhoneNumber={`${data?.data?.appointments?.user?.countryCode} ${data?.data?.appointments?.user?.phoneNum}`}
               />
 
-              <SalonProfileCard
+              <NewSalonProfileCard
                 shadow={false}
                 coverImage={data?.data?.appointments?.salonDetail?.coverImage}
                 bgColor="bg-themeGray"

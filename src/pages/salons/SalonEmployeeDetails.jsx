@@ -10,10 +10,17 @@ import { BsCardList } from "react-icons/bs";
 import GetAPI from "../../utilities/GetAPI";
 import { BASE_URL } from "../../utilities/URL";
 import { formateDate } from "../../utilities/DateTime";
+import NewProfileCard from "../../components/NewProfileCard";
+import SalonProfileCard from "../../components/SalonProfileCard";
+import NewSalonProfileCard from "../../components/NewSalonProfileCard";
+import MyDataTable from "../../components/MyDataTable";
+import { Accordion, AccordionTab } from "primereact/accordion";
 
 export default function SalonEmployeeDetails() {
   const { data } = GetAPI(
-    `admin/employee-detail/${localStorage.getItem("barberShopEmployeeID")}`
+    `admin/salon-employee-detail/${localStorage.getItem(
+      "barberShopEmployeeID"
+    )}`
   );
 
   const [tab, setTab] = useState("services");
@@ -33,6 +40,53 @@ export default function SalonEmployeeDetails() {
     }
   };
 
+  const columns = [
+    { field: "sn", header: "Sn" },
+    {
+      field: "bookingID",
+      header: "Booking ID",
+      sort: true,
+    },
+    {
+      field: "name",
+      header: "Name",
+      sort: true,
+    },
+    {
+      field: "appointmentDate",
+      header: "Appointment Date",
+      sort: true,
+    },
+    {
+      field: "createdAt",
+      header: "Created At",
+      sort: true,
+    },
+    {
+      field: "serviceType",
+      header: "Service Type",
+      sort: true,
+    },
+    {
+      field: "amount",
+      header: "Amount",
+    },
+    {
+      field: "status",
+      header: "Status",
+    },
+  ];
+
+  const Couponcolumns = [
+    { field: "sn", header: "Sn" },
+    { field: "coupon", header: "Coupon" },
+    { field: "couponType", header: "Coupon Type" },
+    { field: "personLimit", header: "Person Limit" },
+    { field: "duration", header: "Duration" },
+    { field: "couponUsed", header: "Coupon Used" },
+    { field: "status", header: "Status" },
+  ];
+
   return (
     <Layout
       content={
@@ -47,22 +101,33 @@ export default function SalonEmployeeDetails() {
               <FaArrowLeft />
             </button>
             <h2 className="flex items-center text-xl lg:text-2xl font-chivo font-semibold">
-              <span className="flex items-center text-[#8F95B2]">
+              <span className="flex items-center text-[#8F95B2] ">
                 Barbershop Details <FaAngleRight size={20} />
               </span>{" "}
               Team Member Details
             </h2>
           </div>
 
-          <div>
-            <ProfileCard
-              shadow="shadow-lg"
-              bgColor="bg-white"
+          <div className="grid grid-cols-2 bg-white p-5 rounded-2xl shadow-lg gap-5">
+            <NewProfileCard
+              shadow="shadow-none"
+              bgColor="bg-themeGray2"
               employeeName={`${data?.data?.employee?.firstName} ${data?.data?.employee?.lastName}`}
               coverImage={data?.data?.employee?.image}
               employeeID={data?.data?.employee?.employee?.id}
               employeeEmail={data?.data?.employee?.email}
               employeePhoneNumber={`${data?.data?.employee?.countryCode} ${data?.data?.employee?.phoneNum}`}
+            />
+
+            <NewSalonProfileCard
+              shadow={false}
+              coverImage={data?.data?.salon?.coverImage}
+              bgColor="bg-themeGray"
+              salonName={data?.data?.salon?.salonName}
+              salonAverageRating={data?.data?.salon?.salonAverageRating}
+              ratingCount={data?.data?.salon?.ratingCount}
+              salonAddress={`${data?.data?.salon?.addressDB?.streetAddress},${data?.data?.salon?.addressDB?.district},${data?.data?.salon?.addressDB?.city},${data?.data?.salon?.addressDB?.country}`}
+              socialLinks={data?.data?.salon?.socialLinks}
             />
           </div>
 
@@ -115,10 +180,46 @@ export default function SalonEmployeeDetails() {
                 >
                   Reviews
                 </li>
+                <li
+                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
+                    tab === "service history"
+                      ? "text-theme bg-themeGray"
+                      : "text-black"
+                  }`}
+                  onClick={() => {
+                    setTab("service history");
+                  }}
+                >
+                  Service History
+                </li>
+                {/* <li
+                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
+                    tab === "policies"
+                      ? "text-theme bg-themeGray"
+                      : "text-black"
+                  }`}
+                  onClick={() => {
+                    setTab("policies");
+                  }}
+                >
+                  Policies
+                </li> */}
+                {/* <li
+                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
+                    tab === "coupon history"
+                      ? "text-theme bg-themeGray"
+                      : "text-black"
+                  }`}
+                  onClick={() => {
+                    setTab("coupon history");
+                  }}
+                >
+                  Coupon History
+                </li> */}
               </ul>
             </div>
 
-            <div className="px-10 xl:px-20 h-full">
+            <div className="px-5 h-full">
               {tab === "services" ? (
                 <div className="space-y-3">
                   <h2 className="text-2xl font-workSans font-medium">
@@ -255,7 +356,10 @@ export default function SalonEmployeeDetails() {
                     Earning method
                   </h2>
                   <p className="text-xl font-workSans font-medium text-labelColor">
-                    Fixed salary
+                    {
+                      data?.data?.employee?.employee?.employeeWagesMethod
+                        ?.wagesMethod?.methodName
+                    }
                   </p>
 
                   <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 mt-5">
@@ -280,7 +384,64 @@ export default function SalonEmployeeDetails() {
                     )}
                   </div>
                 </div>
-              ) : null}
+              ) : tab === "service history" ? (
+                <div className="space-y-3">
+                  <h2 className="text-2xl font-workSans font-medium">
+                    Service History
+                  </h2>
+                  <MyDataTable columns={columns} placeholder="Search " />
+                </div>
+              ) : // : tab === "policies" ? (
+              //   <div className="space-y-3">
+              //     <h2 className="text-2xl font-workSans font-medium">
+              //       Salon policies
+              //     </h2>
+              //     <div className="space-y-3">
+              //       <Accordion className="!rounded-t-lg">
+              //         {data?.data?.detail?.categories?.map((obj) => (
+              //           <AccordionTab
+              //             header={obj?.categoryName}
+              //             className="bg-theme text-white  overflow-hidden"
+              //           >
+              //             {[
+              //               { serviceName: "t1", duration: "10", price: "100" },
+              //               { servicename: "t2", duration: "21", price: "200" },
+              //             ]?.map((service, j) => (
+              //               <div>
+              //                 <div
+              //                   className={`text-white border border-theme bg-theme flex justify-between px-4 py-2 m-0`}
+              //                 >
+              //                   <div className="flex flex-col">
+              //                     <div className="font-workSans font-medium">
+              //                       {service?.serviceName}
+              //                     </div>
+              //                     <p className="text-sm rounded">
+              //                       {service?.duration} min
+              //                     </p>
+              //                   </div>
+              //                   <div className="font-workSans font-medium">
+              //                     ${service?.price}/hr
+              //                   </div>
+              //                 </div>
+              //               </div>
+              //             ))}
+              //           </AccordionTab>
+              //         ))}
+              //       </Accordion>
+              //     </div>
+              //   </div>
+              // ) : tab === "coupon history" ? (
+              //   <div className="space-y-3">
+              //     <h2 className="text-2xl font-workSans font-medium">
+              //       Coupon History
+              //     </h2>
+              //     <MyDataTable
+              //       columns={Couponcolumns}
+              //       placeholder="Search by ID"
+              //     />
+              //   </div>
+              // )
+              null}
             </div>
           </div>
         </div>

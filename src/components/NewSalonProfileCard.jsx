@@ -7,30 +7,25 @@ import { LuMapPin } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../utilities/URL";
 import StarRating from "../utilities/StarRating";
-export default function SalonProfileCard(props) {
+
+export default function NewSalonProfileCard(props) {
   return (
     <div
       className={`${
         props.bgColor
-      } p-4 lg:p-6 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-x-10 ${
+      } p-4 lg:p-6 rounded-xl grid grid-cols-1 sm:grid-cols-2 justify-between${
         props.shadow === true ? "shadow-lg" : "shadow-none"
       }`}
     >
-      <div className="h-64 w-full order-last sm:order-last">
-        <img
-          src={`${BASE_URL}${props?.coverImage}`}
-          alt="barbershop"
-          className="object-fill h-full w-full rounded-md"
-        />
-      </div>
-
       <div className="space-y-3 order-first sm:order-last">
         <div className="space-y-2">
           <h2 className="text-2xl font-medium font-workSans">
             {props?.salonName}
           </h2>
           <div className="flex gap-x-1 items-center">
-            <StarRating rating={props?.salonAverageRating} />
+            {props?.salonAverageRating && (
+              <StarRating rating={props?.salonAverageRating} />
+            )}
 
             <span className="text-themeLightGray font-workSans font-medium">
               ({props?.ratingCount} Reviews)
@@ -48,11 +43,18 @@ export default function SalonProfileCard(props) {
             <span>11:00am - 11:00pm</span>
           </li> */}
           <li className="flex items-center gap-x-2 text-themeLightGray font-medium font-workSans">
-           <div> <LuMapPin size={20} color="#12466F" /></div>
+            <div><LuMapPin size={20} color="#12466F" /></div>
             <p>{props?.salonAddress}</p>
           </li>
         </ul>
+      </div>
 
+      <div className="order-last sm:order-last flex flex-col justify-between items-end">
+        <img
+          src={`${BASE_URL}${props?.coverImage}`}
+          alt="barbershop"
+          className="w-full sm:w-20 h-16 object-cover rounded-lg max-sm:mt-2"
+        />
         <div className="flex items-center gap-x-3">
           {props?.socialLinks?.map((link, ind) => (
             <Link to={link?.url}>

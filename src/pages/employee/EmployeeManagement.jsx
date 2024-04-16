@@ -124,8 +124,6 @@ export default function EmployeeManagement() {
       info_toaster("Please enter last name");
     } else if (addEmployee?.email === "") {
       info_toaster("Please enter email");
-    } else if (addEmployee?.countryCode === "") {
-      info_toaster("Please enter country code");
     } else if (addEmployee?.phoneNum === "") {
       info_toaster("Please enter phone number");
     } else if (addEmployee?.password === "") {
@@ -134,17 +132,15 @@ export default function EmployeeManagement() {
       info_toaster("Please select role");
     } else {
       setLoading(true);
-
       const res = await PostAPI("admin/employee", "employee_management", {
         firstName: addEmployee?.firstName,
         lastName: addEmployee?.lastName,
         email: addEmployee?.email,
-        countryCode: addEmployee?.countryCode,
+        countryCode: addEmployee?.countryCode ? addEmployee?.countryCode : "92",
         phoneNum: addEmployee?.phoneNum,
         password: addEmployee?.password,
         roleId: selectedOption?.value,
       });
-      console.log(res);
       if (res?.data?.status === "1") {
         setLoading(false);
         closeModal();

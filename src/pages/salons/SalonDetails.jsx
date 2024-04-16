@@ -11,6 +11,7 @@ import { BASE_URL } from "../../utilities/URL";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import StarRating from "../../utilities/StarRating";
 import { formateDate } from "../../utilities/DateTime";
+import MyDataTable from "../../components/MyDataTable";
 
 export default function SalonDetails() {
   const [tab, setTab] = useState("about");
@@ -28,6 +29,34 @@ export default function SalonDetails() {
       return "Closed";
     }
   };
+
+  const columns = [
+    { field: "sn", header: "Sn", sort: true },
+    {
+      field: "noofemployee",
+      header: "No of Employee",
+      sort: true,
+    },
+    {
+      field: "planType",
+      header: "Plan Type",
+      sort: true,
+    },
+    {
+      field: "startingDate",
+      header: "Starting Date",
+      sort: true,
+    },
+    {
+      field: "endDate",
+      header: "End Date",
+      sort: true,
+    },
+    {
+      field: "status",
+      header: "Status",
+    },
+  ];
 
   return data.length === 0 ? (
     <Loader />
@@ -58,7 +87,7 @@ export default function SalonDetails() {
               salonAverageRating={data?.data?.detail?.salonAverageRating}
               ratingCount={data?.data?.detail?.ratingCount}
               salonAddress={`${data?.data?.detail?.addressDB?.streetAddress},${data?.data?.detail?.addressDB?.district},${data?.data?.detail?.addressDB?.city},${data?.data?.detail?.addressDB?.country}`}
-              socialLinks={data?.data?.socialLinks}
+              socialLinks={data?.data?.detail?.socialLinks}
             />
           </div>
 
@@ -77,7 +106,9 @@ export default function SalonDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "gallery" ? "text-theme  bg-themeGray" : "text-black"
+                    tab === "gallery"
+                      ? "text-theme  bg-themeGray"
+                      : "text-black"
                   }`}
                   onClick={() => {
                     setTab("gallery");
@@ -87,7 +118,9 @@ export default function SalonDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "services" ? "text-theme  bg-themeGray" : "text-black"
+                    tab === "services"
+                      ? "text-theme  bg-themeGray"
+                      : "text-black"
                   }`}
                   onClick={() => {
                     setTab("services");
@@ -107,7 +140,9 @@ export default function SalonDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "days & hours" ? "text-theme bg-themeGray" : "text-black"
+                    tab === "days & hours"
+                      ? "text-theme bg-themeGray"
+                      : "text-black"
                   }`}
                   onClick={() => {
                     setTab("days & hours");
@@ -117,7 +152,9 @@ export default function SalonDetails() {
                 </li>
                 <li
                   className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "team members" ? "text-theme bg-themeGray" : "text-black"
+                    tab === "team members"
+                      ? "text-theme bg-themeGray"
+                      : "text-black"
                   }`}
                   onClick={() => {
                     setTab("team members");
@@ -125,10 +162,22 @@ export default function SalonDetails() {
                 >
                   Team Members
                 </li>
+                <li
+                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
+                    tab === "subscription plan"
+                      ? "text-theme bg-themeGray"
+                      : "text-black"
+                  }`}
+                  onClick={() => {
+                    setTab("subscription plan");
+                  }}
+                >
+                  Subscription plan
+                </li>
               </ul>
             </div>
 
-            <div className="px-5 sm:px-10 xl:px-20 h-full">
+            <div className="px-5 h-full">
               {tab === "about" ? (
                 <div className="space-y-3">
                   <h2 className="text-2xl font-workSans font-medium">About</h2>
@@ -300,7 +349,7 @@ export default function SalonDetails() {
                           </div>
                           <div className="text-labelColor font-workSans font-medium">
                             {formateDate(obj?.createdAt.slice(0, 10))}
-                          </div> 
+                          </div>
                         </div>
                         <div className="text-labelColor font-workSans font-medium">
                           {obj?.comment}
@@ -338,6 +387,11 @@ export default function SalonDetails() {
                 </div>
               ) : tab === "team members" ? (
                 <TeamMemberCard employees={data?.data?.detail?.employees} />
+              ) : tab === "subscription plan" ? (
+                <MyDataTable
+                  columns={columns}
+                  placeholder="Search Subscription plan"
+                />
               ) : null}
             </div>
           </div>

@@ -11,9 +11,10 @@ export default {
         rubik: ["Rubik", "sans-serif"],
         workSans: ["Work Sans", "sans-serif"],
       },
-      backgroundColor: {
+      backgroundColor: { 
         themeBlue: "#12466F",
         themeGray: "#FAFAFA",
+        themeGray2:"#F8F8F8",
         homeCards: "#FFFFFFBF",
         themePink: "#EEC1FD",
         themeSkyBlue: "#ADEEF5",

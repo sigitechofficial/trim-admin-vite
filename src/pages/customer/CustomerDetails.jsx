@@ -4,7 +4,6 @@ import Layout from "../../components/Layout";
 import Loader from "../../components/Loader";
 import ProfileCard from "../../components/ProfileCard";
 import MyDataTable from "../../components/MyDataTable";
-
 import GetAPI from "../../utilities/GetAPI";
 import formatDateFromDB, {
   formatTimeFromDB,
@@ -21,8 +20,10 @@ import {
 } from "@chakra-ui/react";
 import { MdOutlineEmail } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
+import NewProfileCard from "../../components/NewProfileCard";
 
 export default function CustomerDetails() {
+
   const { data } = GetAPI(
     `admin/customer-detail/${localStorage.getItem("customerID")}`,
     "customer_management"
@@ -42,7 +43,6 @@ export default function CustomerDetails() {
 
   const columns = [
     { field: "sn", header: "Sn" },
-    // { field: "id", header: "Id" },
     {
       field: "salonName",
       header: "Salon name",
@@ -155,7 +155,7 @@ export default function CustomerDetails() {
               </h2>
             </div>
             <div className="bg-white p-6 rounded-lg space-y-6 grid grid-cols-1 xl:grid-cols-2">
-              <ProfileCard
+              <NewProfileCard
                 bgColor="bg-themeGray"
                 shadow="shadow-none"
                 employeeName={`${data?.data?.firstName} ${data?.data?.lastName}`}
@@ -170,7 +170,7 @@ export default function CustomerDetails() {
           <div className="py-5 space-y-5">
             <h2 className="text-xl lg:text-2xl font-chivo font-semibold">
               Customer Details
-            </h2>
+            </h2> 
 
             <MyDataTable columns={columns} data={datas} />
 

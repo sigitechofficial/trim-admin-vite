@@ -8,24 +8,24 @@ import GetAPI from "../../utilities/GetAPI";
 import Loader from "../../components/Loader";
 
 export default function ClientFileReport() {
-  const { data } = GetAPI('admin/reports/client-file',"reports")
+  const { data } = GetAPI("admin/reports/client-file", "reports");
 
   const columns = [
-    { field: "sn", header: "Sn" ,sort: true},
-    { field: "name", header: "Name",sort: true },
-    { field: "averageSpent", header: "Avg. Spent",sort: true },
-    { field: "completeBookingCount", header: "Complete Booking",sort: true },
-    { field: "cancelBookingCount", header: "Cancel Booking",sort: true },
-    { field: "noShowBookingCount", header: "No Show" ,sort: true},
-    { field: "reScheduleCount", header: "Re-Schedule" ,sort: true},
-  ]
- 
+    { field: "sn", header: "Sn", sort: true },
+    { field: "name", header: "Name", sort: true },
+    { field: "averageSpent", header: "Avg. Spent", sort: true },
+    { field: "completeBookingCount", header: "Complete Booking", sort: true },
+    { field: "cancelBookingCount", header: "Cancel Booking", sort: true },
+    { field: "noShowBookingCount", header: "No Show", sort: true },
+    { field: "reScheduleCount", header: "Re-Schedule", sort: true },
+  ];
+
   const datas = [];
   data?.data?.report?.map((values, index) => {
     return datas.push({
       sn: index + 1,
       name: `${values?.firstName} ${values?.lastName}`,
-      averageSpent: `${values?.averageSpent ? values?.averageSpent:0}`,
+      averageSpent: `${values?.averageSpent ? values?.averageSpent : 0}`,
       completeBookingCount: values?.completeBookingCount,
       cancelBookingCount: values?.cancelBookingCount,
       noShowBookingCount: values?.noShowBookingCount,
@@ -55,7 +55,11 @@ export default function ClientFileReport() {
               Client File Report
             </h2>
           </div>
-          <MyDataTable columns={columns} data={datas} placeholder={"Search by Salon name "} />
+          <MyDataTable
+            columns={columns}
+            data={datas}
+            placeholder={"search by client name"}
+          />
         </div>
       }
     />
