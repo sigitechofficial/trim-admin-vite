@@ -4,26 +4,29 @@ import Layout from "../../components/Layout";
 import { FaAngleRight, FaArrowLeft } from "react-icons/fa";
 import { HiOutlineStar } from "react-icons/hi2";
 import TeamMemberCard from "../../components/TeamMemberCard";
-import ProfileCard from "../../components/ProfileCard";
 import HomeCards from "../../components/HomeCards";
 import { BsCardList } from "react-icons/bs";
 import GetAPI from "../../utilities/GetAPI";
 import { BASE_URL } from "../../utilities/URL";
-import { formateDate } from "../../utilities/DateTime";
+import { formatTimeFromDB, formateDate } from "../../utilities/DateTime";
 import NewProfileCard from "../../components/NewProfileCard";
-import SalonProfileCard from "../../components/SalonProfileCard";
 import NewSalonProfileCard from "../../components/NewSalonProfileCard";
 import MyDataTable from "../../components/MyDataTable";
-import { Accordion, AccordionTab } from "primereact/accordion";
 
 export default function SalonEmployeeDetails() {
+  const [tab, setTab] = useState("services");
+
   const { data } = GetAPI(
     `admin/salon-employee-detail/${localStorage.getItem(
       "barberShopEmployeeID"
     )}`
   );
 
-  const [tab, setTab] = useState("services");
+  const { data: serviceHistoryData } = GetAPI(
+    `admin/employee-services-history/${localStorage.getItem(
+      "barberShopEmployeeID"
+    )}}`
+  );
 
   const handleTime = (day) => {
     const temp = data?.data?.employee?.employee?.times?.find(
@@ -38,6 +41,16 @@ export default function SalonEmployeeDetails() {
     } else {
       return "Closed";
     }
+  };
+
+  const handleJobs = (jobs) => {
+    let serviceType = "";
+    jobs?.map((values, i) =>
+      i === jobs.length - 1
+        ? (serviceType += values?.serviceNames)
+        : (serviceType += values?.serviceNames + ", ")
+    );
+    return serviceType;
   };
 
   const columns = [
@@ -77,15 +90,47 @@ export default function SalonEmployeeDetails() {
     },
   ];
 
-  const Couponcolumns = [
-    { field: "sn", header: "Sn" },
-    { field: "coupon", header: "Coupon" },
-    { field: "couponType", header: "Coupon Type" },
-    { field: "personLimit", header: "Person Limit" },
-    { field: "duration", header: "Duration" },
-    { field: "couponUsed", header: "Coupon Used" },
-    { field: "status", header: "Status" },
-  ];
+  const datas = [];
+  serviceHistoryData?.data?.history.map((values, i) =>
+    datas.push({
+      sn: i + 1,
+      bookingID: values?.id,
+      name: `${values?.user?.firstName} ${values?.user?.lastName}`,
+      appointmentDate: `${formateDate(values?.on)} ${formatTimeFromDB(
+        values?.startTime
+      )}`,
+      createdAt: formateDate(values?.createdAt.slice(0, 10)),
+      serviceType: handleJobs(values?.jobs),
+      amount: values?.actualCapturedAmount,
+      status: (
+        <div>
+          {values?.status === "complete" ? (
+            <div className="w-24 bg-green-100 text-green-500 font-semibold p-2 rounded-md flex justify-center">
+              Completed
+            </div>
+          ) : values?.status === "no-show" ? (
+            <div className="w-24 bg-[#d4fffb] text-[#01C7B8] font-semibold p-2 rounded-md flex justify-center">
+              No Show
+            </div>
+          ) : values?.status === "cancelled" ? (
+            <div className="w-24 bg-red-100 text-red-500 font-semibold p-2 rounded-md flex justify-center">
+              Cancelled
+            </div>
+          ) : values?.status === "save-unpaid" ? (
+            <div className="w-24 bg-[#ffe6db] text-[#EC8559] font-semibold p-2 rounded-md flex justify-center">
+              Unpaid
+            </div>
+          ) : values?.status === "pending" || values.status === "book" ? (
+            <div className="w-24 bg-yellow-100 text-yellow-500 font-semibold p-2 rounded-md flex justify-center">
+              Pending
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      ),
+    })
+  ); 
 
   return (
     <Layout
@@ -192,30 +237,6 @@ export default function SalonEmployeeDetails() {
                 >
                   Service History
                 </li>
-                {/* <li
-                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "policies"
-                      ? "text-theme bg-themeGray"
-                      : "text-black"
-                  }`}
-                  onClick={() => {
-                    setTab("policies");
-                  }}
-                >
-                  Policies
-                </li> */}
-                {/* <li
-                  className={`text-lg lg:text-2xl font-workSans font-medium cursor-pointer hover:text-theme ${
-                    tab === "coupon history"
-                      ? "text-theme bg-themeGray"
-                      : "text-black"
-                  }`}
-                  onClick={() => {
-                    setTab("coupon history");
-                  }}
-                >
-                  Coupon History
-                </li> */}
               </ul>
             </div>
 
@@ -389,59 +410,13 @@ export default function SalonEmployeeDetails() {
                   <h2 className="text-2xl font-workSans font-medium">
                     Service History
                   </h2>
-                  <MyDataTable columns={columns} placeholder="Search " />
+                  <MyDataTable
+                    columns={columns}
+                    data={datas}
+                    placeholder="Search "
+                  />
                 </div>
-              ) : // : tab === "policies" ? (
-              //   <div className="space-y-3">
-              //     <h2 className="text-2xl font-workSans font-medium">
-              //       Salon policies
-              //     </h2>
-              //     <div className="space-y-3">
-              //       <Accordion className="!rounded-t-lg">
-              //         {data?.data?.detail?.categories?.map((obj) => (
-              //           <AccordionTab
-              //             header={obj?.categoryName}
-              //             className="bg-theme text-white  overflow-hidden"
-              //           >
-              //             {[
-              //               { serviceName: "t1", duration: "10", price: "100" },
-              //               { servicename: "t2", duration: "21", price: "200" },
-              //             ]?.map((service, j) => (
-              //               <div>
-              //                 <div
-              //                   className={`text-white border border-theme bg-theme flex justify-between px-4 py-2 m-0`}
-              //                 >
-              //                   <div className="flex flex-col">
-              //                     <div className="font-workSans font-medium">
-              //                       {service?.serviceName}
-              //                     </div>
-              //                     <p className="text-sm rounded">
-              //                       {service?.duration} min
-              //                     </p>
-              //                   </div>
-              //                   <div className="font-workSans font-medium">
-              //                     ${service?.price}/hr
-              //                   </div>
-              //                 </div>
-              //               </div>
-              //             ))}
-              //           </AccordionTab>
-              //         ))}
-              //       </Accordion>
-              //     </div>
-              //   </div>
-              // ) : tab === "coupon history" ? (
-              //   <div className="space-y-3">
-              //     <h2 className="text-2xl font-workSans font-medium">
-              //       Coupon History
-              //     </h2>
-              //     <MyDataTable
-              //       columns={Couponcolumns}
-              //       placeholder="Search by ID"
-              //     />
-              //   </div>
-              // )
-              null}
+              ) : null}
             </div>
           </div>
         </div>

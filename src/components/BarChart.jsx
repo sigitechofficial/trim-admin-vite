@@ -5,7 +5,7 @@ import Chart from 'chart.js/auto';
 export default function BarChart({ dashboardBarChartData }) {
     const UpdatedData = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        ,
+        , 
         datasets: [
             {
                 label: 'Revenue',

@@ -26,7 +26,6 @@ export default function NewSalonProfileCard(props) {
             {props?.salonAverageRating && (
               <StarRating rating={props?.salonAverageRating} />
             )}
-
             <span className="text-themeLightGray font-workSans font-medium">
               ({props?.ratingCount} Reviews)
             </span>
@@ -43,7 +42,9 @@ export default function NewSalonProfileCard(props) {
             <span>11:00am - 11:00pm</span>
           </li> */}
           <li className="flex items-center gap-x-2 text-themeLightGray font-medium font-workSans">
-            <div><LuMapPin size={20} color="#12466F" /></div>
+            <div>
+              <LuMapPin size={20} color="#12466F" />
+            </div>
             <p>{props?.salonAddress}</p>
           </li>
         </ul>

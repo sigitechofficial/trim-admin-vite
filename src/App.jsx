@@ -35,6 +35,9 @@ import AllBookings from './pages/bookings/AllBookings';
 import ProtectedRoute from './utilities/ProtectedRoute'; 
 import PendingBookings from './pages/bookings/PendingBookings';
 import UnpaidBookings from './pages/bookings/UnpaidBookings';
+import TopServicesReport from './pages/reports/TopServicesReport';
+import TopSalonsReport from './pages/reports/TopSalonsReport';
+import ClientStatusReport from './pages/reports/ClientStatusReport';
 
 function App() {
   return (
@@ -75,6 +78,11 @@ function App() {
             <Route exact path="/reports/subscription-report" element={<ProtectedRoute Component={SubscriptionReport} />} />
             <Route exact path="/reports/financial-performance-report" element={<ProtectedRoute Component={FinancialPeroformanceReport} />} />
             <Route exact path="/reports/appointment-conversion-report" element={<ProtectedRoute Component={AppointmentReport} />} />
+            
+            <Route exact path="/reports/top-performing-services-report" element={<ProtectedRoute Component={TopServicesReport} />} />
+            <Route exact path="/reports/top-performing-salons-report" element={<ProtectedRoute Component={TopSalonsReport} />} />
+            <Route exact path="/reports/client-status-distribution-report" element={<ProtectedRoute Component={ClientStatusReport} />} />
+
           </Routes>
         </Router>
       </ChakraProvider >

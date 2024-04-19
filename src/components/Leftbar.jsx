@@ -170,7 +170,10 @@ export default function Leftbar(props) {
             location === "/reports/client-file-report" ||
             location === "/reports/subscription-report" ||
             location === "/reports/financial-performance-report" ||
-            location === "/reports/appointment-conversion-report"
+            location === "/reports/appointment-conversion-report" ||
+            location === "/reports/top-performing-services-report" ||
+            location === "/reports/top-performing-salons-report" ||
+            location === "/reports/client-status-distribution-report"
           }
         />
 

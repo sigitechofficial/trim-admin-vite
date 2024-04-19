@@ -312,7 +312,6 @@ export default function EmployeeManagement() {
                           Add employee
                         </h2>
                       </div>
-
                       <div className="w-full space-y-2">
                         <div className="space-y-1">
                           <label
