@@ -5,7 +5,9 @@ import BarChart from "../../components/BarChart";
 import GetAPI from "../../utilities/GetAPI";
 
 export default function TopServicesReport() {
-  const { data } = GetAPI("admin/dashboard", "dashboard");
+  const { data } = GetAPI("admin/graph/top-performing-services", "dashboard");
+  console.log(data?.data?.graph);
+
   return (
     <Layout
       content={
@@ -28,7 +30,9 @@ export default function TopServicesReport() {
           </div>
 
           <div>
-          <BarChart dashboardBarChartData={data?.data?.dashboardBarChartData} />
+            <BarChart
+              dashboardBarChartData={data?.data?.graph}
+            />
           </div>
         </div>
       }

@@ -28,17 +28,17 @@ export default function StackedChart() {
     datasets: [
       {
         label: "No of Appointments",
-        data: [1, 10, 3, 4, 5],
+        data: [1, 2, 3, 4, 6],
         backgroundColor: "rgb(255, 99, 132)",
       },
       {
         label: "No of Services",
-        data: [5, 10, 3, 4, 5],
+        data: [3, 2, 3, 4, 2],
         backgroundColor: "rgb(75, 192, 192)",
       },
       {
         label: "Revenue",
-        data: [3, 10, 8, 9, 10],
+        data: [3, 5, 8, 3,5],
         backgroundColor: "rgb(53, 162, 235)",
       },
     ],
