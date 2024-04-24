@@ -93,6 +93,8 @@ export default function Leftbar(props) {
           active={location === "/customer-details"}
         />
 
+        <ListHead title="Roles Management" to="/roles" Icon={FaUserEdit} />
+
         <ListHead title="Employee Management" to="/employees" Icon={FiUsers} />
 
         <ListHead
@@ -130,8 +132,6 @@ export default function Leftbar(props) {
           to="/earnings"
           Icon={TbAlignBoxBottomCenter}
         />
-
-        <ListHead title="Roles Management" to="/roles" Icon={FaUserEdit} />
 
         <ListHead
           title="Coupons"

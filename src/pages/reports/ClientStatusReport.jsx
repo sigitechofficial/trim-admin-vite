@@ -28,7 +28,7 @@ export default function ClientStatusReport() {
             </h2>
           </div>
 
-          <div>
+          <div className="flex items-center justify-center pt-20">
             <DoughnutChart
               dashboardDoughnutChartData={
                 data?.data?.dashboardDoughnutChartData

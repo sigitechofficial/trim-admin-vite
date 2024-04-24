@@ -1,45 +1,52 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
+import { grid } from "@chakra-ui/react";
 
-export default function StackedChart() {
+export default function StackedChart(props) {
   const options = {
-    plugins: {
-      title: {
-        display: true,
-        // text: "Chart.js Bar Chart - Stacked",
-      },
-    },
+    // plugins: {
+    //   title: {
+    //     display: true,
+    //     text: "Chart.js Bar Chart - Stacked",
+    //   },
+    // },
     responsive: true,
     scales: {
       x: {
         stacked: true,
+        grid: {
+          display: false,
+        },
       },
       y: {
         stacked: true,
+        grid: {
+          display: false,
+        },
       },
     },
   };
 
-  const labels = ["Salon Hub", "Salon 2", "Salon 3", "Salon 4", "Salon 5"];
+  const labels = props?.graphData?.labels;
 
   const data = {
     labels,
     datasets: [
       {
-        label: "No of Appointments",
-        data: [1, 2, 3, 4, 6],
-        backgroundColor: "rgb(255, 99, 132)",
+        label: props?.graphData?.datasets[1]?.label,
+        data: props?.graphData?.datasets[1]?.data,
+        backgroundColor: props?.graphData?.datasets[1]?.backgroundColor,
       },
       {
-        label: "No of Services",
-        data: [3, 2, 3, 4, 2],
-        backgroundColor: "rgb(75, 192, 192)",
+        label: props?.graphData?.datasets[2]?.label,
+        data: props?.graphData?.datasets[2]?.data,
+        backgroundColor: props?.graphData?.datasets[2]?.backgroundColor,
       },
       {
-        label: "Revenue",
-        data: [3, 5, 8, 3,5],
-        backgroundColor: "rgb(53, 162, 235)",
+        label: props?.graphData?.datasets[0]?.label,
+        data: props?.graphData?.datasets[0]?.data,
+        backgroundColor: props?.graphData?.datasets[0]?.backgroundColor,
       },
     ],
   };

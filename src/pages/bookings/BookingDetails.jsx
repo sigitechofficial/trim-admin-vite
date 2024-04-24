@@ -20,6 +20,7 @@ export default function BookingDetails() {
     )}`,
     "bookings"
   );
+  console.log(data?.data?.appointments?.salonDetail?.salonAverageRating);
 
   return data?.length === 0 ? (
     <Loader />

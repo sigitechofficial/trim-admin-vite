@@ -2,8 +2,12 @@ import React from "react";
 import Layout from "../../components/Layout";
 import { FaAngleRight, FaArrowLeft } from "react-icons/fa";
 import StackedChart from "../../components/StackedChart";
+import GetAPI from "../../utilities/GetAPI";
 
 export default function TopSalonsReport() {
+  const { data } = GetAPI(`admin/graph/top-performing-salons/5`);
+  console.log(data?.data?.graph);
+
   return (
     <Layout
       content={
@@ -26,7 +30,7 @@ export default function TopSalonsReport() {
           </div>
 
           <div>
-            <StackedChart />
+            <StackedChart graphData={data?.data?.graph} />
           </div>
         </div>
       }
