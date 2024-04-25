@@ -24,16 +24,19 @@ export default function Reports() {
               title="Off Peak Time Report"
               to="/reports/off-peak-time-report"
             />
+
             <ReportCard
               Icon={TbReportAnalytics}
               title="Client File Report"
               to="/reports/client-file-report"
             />
+
             <ReportCard
               Icon={MdOutlineSubscriptions}
               title="Subscription Report"
               to="/reports/subscription-report"
             />
+
             <ReportCard
               Icon={BsCashCoin}
               title="Financial Performance Report"

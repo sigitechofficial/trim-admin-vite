@@ -3,11 +3,18 @@ import Layout from "../../components/Layout";
 import { FaAngleRight, FaArrowLeft } from "react-icons/fa";
 import DoughnutChart from "../../components/DoughnutChart";
 import GetAPI from "../../utilities/GetAPI";
+import Loader from "../../components/Loader";
 
 export default function ClientStatusReport() {
-  const { data } = GetAPI("admin/dashboard", "dashboard");
-  
-  return (
+  const { data } = GetAPI(
+    "admin/graph/client-status-distribution-graph",
+    "dashboard"
+  );
+  console.log(data?.data?.report);
+
+  return data.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">
@@ -29,11 +36,7 @@ export default function ClientStatusReport() {
           </div>
 
           <div className="flex items-center justify-center pt-20">
-            <DoughnutChart
-              dashboardDoughnutChartData={
-                data?.data?.dashboardDoughnutChartData
-              }
-            />
+            <DoughnutChart dashboardDoughnutChartData={data?.data?.report} />
           </div>
         </div>
       }

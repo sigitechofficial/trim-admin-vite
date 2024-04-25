@@ -4,7 +4,7 @@ import { Doughnut } from "react-chartjs-2";
 export default function DoughnutChart({ dashboardDoughnutChartData }) {
   console.log(
     "Doghnut Chart --- ",
-    dashboardDoughnutChartData?.datasets[0]?.data
+    dashboardDoughnutChartData
   );
   const updatedData = {
     labels: dashboardDoughnutChartData?.labels,
