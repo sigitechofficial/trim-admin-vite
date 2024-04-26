@@ -32,10 +32,6 @@ export default function SalonEmployeeDetails() {
     const temp = data?.data?.employee?.employee?.times?.find(
       (obj) => obj?.day.toLowerCase() === day.toLowerCase()
     );
-    if (day === "friday") {
-      console.log(temp);
-      console.log(day, " ", temp?.openingTime, temp?.closingTime);
-    }
     if (temp) {
       return `${temp?.openingTime} - ${temp?.closingTime}`;
     } else {

@@ -2,10 +2,6 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
 export default function DoughnutChart({ dashboardDoughnutChartData }) {
-  console.log(
-    "Doghnut Chart --- ",
-    dashboardDoughnutChartData
-  );
   const updatedData = {
     labels: dashboardDoughnutChartData?.labels,
     datasets: [
@@ -16,8 +12,7 @@ export default function DoughnutChart({ dashboardDoughnutChartData }) {
     ],
   };
 
-  const totalSubscriptions =
-    dashboardDoughnutChartData?.datasets[0]?.data?.reduce(
+  const totalSubscriptions = dashboardDoughnutChartData?.datasets[0]?.data?.reduce(
       (total, num) => total + Math.round(num)
     );
 
@@ -45,7 +40,7 @@ export default function DoughnutChart({ dashboardDoughnutChartData }) {
 
   return (
     <div className="py-3 md:h-40 lg:h-60 xl:h-72 md:w-44 lg:w-52 flex items-center justify-center">
-      <Doughnut  data={updatedData} options={options} />
+      <Doughnut data={updatedData} options={options} />
     </div>
   );
 }

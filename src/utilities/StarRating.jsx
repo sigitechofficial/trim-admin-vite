@@ -9,9 +9,6 @@ const StarRating = ({ rating }) => {
   const remainder = rating - filledStars;
   const emptyStars = MAX_RATING - filledStars - (remainder > 0 ? 1 : 0);
 
-  // console.log("Remainder ", remainder);
-  // console.log("Empty Stars", emptyStars);
-
   // const renderFilledStar = () => (
   //   <span className="text-2xl text-yellow-300">&#9733;</span>
   // );
