@@ -49,7 +49,7 @@ export default function BarChart({ dashboardBarChartData }) {
           //         position: 'right',
           //     },
           // },
-          // responsive: true,
+          responsive: true,
         }}
       />
     </div>

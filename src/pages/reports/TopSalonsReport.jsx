@@ -131,7 +131,7 @@ export default function TopSalonsReport() {
               </Button>
             </div>
           </div>
-          <div>
+          <div className="w-3/4 ">
             <StackedChart graphData={data?.data?.graph} />
           </div>
 

@@ -131,7 +131,7 @@ export default function TopServicesReport() {
               </Button>
             </div>
           </div>
-          <div>
+          <div className="w-3/4">
             <BarChart dashboardBarChartData={data?.data?.graph} />
           </div>
 

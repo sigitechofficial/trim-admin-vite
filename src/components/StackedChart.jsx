@@ -5,12 +5,6 @@ import { grid } from "@chakra-ui/react";
 
 export default function StackedChart(props) {
   const options = {
-    // plugins: {
-    //   title: {
-    //     display: true,
-    //     text: "Chart.js Bar Chart - Stacked",
-    //   },
-    // },
     responsive: true,
     scales: {
       x: {
@@ -23,9 +17,11 @@ export default function StackedChart(props) {
         stacked: true,
         grid: {
           display: false,
+
         },
       },
     },
+    
   };
 
   const labels = props?.graphData?.labels;
