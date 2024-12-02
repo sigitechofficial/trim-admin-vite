@@ -7,8 +7,9 @@ import { PiUsersThreeBold } from "react-icons/pi";
 import Layout from "../../components/Layout";
 
 export default function AdminEarnings() {
+  
   return (
-    <Layout
+    <Layout 
       content={
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
           <HomeCards title="Total Shop’s" total="3,500" Icon={FaShop} />

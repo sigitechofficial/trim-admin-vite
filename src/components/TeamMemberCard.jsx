@@ -16,12 +16,12 @@ export default function TeamMemberCard(props) {
     <>
       <h2 className="text-2xl font-workSans font-medium">Team Members</h2>
       <div>
-        <div className="mt-6 grid grid-cols-3 lg:grid-cols-4  xl:grid-cols-6 2xl:grid-cols-8">
+        <div className="mt-6 grid grid-cols-3 lg:grid-cols-4  xl:grid-cols-6 2xl:grid-cols-8 gap-x-2">
           {props?.employees?.map((employee, i) => (
             <div
               key={i}
               onClick={() => handleBarberShopDetail(employee)}
-              className="relative"
+              className="relative cursor-pointer"
             >
               <img
                 src={

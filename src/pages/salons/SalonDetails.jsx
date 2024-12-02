@@ -303,7 +303,8 @@ export default function SalonDetails() {
                                 </p>
                               </div>
                               <div className="font-workSans font-medium">
-                                ${service?.price}/hr
+                                ${service?.price}
+                                {/* /hr */}
                               </div>
                             </div>
                           </div>
@@ -318,7 +319,7 @@ export default function SalonDetails() {
                     Reviews
                   </h2>
                   <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
-                    {data?.data?.detail?.ratings?.map((obj) => (
+                    {data?.data?.detail?.bookings?.map((obj) => (
                       <div className="bg-white rounded-lg shadow-lg p-4 space-y-3">
                         <div className="flex justify-between">
                           <div className="flex gap-x-3">
@@ -352,7 +353,7 @@ export default function SalonDetails() {
                           </div>
                         </div>
                         <div className="text-labelColor font-workSans font-medium">
-                          {obj?.comment}
+                          {obj?.feedback}
                         </div>
                       </div>
                     ))}

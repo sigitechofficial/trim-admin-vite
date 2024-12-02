@@ -12,6 +12,8 @@ import { formatTimeFromDB, formateDate } from "../../utilities/DateTime";
 import NewProfileCard from "../../components/NewProfileCard";
 import NewSalonProfileCard from "../../components/NewSalonProfileCard";
 import MyDataTable from "../../components/MyDataTable";
+import Loader from "../../components/Loader";
+import StarRating from "../../utilities/StarRating";
 
 export default function SalonEmployeeDetails() {
   const [tab, setTab] = useState("services");
@@ -21,11 +23,16 @@ export default function SalonEmployeeDetails() {
       "barberShopEmployeeID"
     )}`
   );
+  console.log("🚀 ~ SalonEmployeeDetails ~ data:", data);
 
   const { data: serviceHistoryData } = GetAPI(
     `admin/employee-services-history/${localStorage.getItem(
       "barberShopEmployeeID"
     )}}`
+  );
+  console.log(
+    "🚀 ~ SalonEmployeeDetails ~ serviceHistoryData:",
+    serviceHistoryData
   );
 
   const handleTime = (day) => {
@@ -108,7 +115,7 @@ export default function SalonEmployeeDetails() {
             <div className="w-24 bg-[#d4fffb] text-[#01C7B8] font-semibold p-2 rounded-md flex justify-center">
               No Show
             </div>
-          ) : values?.status === "cancelled" ? (
+          ) : values?.status === "cancel" ? (
             <div className="w-24 bg-red-100 text-red-500 font-semibold p-2 rounded-md flex justify-center">
               Cancelled
             </div>
@@ -126,9 +133,11 @@ export default function SalonEmployeeDetails() {
         </div>
       ),
     })
-  ); 
+  );
 
-  return (
+  return data.length === 0 ? (
+    <Loader />
+  ) : (
     <Layout
       content={
         <div className="space-y-5">
@@ -255,7 +264,8 @@ export default function SalonEmployeeDetails() {
                               <span> ({values?.service?.duration} min)</span>
                             </div>
                             <div className="font-workSans font-medium">
-                              ${values?.service?.price}/hr
+                              ${values?.service?.price}
+                              {/* /hr */}
                             </div>
                           </div>
                         )
@@ -298,17 +308,17 @@ export default function SalonEmployeeDetails() {
                                     {values?.user?.firstName}
                                   </h2>
                                   <div className="flex gap-x-1 items-center">
-                                    <HiOutlineStar />
-                                    <HiOutlineStar />
-                                    <HiOutlineStar />
-                                    <HiOutlineStar />
-                                    <HiOutlineStar />
+                                    <StarRating
+                                      rating={
+                                        values?.value
+                                      }
+                                    />
                                   </div>
                                 </div>
                               </div>
                               <div className="text-labelColor font-workSans font-medium">
                                 {/* 27/07/2023 */}
-                                {formateDate(values?.createdAt.slice(1, 10))}
+                                {formateDate(values?.createdAt.slice(0, 10))}
                               </div>
                             </div>
                             <div className="text-labelColor font-workSans font-medium">
@@ -380,7 +390,7 @@ export default function SalonEmployeeDetails() {
                   </p>
 
                   <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 mt-5">
-                    {data?.data?.revenue.length > 0 ? (
+                    {data?.data?.revenue.totalRevenue ? (
                       Object.entries(data?.data?.revenue).map(
                         ([key, value]) => (
                           <HomeCards

@@ -11,29 +11,28 @@ import StarRating from "../utilities/StarRating";
 export default function NewSalonProfileCard(props) {
   return (
     <div
-      className={`${
-        props.bgColor
-      } p-4 lg:p-6 rounded-xl grid grid-cols-1 sm:grid-cols-2 justify-between${
+      className={`${props.bgColor} ${
         props.shadow === true ? "shadow-lg" : "shadow-none"
-      }`}
+      } p-4 lg:p-6 rounded-xl space-y-2`}
     >
-      <div className="space-y-3 order-first sm:order-last">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-medium font-workSans">
-            {props?.salonName}
-          </h2>
-          <div className="flex gap-x-1 items-center">
-            {props?.salonAverageRating && (
-              <StarRating rating={props?.salonAverageRating} />
-            )}
-            <span className="text-themeLightGray font-workSans font-medium">
-              ({props?.ratingCount} Reviews)
-            </span>
+      <div className={`grid grid-cols-1 sm:grid-cols-2 justify-between`}>
+        <div className="space-y-3 order-first sm:order-last">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-medium font-workSans">
+              {props?.salonName}
+            </h2>
+            <div className="flex gap-x-1 items-center">
+              {props?.salonAverageRating && (
+                <StarRating rating={props?.salonAverageRating} />
+              )}
+              <span className="text-themeLightGray font-workSans font-medium">
+                ({props?.ratingCount} Reviews)
+              </span>
+            </div>
           </div>
-        </div>
 
-        <ul className="space-y-2">
-          {/* <li className="flex items-center gap-x-2 text-themeLightGray font-medium font-workSans">
+          <ul className="space-y-2">
+            {/* <li className="flex items-center gap-x-2 text-themeLightGray font-medium font-workSans">
             <IoCalendarOutline size={20} color="#12466F" />
             <span>Mon - Fri</span>
           </li>
@@ -41,32 +40,34 @@ export default function NewSalonProfileCard(props) {
             <LuClock3 size={20} color="#12466F" />
             <span>11:00am - 11:00pm</span>
           </li> */}
-          <li className="flex items-center gap-x-2 text-themeLightGray font-medium font-workSans">
-            <div>
-              <LuMapPin size={20} color="#12466F" />
-            </div>
-            <p>{props?.salonAddress}</p>
-          </li>
-        </ul>
+            <li className="flex items-center gap-x-2 text-themeLightGray font-medium font-workSans">
+              <div>
+                <LuMapPin size={20} color="#12466F" />
+              </div>
+              <p>{props?.salonAddress}</p>
+            </li>
+          </ul>
+        </div>
+
+        <div className="order-last sm:order-last flex flex-col justify-between items-end">
+          <img
+            src={`${BASE_URL}${props?.coverImage}`}
+            alt="barbershop"
+            className="w-full sm:w-20 h-16 object-cover rounded-lg max-sm:mt-2"
+          />
+        </div>
       </div>
 
-      <div className="order-last sm:order-last flex flex-col justify-between items-end">
-        <img
-          src={`${BASE_URL}${props?.coverImage}`}
-          alt="barbershop"
-          className="w-full sm:w-20 h-16 object-cover rounded-lg max-sm:mt-2"
-        />
-        <div className="flex items-center gap-x-3">
-          {props?.socialLinks?.map((link, ind) => (
-            <Link to={link?.url}>
-              <img
-                src={`/images/${link?.platform}.webp`}
-                alt={link?.platform}
-                className="w-8 h-8 object-contain"
-              />
-            </Link>
-          ))}
-        </div>
+      <div className="flex justify-end gap-x-3">
+        {props?.socialLinks?.map((link, ind) => (
+          <Link to={link?.url}>
+            <img
+              src={`/images/${link?.platform}.webp`}
+              alt={link?.platform}
+              className="w-8 h-8 object-contain"
+            />
+          </Link>
+        ))}
       </div>
     </div>
   );
